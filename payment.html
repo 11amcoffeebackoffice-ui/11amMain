@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Success - 11am Coffee</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="paymentstyle.css">
+  <link rel="stylesheet" href="modal\modelstyle.css">
+  <link rel="icon" type="image/png" href="logo.jpeg">
+</head>
+
+<body>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <i class="fas fa-bullhorn">
+    </i>
+    <span class="announcement-full">
+    </span>
+    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles or more. &nbsp; </span>
+  </div>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <!-- Mobile menu button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars">
+        </i>
+      </button>
+      <!-- Center: Logo -->
+      <div class="logo">11am Coffee</div>
+      <!-- Mobile Actions (only show on mobile) -->
+      <div class="mobile-actions">
+        <button class="icon-btn" id="orderCheckBtnOpen">
+          <i class="fas fa-clipboard-list">
+          </i>
+        </button>
+        <button class="icon-btn" id="deliveryCheckBtn">
+          <i class="fas fa-truck">
+          </i>
+        </button>
+      </div>
+      <!-- Navigation Menu -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#shop" class="nav-link">Shop</a>
+        <a href="order.html" class="nav-link">Order</a>
+        <a href="index.html#shop#about" class="nav-link">About Us</a>
+        <button class="icon-btn" id="orderCheckBtnOpenNav">
+          <i class="fas fa-clipboard-list">
+          </i>
+        </button>
+        <button class="icon-btn" id="deliveryCheckBtnNav">
+          <i class="fas fa-truck">
+          </i>
+        </button>
+      </nav>
+    </div>
+  </header>
+  <!-- Order Success Section -->
+  <section class="order-success-section">
+    <div class="container">
+      <div class="success-container">
+        <div class="success-icon">
+          <i class="fas fa-check-circle">
+          </i>
+        </div>
+        <h2 class="section-title">Order Confirmed!</h2>
+        <p class="success-message">Thank you for your order. We've received it and will begin preparing it shortly.</p>
+        <div class="order-details">
+          <h3>Order Details</h3>
+          <div class="order-info">
+            <span class="label">Order ID:</span>
+            <span class="value" id="orderIdDisplay">
+            </span>
+          </div>
+          <div class="order-info">
+            <span class="label">Customer Name:</span>
+            <span class="value" id="customerNameDisplay">
+            </span>
+          </div>
+          <div class="order-info">
+            <span class="label">Order Total:</span>
+            <span class="value" id="orderTotalDisplay">
+            </span>
+          </div>
+          <div class="order-info">
+            <span class="label">Delivery Address:</span>
+            <span class="value" id="deliveryAddressDisplay">
+            </span>
+          </div>
+        </div>
+        <p class="success-message">To complete your order, please proceed with payment via WhatsApp.</p>
+        <a href="#" class="whatsapp-btn" id="whatsappPaymentBtn">
+          <i class="fab fa-whatsapp">
+          </i> Pay via WhatsApp </a>
+        <div class="action-buttons">
+          <button class="btn btn-primary" id="printReceiptBtn">
+            <i class="fas fa-print">
+            </i> Print Receipt </button>
+          <a href="order.html" class="btn btn-secondary">
+            <i class="fas fa-coffee">
+            </i> Place Another Order </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>11am Coffee</h3>
+          <p>Brewing joy in every cup — 11am Coffee, your daily ritual since 2025.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>
+              <i class="fas fa-phone">
+              </i>
+              <a href="tel:+60175115356">+60 17-511 5356</a>
+            </li>
+            <li>
+              <i class="fab fa-whatsapp">
+              </i>
+              <a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/11amcoffee/">
+              <i class="fab fa-instagram">
+              </i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Print Template (hidden on screen) -->
+  <div id="printTemplate">
+    <div class="print-container">
+      <div class="print-header">
+        <h1 class="print-title">Order Confirmation</h1>
+        <p>Thank you for your purchase!</p>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Customer Name</div>
+        <div class="print-value" id="printName">John Doe</div>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Order ID</div>
+        <div class="print-value" id="printOrderId">EL0000000000</div>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Order Total</div>
+        <div class="print-value" id="printTotal">RM 0.00</div>
+      </div>
+      <div class="print-footer">
+        <p>Please keep this receipt for your records</p>
+        <p>Contact us if you have any questions</p>
+      </div>
+    </div>
+  </div>
+  <!-- Postcode Checker Modal -->
+  <div class="modal-overlay" id="postcodeModal">
+    <div class="postcode-modal">
+      <button class="modal-close" id="modalClose">
+      </button>
+      <div class="order-card">
+        <div class="content">
+          <h2>Check delivery by postcode</h2>
+          <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
+          <label for="postcode">Postcode</label>
+          <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
+          <small id="hint">Malaysian format: 5 digits.</small>
+        </div>
+        <button id="checkBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Check</button>
+        <!-- Check result output -->
+        <div id="output" class="result" aria-live="polite" style="display:none; margin-top:12px;">
+        </div>
+        <!-- ✅ Done button (hidden until result shown) -->
+        <button id="doneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
+      </div>
+    </div>
+  </div>
+  <!-- ✅ Order Checker Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="postcode-modal">
+      <button class="modal-close" id="orderModalClose">
+      </button>
+      <div class="order-card">
+        <div class="content">
+          <h2>Check your order</h2>
+          <p class="muted">Enter your Order ID to track your order status.</p>
+          <label for="orderId">Order ID</label>
+          <input id="orderId" type="text" placeholder="e.g. ORD12345" aria-describedby="orderHint" />
+          <small id="orderHint">Your Order ID is provided after checkout.</small>
+        </div>
+        <!-- ✅ Button inside modal to check -->
+        <button id="checkOrderBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Check Order </button>
+        <!-- Result -->
+        <div id="orderOutput" class="result" aria-live="polite" style="display:none; margin-top:12px;">
+        </div>
+        <!-- Done button -->
+        <button id="orderDoneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Done </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+    window.addEventListener("DOMContentLoaded", async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("orderId");
+      const name = urlParams.get("name");
+      const ordertotal = urlParams.get("ordertotal");
+      const address = urlParams.get("address");
+      if (!orderId) {
+        alert("⚠️ No order ID found. Please place an order first.");
+        window.location.href = "order.html";
+        return;
+      }
+      // ✅ Fill details
+      document.getElementById("orderIdDisplay").textContent = orderId || "N/A";
+      document.getElementById("customerNameDisplay").textContent = name || "N/A";
+      document.getElementById("orderTotalDisplay").textContent = ordertotal || "RM 0.00";
+      document.getElementById("deliveryAddressDisplay").textContent = address || "N/A";
+      // ✅ Print template update
+      document.getElementById("printName").textContent = name || "N/A";
+      document.getElementById("printOrderId").textContent = orderId || "N/A";
+      document.getElementById("printTotal").textContent = ordertotal || "RM 0.00";
+    });
+    // WhatsApp Payment Button
+    document.getElementById('whatsappPaymentBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      // Format WhatsApp message
+      const orderId = document.getElementById("orderIdDisplay").textContent;
+      const customerName = document.getElementById("customerNameDisplay").textContent;
+      const orderTotal = document.getElementById("orderTotalDisplay").textContent;
+      // Create item list for message
+      //let itemsText = '';
+      //orderData.items.forEach(item => {
+      //  itemsText += `- ${item.quantity}x ${item.name} (RM ${(item.price * item.quantity).toFixed(2)})\n`;
+      //});
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\n\nOrder Total: ${orderTotal}\n\nPlease provide payment instructions.`;
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      // WhatsApp API URL
+      const whatsappUrl = `https://wa.me/60175115356?text=${encodedMessage}`;
+      // Redirect to WhatsApp
+      window.open(whatsappUrl, '_blank');
+    });
+    // Print Receipt Button
+    document.getElementById('printReceiptBtn').addEventListener('click', function() {
+      // Create a print window
+      const printContent = document.getElementById('printTemplate').innerHTML;
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+                     <!DOCTYPE html>
+                     <html>
+                     <head>
+                         <title>Order Receipt - 11am Coffee</title>
+                         <style>
+                             body {
+                                 font-family: Arial, sans-serif;
+                                 margin: 0;
+                                 padding: 20px;
+                                 background: white;
+                             }
+                             .print-container {
+                                 max-width: 400px;
+                                 margin: 0 auto;
+                                 text-align: center;
+                                 border: 1px solid #ddd;
+                                 padding: 20px;
+                                 border-radius: 10px;
+                             }
+                             .print-header {
+                                 margin-bottom: 25px;
+                                 padding-bottom: 15px;
+                                 border-bottom: 2px solid #eee;
+                             }
+                             .print-title {
+                                 font-size: 24px;
+                                 color: #2c3e50;
+                                 margin-bottom: 10px;
+                             }
+                             .print-detail {
+                                 margin: 20px 0;
+                                 padding: 15px;
+                                 background: #f9f9f9;
+                                 border-radius: 8px;
+                             }
+                             .print-label {
+                                 font-weight: bold;
+                                 color: #7f8c8d;
+                                 margin-bottom: 5px;
+                             }
+                             .print-value {
+                                 font-size: 20px;
+                                 color: #2c3e50;
+                             }
+                             .print-orderid {
+                                 font-size: 26px;
+                                 font-weight: bold;
+                                 color: #e74c3c;
+                                 letter-spacing: 2px;
+                             }
+                             .print-footer {
+                                 margin-top: 30px;
+                                 padding-top: 15px;
+                                 border-top: 2px solid #eee;
+                                 color: #7f8c8d;
+                                 font-size: 16px;
+                             }
+                             @media print {
+                                 body {
+                                     margin: 0;
+                                     padding: 0;
+                                 }
+                                 .print-container {
+                                     border: none;
+                                     box-shadow: none;
+                                 }
+                             }
+                         </style>
+                     </head>
+                     <body>
+                         ${printContent}
+                     </body>
+                     </html>
+                 `);
+      printWindow.document.close();
+      printWindow.focus();
+      // Wait for content to load before printing
+      setTimeout(() => {
+        printWindow.print();
+        // Don't close immediately - let user decide when to close
+      }, 250);
+    });
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+      });
+    });  
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="Modal/modalscript.js"></script>
+</body>
+</html>
