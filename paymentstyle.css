@@ -2,7 +2,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         html {
@@ -614,3 +613,16 @@
         cursor: pointer;
         color: #666;
       }
+	  
+	  .sidebar-header {
+		  display: flex;
+		  align-items: center;
+		  gap: 10px; /* space between logo and text */
+		  padding: 10px 15px;
+		}
+
+		.sidebar-logo {
+		  width: 32px;       /* adjust size as needed */
+		  height: 32px;
+		  object-fit: contain; /* keeps aspect ratio */
+		}

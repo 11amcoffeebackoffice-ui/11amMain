@@ -10,7 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="paymentstyle.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
-  <link rel="icon" type="image/png" href="logo.jpeg">
+	<!-- Favicon -->
+	<link rel="icon" href="images/11amV2.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="images/11amV2.ico" type="image/x-icon">
+
+	<!-- Optional for better support -->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.ico">
 </head>
 
 <body>
@@ -20,7 +27,7 @@
     </i>
     <span class="announcement-full">
     </span>
-    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles or more. &nbsp; </span>
+    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more. &nbsp; </span>
   </div>
   <!-- Header -->
   <header>
@@ -31,7 +38,7 @@
         </i>
       </button>
       <!-- Center: Logo -->
-      <div class="logo">11am Coffee</div>
+      <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">11am Coffee</div>
       <!-- Mobile Actions (only show on mobile) -->
       <div class="mobile-actions">
         <button class="icon-btn" id="orderCheckBtnOpen">
@@ -85,6 +92,16 @@
           <div class="order-info">
             <span class="label">Order Total:</span>
             <span class="value" id="orderTotalDisplay">
+            </span>
+          </div>
+		  <div class="order-info">
+            <span class="label">Delivery Fee:</span>
+            <span class="value" id="deliveryFeeDisplay">
+            </span>
+          </div>
+		 <div class="order-info">
+            <span class="label">Grand Total:</span>
+            <span class="value" id="grandTotalDisplay">
             </span>
           </div>
           <div class="order-info">
@@ -236,21 +253,26 @@
       const orderId = urlParams.get("orderId");
       const name = urlParams.get("name");
       const ordertotal = urlParams.get("ordertotal");
+	  const grandtotal = urlParams.get("grandtotal");
+	  const deliveryfee = urlParams.get("deliveryFee");
       const address = urlParams.get("address");
       if (!orderId) {
         alert("⚠️ No order ID found. Please place an order first.");
         window.location.href = "order.html";
         return;
       }
+	  
       // ✅ Fill details
       document.getElementById("orderIdDisplay").textContent = orderId || "N/A";
       document.getElementById("customerNameDisplay").textContent = name || "N/A";
-      document.getElementById("orderTotalDisplay").textContent = ordertotal || "RM 0.00";
       document.getElementById("deliveryAddressDisplay").textContent = address || "N/A";
+	  document.getElementById("orderTotalDisplay").textContent = ordertotal || "RM 0.00";
+	  document.getElementById("deliveryFeeDisplay").textContent = deliveryfee || "RM 0.00";
+	  document.getElementById("grandTotalDisplay").textContent = grandtotal || "RM 0.00";
       // ✅ Print template update
       document.getElementById("printName").textContent = name || "N/A";
       document.getElementById("printOrderId").textContent = orderId || "N/A";
-      document.getElementById("printTotal").textContent = ordertotal || "RM 0.00";
+      document.getElementById("printTotal").textContent = grandtotal || "RM 0.00";
     });
     // WhatsApp Payment Button
     document.getElementById('whatsappPaymentBtn').addEventListener('click', function(e) {
@@ -259,12 +281,14 @@
       const orderId = document.getElementById("orderIdDisplay").textContent;
       const customerName = document.getElementById("customerNameDisplay").textContent;
       const orderTotal = document.getElementById("orderTotalDisplay").textContent;
+	  const deliveryFee = document.getElementById("deliveryFeeDisplay").textContent;
+	  const grandTotal = document.getElementById("grandTotalDisplay").textContent;
       // Create item list for message
       //let itemsText = '';
       //orderData.items.forEach(item => {
       //  itemsText += `- ${item.quantity}x ${item.name} (RM ${(item.price * item.quantity).toFixed(2)})\n`;
       //});
-      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\n\nOrder Total: ${orderTotal}\n\nPlease provide payment instructions.`;
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${orderTotal}\n\nPlease provide payment instructions.`;
       // Encode message for URL
       const encodedMessage = encodeURIComponent(message);
       // WhatsApp API URL

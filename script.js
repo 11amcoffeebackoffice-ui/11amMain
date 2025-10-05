@@ -72,9 +72,9 @@
       }	  
 	  
 	// feedback-pagination.js
-class FeedbackPagination {
+	class FeedbackPagination {
     constructor() {
-        this.feedbackCollection = db.collection('CustomerFeedback');
+        //this.feedbackCollection = db.collection('CustomerFeedback');
         this.feedbackContainer = document.getElementById('feedbackCards');
         this.loadingElement = document.getElementById('feedbackLoading');
         this.errorElement = document.getElementById('feedbackError');
@@ -117,46 +117,43 @@ class FeedbackPagination {
         });
     }
 
-    async loadFeedback() {
-        try {
-            this.showLoading();
-            this.hideError();
-            this.hideFeedback();
-            this.hidePagination();
+	async loadFeedback() {
+	  try {
+		this.showLoading();
+		this.hideError();
+		this.hideFeedback();
+		this.hidePagination();
 
-            // Get all approved feedback, ordered by timestamp (newest first)
-			// ✅ Query: only approved feedback, newest first
-			const snapshot = await this.feedbackCollection
-			  .orderBy('CreateTime', 'desc')   // Use your existing field name
-			  .get();
+		// 🔗 Call your Worker instead of Firestore directly
+		const response = await fetch("https://getfeedback.11amcoffeebackoffice.workers.dev/", {
+		  method: "GET",
+		  headers: { "Content-Type": "application/json" }
+		});
 
-            if (snapshot.empty) {
-                this.showNoReviews();
-                return;
-            }
+		const result = await response.json();
+		console.log("Worker getFeedback result 👉", result);
 
-            this.allFeedbackData = [];
-            let totalRating = 0;
+		if (!result.success || !result.feedback || result.feedback.length === 0) {
+		  this.showNoReviews();
+		  return;
+		}
 
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                this.allFeedbackData.push(data);
-                totalRating += data.Rating || 0;
-            });
+		this.allFeedbackData = result.feedback;
+		let totalRating = result.feedback.reduce((sum, f) => sum + (f.Rating || 0), 0);
 
-            // Calculate total pages
-            this.totalPages = Math.ceil(this.allFeedbackData.length / this.itemsPerPage);
-            this.currentPage = 1;
+		// Calculate total pages
+		this.totalPages = Math.ceil(this.allFeedbackData.length / this.itemsPerPage);
+		this.currentPage = 1;
 
-            // Display first page
-            this.displayCurrentPage();
-            this.calculateAndDisplayRatings(totalRating);
-            
-        } catch (error) {
-            console.error('Error loading feedback:', error);
-            this.showError();
-        }
-    }
+		// Display first page
+		this.displayCurrentPage();
+		this.calculateAndDisplayRatings(totalRating);
+
+	  } catch (error) {
+		console.error("❌ Error loading feedback from Worker:", error);
+		this.showError();
+	  }
+	}
 
     displayCurrentPage() {
         // Calculate start and end index for current page
@@ -269,16 +266,28 @@ class FeedbackPagination {
         this.showRatingSummary();
     }
 
-    formatDate(timestamp) {
-        if (!timestamp) return '';
-        
-        const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    }
+	formatDate(timestamp) {
+		if (!timestamp) return '';
+
+		// timestamp is already string like "01/10/2025, 11:24:13"
+		// Parse it into Date
+		const parts = timestamp.split(', ');
+		if (parts.length !== 2) return timestamp; // fallback
+
+		const [datePart, timePart] = parts; // e.g. ["01/10/2025", "11:24:13"]
+		const [day, month, year] = datePart.split('/');
+
+		const isoString = `${year}-${month}-${day}T${timePart}`; 
+		const date = new Date(isoString);
+
+		// Format for display (e.g. "October 1, 2025")
+		return date.toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		});
+	}
+
 
     escapeHtml(text) {
         const div = document.createElement('div');
@@ -337,10 +346,10 @@ class FeedbackPagination {
     }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new FeedbackPagination();
-});
+	// Initialize when DOM is loaded
+	document.addEventListener('DOMContentLoaded', () => {
+		new FeedbackPagination();
+	});
 	
 	// feedback-form.js
 	class FeedbackForm {
@@ -417,20 +426,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		return {
 		  CustName: formData.get('customerName'),
 		  CustEmail: formData.get('customerEmail') || '',
-		  OrderId: formData.get('orderId') || '',
+		  OrderId: formData.get('feedbackorderId') || '',
 		  Rating: parseInt(formData.get('rating')),
 		  Content: formData.get('feedbackText'),
 		  CreateTime: new Date().toISOString(),
-		  Approved: false // Admin must approve before showing publicly
+		  Status: "Approved" // Admin must approve before showing publicly
 		};
 	  }
 
-	  async saveToFirebase(feedbackData) {
-		// Make sure db is available from your firebase-config.js
-		const docRef = await db.collection('CustomerFeedback').add(feedbackData);
-		console.log('Feedback saved with ID: ', docRef.id);
-		return docRef;
-	  }
+		async saveToFirebase(feedbackData) {
+			console.error("❌ Error saving feedback:", feedbackData);
+		  try {
+			const res = await fetch("https://writefeedback.11amcoffeebackoffice.workers.dev/", {
+			  method: "POST",
+			  headers: { "Content-Type": "application/json" },
+			  body: JSON.stringify(feedbackData),
+			});
+
+			const result = await res.json();
+			console.log("Worker writeFeedback result 👉", result);
+
+			return result; // return to caller if needed
+		  } catch (err) {
+			console.error("❌ Error saving feedback:", err);
+			return { success: false, error: err.message + feedbackData };
+		  }
+		}
+
 
 	  setLoadingState(isLoading) {
 		if (isLoading) {

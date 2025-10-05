@@ -98,23 +98,6 @@
 		  }
 		});
 		
-		// ✅ Initialize Firebase (only once)
-		const firebaseConfig = {
-			apiKey: "AIzaSyDjhTc_zNJifXA0AiRrOkzfROC9JuVd2JQ",
-			authDomain: "planning-with-ai-e9d7d.firebaseapp.com",
-			projectId: "planning-with-ai-e9d7d",
-			storageBucket: "planning-with-ai-e9d7d.firebasestorage.app",
-			messagingSenderId: "539840620997",
-			appId: "1:539840620997:web:e70ac76536f9a0b5e943ac"
-		};
-
-		if (!firebase.apps.length) {
-		  firebase.initializeApp(firebaseConfig);
-		}
-
-		// ✅ Firestore reference
-		const db = firebase.firestore();
-
 		// Handle order check
 		checkOrderBtn.addEventListener("click", async function () {
 		  const orderId = orderIdInput.value.trim();
@@ -123,38 +106,43 @@
 			orderDoneBtn.style.display = "none";
 			return;
 		  }
+		  
+		 console.log("✅ Check Order button clicked", orderId);
 
-		  // Show loading
 		  orderOutput.style.display = "block";
 		  orderOutput.innerHTML = "⏳ Please wait... checking order.";
 		  orderDoneBtn.style.display = "none";
 
 		  try {
-			// ✅ Firestore (compat style)
-			const docSnap = await db.collection("Order").doc(orderId).get();
+			const response = await fetch("https://checkorder.11amcoffeebackoffice.workers.dev/", {
+			  method: "POST",
+			  headers: { "Content-Type": "application/json" },
+			  body: JSON.stringify({ orderId }),
+			});
 
-			if (docSnap.exists) {
-			  const data = docSnap.data();
+			const result = await response.json();
+
+			if (result.success) {
+			  const order = result.order;
 			  orderOutput.innerHTML = `
 				✅ <b>Order Found</b><br>
-				<b>Name:</b> ${data.CustName || "-"}<br>
-				<b>Order ID:</b> ${orderId}<br>
-				<b>Status:</b> ${data.Status || "new"}<br>
-				<b>Total:</b> ${data.GrandTotal || "-"}<br>
+				<b>Name:</b> ${order.CustName}<br>
+				<b>Order ID:</b> ${order.orderId}<br>
+				<b>Status:</b> ${order.Status}<br>
+				<b>Total:</b> ${order.GrandTotal}<br>
+				<b>Date:</b> ${order.DateTime}<br>
 			  `;
 			  orderDoneBtn.style.display = "inline-block";
 			  checkOrderBtn.style.display = "none";
 			} else {
-			  orderOutput.innerHTML = "❌ Order not found";
-			  orderDoneBtn.style.display = "none";
+			  orderOutput.innerHTML = `❌ ${result.error || "Order not found"}`;
 			}
 		  } catch (err) {
-			console.error("❌ Error checking order:", err);
+			console.error("❌ Error:", err);
 			orderOutput.innerHTML = `❌ Error: ${err.message}`;
-			orderDoneBtn.style.display = "none";
 		  }
 		});
- 
+
       // Handle order done
       orderDoneBtn.addEventListener("click", function() {
         window.location.reload();

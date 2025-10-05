@@ -14,7 +14,14 @@
   <!-- Confetti -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
-  <link rel="icon" type="image/png" href="logo.jpeg">
+	<!-- Favicon -->
+	<link rel="icon" href="images/11amV2.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="images/11amV2.ico" type="image/x-icon">
+
+	<!-- Optional for better support -->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.ico">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.ico">
   
   <style>
     .announcement-bar {
@@ -96,7 +103,6 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     html {
@@ -1001,7 +1007,7 @@
     </i>
     <span class="announcement-full">
     </span>
-    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles or more. &nbsp; </span>
+    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more. &nbsp; </span>
   </div>
   <!-- Header -->
   <header>
@@ -1012,7 +1018,7 @@
         </i>
       </button>
       <!-- Center: Logo -->
-      <div class="logo">11am Coffee</div>
+      <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">11am Coffee</a></div>
       <!-- Mobile Actions (only show on mobile) -->
       <div class="mobile-actions">
         <button class="icon-btn" id="orderCheckBtnOpen">
@@ -1029,6 +1035,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="index.html#shop" class="nav-link">Shop</a>
         <a href="order.html" class="nav-link">Order</a>
+		<a href="index.html#feedback-form" class="nav-link">Feedback</a>  
         <a href="index.html#shop#about" class="nav-link">About Us</a>
         <button class="icon-btn" id="orderCheckBtnOpenNav">
           <i class="fas fa-clipboard-list">
@@ -1070,12 +1077,12 @@
           <h3>Select Your Coffee</h3>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Espresso">
+              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Espresso">
             </div>
             <div class="product-details">
               <div class="product-name">Solo Pack</div>
-              <div class="product-description">Our signature blend with rich flavor and perfect crema</div>
-              <div class="product-price">RM 35.90</div>
+              <div class="product-description"><p>6 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</p></div>
+              <div class="product-price">RM 36</div>
             </div>
             <div class="quantity-controls">
               <button class="quantity-btn minus" data-product="solopack">-</button>
@@ -1085,12 +1092,12 @@
           </div>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1536227661368-deef57acf708?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cappuccino">
+              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Cappuccino">
             </div>
             <div class="product-details">
               <div class="product-name">Duo Pack</div>
-              <div class="product-description">Perfect balance of espresso, steamed milk and foam</div>
-              <div class="product-price">RM 69.90</div>
+              <div class="product-description">12 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</div>
+              <div class="product-price">RM 70</div>
             </div>
             <div class="quantity-controls">
               <button class="quantity-btn minus" data-product="duopack">-</button>
@@ -1100,12 +1107,13 @@
           </div>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Cold Brew">
+              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Cold Brew">
             </div>
             <div class="product-details">
               <div class="product-name">Family Pack</div>
-              <div class="product-description">Smooth and refreshing, brewed for 24 hours for maximum flavor</div>
-              <div class="product-price">RM 103.90</div>
+              <div class="product-description">18 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</div>
+
+              <div class="product-price">RM 105</div>
             </div>
             <div class="quantity-controls">
               <button class="quantity-btn minus" data-product="familypack">-</button>
@@ -1204,7 +1212,7 @@
               <span id="items-total">RM 0.00</span>
             </div>
             <div class="summary-item">
-              <span>Delivery:</span>
+              <span>Delivery(Estimate Fee Only):</span>
               <span id="delivery-fee">RM 0.00</span>
             </div>
             <div class="summary-total">
@@ -1584,48 +1592,7 @@
     postcodeInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') checkBtn.click();
     });
-    // Order Checker Functionality
-    const orderCheckBtnOpen = document.getElementById('orderCheckBtnOpen');
-    const orderCheckBtnOpenNav = document.getElementById('orderCheckBtnOpenNav'); // ✅ nav version
-    const orderModal = document.getElementById('orderModal');
-    const orderModalClose = document.getElementById('orderModalClose');
-    const checkOrderBtn = document.getElementById('checkOrderBtn');
-    const orderIdInput = document.getElementById('orderId');
-    const orderOutput = document.getElementById('orderOutput');
-    const orderDoneBtn = document.getElementById('orderDoneBtn');
-    // Open modal
-    function openOrderModal() {
-      orderModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-    orderCheckBtnOpen.addEventListener('click', openOrderModal);
-    if (orderCheckBtnOpenNav) {
-      orderCheckBtnOpenNav.addEventListener('click', openOrderModal);
-    }
-    // Reset when typing new Order ID
-    orderIdInput.addEventListener("input", function() {
-      checkOrderBtn.style.display = "inline-block"; // show Check
-      orderDoneBtn.style.display = "none"; // hide Done
-      orderOutput.style.display = "none"; // hide old result
-    });
-    // Close modal
-    function closeOrderModal() {
-      orderModal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    orderModalClose.addEventListener('click', closeOrderModal);
-    // Close when clicking outside modal
-    orderModal.addEventListener('click', (e) => {
-      if (e.target === orderModal) {
-        closeOrderModal();
-      }
-    });
-    // Close with ESC key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === "Escape" && orderModal.classList.contains('active')) {
-        closeOrderModal();
-      }
-    });
+
     // Quantity controls
     document.querySelectorAll('.quantity-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -1674,9 +1641,9 @@
       const soloQty = parseInt(document.getElementById('solopack-qty').value) || 0;
       const duoQty = parseInt(document.getElementById('duopack-qty').value) || 0;
       const familyQty = parseInt(document.getElementById('familypack-qty').value) || 0;
-      const soloPrice = 35.90;
-      const duoPrice = 69.90;
-      const familyPrice = 103.90;
+      const soloPrice = 36;
+      const duoPrice = 70;
+      const familyPrice = 105;
       let itemsTotal = (soloQty * soloPrice) + (duoQty * duoPrice) + (familyQty * familyPrice);
       const deliveryEl = document.getElementById('delivery-fee');
       const resultDiv = document.getElementById('delivery-result');
@@ -1727,121 +1694,125 @@
     });
 	
 	// ✅ Handle Continue Button
-	document.getElementById("continue-btn").addEventListener("click", async function() {
-    const msgEl = document.getElementById("formMsg");
-    msgEl.style.color = "red"; // default red for errors
+document.getElementById("continue-btn").addEventListener("click", async function() {
+  const msgEl = document.getElementById("formMsg");
+  msgEl.style.color = "red"; // default red for errors
 
-    // Collect selected products
-    let selected = [];
-    const products = ["solopack", "duopack", "familypack"];
-    products.forEach(p => {
-      const qty = parseInt(document.getElementById(`${p}-qty`).value) || 0;
-      if (qty > 0) {
-        selected.push({ product: p, qty: qty });
-      }
-    });
-    if (selected.length === 0) {
-      msgEl.textContent = "⚠️ Please select at least one product.";
-      return;
+  // Collect selected products
+  let selected = [];
+  const products = ["solopack", "duopack", "familypack"];
+  products.forEach(p => {
+    const qty = parseInt(document.getElementById(`${p}-qty`).value) || 0;
+    if (qty > 0) {
+      selected.push({ product: p, qty: qty });
     }
-
-    // Delivery postcode check
-    const postcode = document.getElementById("postcodeorder").value.trim();
-    if (!postcode) {
-      msgEl.textContent = "⚠️ Please check your delivery postcode before continuing.";
-      return;
-    }
-
-    // Customer details
-    const custdeliverytime = document.getElementById("delivery-datetime").value.trim();
-    const custName = document.getElementById("name").value.trim();
-    const custPhone = document.getElementById("phone").value.trim();
-    const custEmail = document.getElementById("email").value.trim();
-    const custAddress = document.getElementById("address").value.trim();
-
-    if (!custName || !custPhone || !custEmail || !custAddress) {
-      msgEl.textContent = "⚠️ Please fill in all customer details.";
-      return;
-    }
-    if (!custdeliverytime) {
-      msgEl.textContent = "⚠️ Please Select Delivery DateTime";
-      return;
-    }
-
-    // Phone validation
-    const phoneRegex = /^(?:\+60\d{9,10}|0\d{8,9})$/;
-    if (!phoneRegex.test(custPhone)) {
-      msgEl.textContent = "⚠️ Please enter a valid phone number (e.g., +60123456789 or 0143810530).";
-      return;
-    }
-	
-	// Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(custEmail)) {
-      msgEl.textContent = "⚠️ Please enter a valid email (e.g., example@email.com).";
-      return;
-    }
-
-    // Totals
-    const orderTotal = document.getElementById("items-total").textContent;
-    const deliveryFee = document.getElementById("delivery-fee").textContent;
-    const grandTotal = document.getElementById("order-total").textContent;
-
-    // Payload
-    const payload = {
-      CustName: custName,
-      Phone: custPhone,
-      Email: custEmail,
-      Address: custAddress,
-      Orders: selected,
-      OrderPrice: orderTotal,
-      DeliveryFee: deliveryFee,
-      GrandTotal: grandTotal,
-      DateTime: new Date().toLocaleString("en-GB", { timeZone: "Asia/Kuala_Lumpur" }),
-      Status: "New",
-	  DeliveryTime: custdeliverytime
-    };
-
-    console.log("Final Payload 👉", payload);
-
-    // Status: loading
-    msgEl.textContent = "⏳ Placing your order, please wait...";
-    msgEl.style.color = "blue";
-    const btn = document.getElementById("continue-btn");
-    btn.disabled = true;
-    btn.textContent = "Submitting Order...";
-
-    try {
-		const response = await fetch("https://us-central1-rapid-booking-473610-c6.cloudfunctions.net/createOrder", {
-		  method: "POST",
-		  body: JSON.stringify(payload),
-		});
-
-  const result = await response.json();
-
-  if (result.success) {
-    const newOrderId = result.orderId;
-
-    document.getElementById("printOrderId").textContent = newOrderId;
-    document.getElementById("printName").textContent = custName;
-
-    sessionStorage.setItem("selectedOrders", JSON.stringify(payload));
-
-    setTimeout(() => {
-      window.location.replace(`payment.html?orderId=${newOrderId}&name=${custName}&ordertotal=${grandTotal}&address=${custAddress}`);
-    }, 2000);
-  } else {
-  	btn.disabled = false;
-    btn.textContent = "Continue to Payment";
-    msgEl.textContent = "⚠️ Failed to save order: " + (result.error || "Unknown error");
+  });
+  if (selected.length === 0) {
+    msgEl.textContent = "⚠️ Please select at least one product.";
+    return;
   }
-} catch (err) {
-	btn.disabled = false;
-    btn.textContent = "Continue to Payment";
-  console.error("❌ Error:", err);
-  msgEl.textContent = "⚠️ Failed to save order, please try again.";
-}
 
+  // Delivery postcode check
+  const postcode = document.getElementById("postcodeorder").value.trim();
+  if (!postcode) {
+    msgEl.textContent = "⚠️ Please check your delivery postcode before continuing.";
+    return;
+  }
+
+  // Customer details
+  const custdeliverytime = document.getElementById("delivery-datetime").value.trim();
+  const custName = document.getElementById("name").value.trim();
+  const custPhone = document.getElementById("phone").value.trim();
+  const custEmail = document.getElementById("email").value.trim();
+  const custAddress = document.getElementById("address").value.trim();
+
+  if (!custName || !custPhone || !custEmail || !custAddress) {
+    msgEl.textContent = "⚠️ Please fill in all customer details.";
+    return;
+  }
+  if (!custdeliverytime) {
+    msgEl.textContent = "⚠️ Please Select Delivery DateTime";
+    return;
+  }
+
+  // Phone validation
+  const phoneRegex = /^(?:\+60\d{9,10}|0\d{8,9})$/;
+  if (!phoneRegex.test(custPhone)) {
+    msgEl.textContent = "⚠️ Please enter a valid phone number (e.g., +60123456789 or 0143810530).";
+    return;
+  }
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(custEmail)) {
+    msgEl.textContent = "⚠️ Please enter a valid email (e.g., example@email.com).";
+    return;
+  }
+
+  // Totals
+  const orderTotal = document.getElementById("items-total").textContent;
+  const deliveryFee = document.getElementById("delivery-fee").textContent;
+  const grandTotal = document.getElementById("order-total").textContent;
+
+  // Payload
+  const payload = {
+    CustName: custName,
+    Phone: custPhone,
+    Email: custEmail,
+    Address: custAddress,
+    Orders: selected,
+    OrderPrice: orderTotal,
+    DeliveryFee: deliveryFee,
+    GrandTotal: grandTotal,
+    DateTime: new Date().toLocaleString("en-GB", { timeZone: "Asia/Kuala_Lumpur" }),
+    Status: "New",
+    DeliveryTime: custdeliverytime
+  };
+
+  console.log("Final Payload 👉", payload);
+
+  // Status: loading
+  msgEl.textContent = "⏳ Placing your order, please wait...";
+  msgEl.style.color = "blue";
+  const btn = document.getElementById("continue-btn");
+  btn.disabled = true;
+  btn.textContent = "Submitting Order...";
+
+  try {
+    // 🔗 Call Cloudflare Worker instead of Firebase
+    const response = await fetch("https://gentle-grass-be7d.11amcoffeebackoffice.workers.dev/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await response.json();
+    console.log("Worker Response 👉", result);
+
+    if (result.success) {
+      const newOrderId = result.orderId;
+
+      document.getElementById("printOrderId").textContent = newOrderId;
+      document.getElementById("printName").textContent = custName;
+
+      sessionStorage.setItem("selectedOrders", JSON.stringify(payload));
+
+      setTimeout(() => {
+        window.location.replace(
+          `payment.html?orderId=${newOrderId}&name=${encodeURIComponent(custName)}&deliveryfee=${encodeURIComponent(deliveryFee)}&ordertotal=${encodeURIComponent(orderTotal)}&grandtotal=${encodeURIComponent(grandTotal)}&address=${encodeURIComponent(custAddress)}`
+        );
+      }, 2000);
+    } else {
+      btn.disabled = false;
+      btn.textContent = "Continue to Payment";
+      msgEl.textContent = "⚠️ Failed to save order: " + (result.error || "Unknown error");
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = "Continue to Payment";
+    console.error("❌ Error:", err);
+    msgEl.textContent = "⚠️ Failed to save order, please try again.";
+  }
 });
 	
     // Close modal with Done button
@@ -1958,8 +1929,6 @@
 	
 
   </script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="Modal/modalscript.js"></script>
 </body>
 </html>

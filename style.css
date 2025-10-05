@@ -44,7 +44,7 @@
 	.tagline {
 	  font-family: 'Playfair Display', serif;
 	  font-size: 1rem;
-	  font-style: italic;
+	  font-style: bold;
 	  color: #3a2c1e; /* matches your coffee theme */
 	}
 	
@@ -82,7 +82,6 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       }
 	  
 	  html {
@@ -1054,6 +1053,14 @@
         order: -1;
     }
 }
+
+	@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+	.brew-script {
+	  font-family: 'Pacifico', cursive;
+	  color: #6b4e16;
+	  letter-spacing: 0.5px;
+	}
 		
 		
 					  
