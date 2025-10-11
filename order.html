@@ -8,11 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <!-- Include Flatpickr CSS & JS -->
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr">
   </script>
-<!-- Confetti -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
   <link rel="stylesheet" href="common.css">
 	<!-- Favicon -->
@@ -24,8 +20,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.png">
   
-  <style>
-	
+  <style>	
     /* Order Page Specific Styles */
     .order-section {
       padding: 60px 0;
@@ -467,6 +462,276 @@
       color: #aaa;
     }
 
+    /* Date & Time Picker Styles */
+    .date-picker-trigger, .time-picker-trigger {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+      color: #3b2a21;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .date-picker-trigger:hover, .time-picker-trigger:hover {
+      border-color: #d9a66d;
+    }
+
+    .date-picker-trigger:focus, .time-picker-trigger:focus {
+      border-color: #5d4037;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(93, 64, 55, 0.1);
+    }
+
+    /* Time Picker Styles */
+    .time-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .time-slot {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      font-weight: 600;
+      color: #3b2a21;
+    }
+
+    .time-slot:hover {
+      border-color: #d9a66d;
+      transform: translateY(-1px);
+    }
+
+    .time-slot.selected {
+      background: #5d4037;
+      color: white;
+      border-color: #5d4037;
+    }
+
+    .time-group-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #7a5c44;
+      margin: 15px 0 8px 0;
+    }
+
+    /* Modal Styles for Date/Time Picker */
+    .modal-overlay-datetime {
+      position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+	
+	.modal-overlay-datetime.active {
+        visibility: visible;
+        opacity: 1;
+      }
+
+    .modal-content {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Date Picker Modal */
+    .datepicker-header {
+      background: linear-gradient(135deg, #5d4037 0%, #8d6e63 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .datepicker-month-year {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .datepicker-days-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #7a5c44;
+      color: white;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: center;
+      padding: 10px 0;
+      text-transform: uppercase;
+    }
+
+    .datepicker-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: #f0f0f0;
+      padding: 1px;
+      min-height: 250px;
+    }
+
+    .datepicker-day {
+      background: white;
+      border: none;
+      padding: 12px 0;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #333;
+    }
+
+    .datepicker-day:hover {
+      background: #f8f8f8;
+    }
+
+    .datepicker-day.selected {
+      background: #5d4037;
+      color: white;
+    }
+
+    .datepicker-day.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      background: #fafafa;
+    }
+
+    .datepicker-day.other-month {
+      color: #ddd;
+      background: #fafafa;
+    }
+
+    .datepicker-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #f9f5f0;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    .nav-btn {
+      background: #5d4037;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: #8d6e63;
+    }
+
+    .modal-footer {
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    .selected-display {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 15px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #5d4037;
+      color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #8d6e63;
+    }
+
+    .btn-primary:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    /* Mobile Responsive for Date/Time Picker */
+    @media (max-width: 480px) {
+      .time-slots-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .datepicker-days-grid {
+        min-height: 220px;
+      }
+      
+      .datepicker-day {
+        padding: 10px 0;
+      }
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       .mobile-menu-btn {
@@ -550,29 +815,7 @@
 
       .btn-group {
         flex-direction: column;
-      }
-	  
-		.flatpickr-time {
-        height: 60px !important;
-      }
-      
-      .flatpickr-time .numInputWrapper {
-        width: 100px !important;
-        height: 50px !important;
-      }
-      
-      .flatpickr-time .numInputWrapper .numInput {
-        font-size: 20px !important;
-        height: 50px !important;
-        line-height: 50px !important;
-      }
-      
-      .flatpickr-time .flatpickr-am-pm {
-        font-size: 20px !important;
-        height: 50px !important;
-        line-height: 50px !important;
-        width: 100px !important;
-      }
+      } 
     }
 
     /* Print Template (hidden on screen) */
@@ -666,91 +909,6 @@
         font-size: 16px;
       }
 	  
-		/* Force Flatpickr to use desktop style on mobile */
-    .flatpickr-calendar {
-      position: absolute !important;
-      width: 325px !important;
-      max-height: 385px !important;
-      overflow: hidden;
-      visibility: hidden;
-      opacity: 0;
-      animation: none;
-      text-align: center;
-      padding: 0;
-      border-radius: 10px !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    }
-
-    .flatpickr-calendar.open {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .flatpickr-calendar.inline {
-      position: relative;
-      top: 2px;
-    }
-
-    .flatpickr-calendar.static {
-      position: absolute;
-      top: calc(100% + 5px);
-    }
-
-    .flatpickr-calendar.static.open {
-      position: absolute;
-    }
-
-    /* Time picker styling */
-    .flatpickr-time {
-      display: flex;
-      height: 40px;
-      line-height: 40px;
-      justify-content: center;
-      align-items: center;
-      max-width: 100%;
-    }
-
-    .flatpickr-time .numInputWrapper {
-          width: 70px !important;
-        }
-
-        .flatpickr-time .flatpickr-am-pm {
-          width: auto !important;
-          padding: 0 10px;
-        }
-
-        /* Input field styling */
-    .flatpickr-input {
-      font-family: 'Open Sans', sans-serif !important;
-      font-size: 16px !important;
-      color: #3b2a21 !important;
-      background: white !important;
-      cursor: pointer !important;
-    }
-
-    .flatpickr-alt-input {
-      font-family: 'Open Sans', sans-serif !important;
-      font-size: 16px !important;
-      color: #3b2a21 !important;
-      background: white !important;
-      cursor: pointer !important;
-    }
-
-    /* Backdrop for mobile */
-    .flatpickr-calendar.open {
-      z-index: 99999;
-    }
-
-    .flatpickr-calendar.open ~ .flatpickr-monthDropdown-months,
-    .flatpickr-calendar.open ~ .flatpickr-yearDropdown {
-      z-index: 100000;
-    }
-
-    /* Ensure the calendar appears above other content */
-    .flatpickr-wrapper {
-      position: relative;
-      z-index: 9999;
-    }
   </style>
 </head>
 
@@ -904,7 +1062,7 @@
             </div>
           </div>
           <div id="delivery-details">
-            <p>Enter your postcode to check delivery availability:</p>
+		    <label class="form-label" for="name">Enter your postcode to check delivery availability:</label>
             <div class="postcode-check">
               <input type="text" class="postcode-input" id="postcodeorder" placeholder="Postcode will appear here after check" maxlength="5" readonly>
               <button class="check-btn" id="checkPostcode">Check</button>
@@ -913,7 +1071,8 @@
             </div>
             <!-- Delivery DateTime -->
             <div class="form-group" style='padding-top:10px;'>
-              <input type="text" id="delivery-datetime" class="form-input" placeholder="Select delivery date & time" required>
+			  <label class="form-label" for="name">Delivery Date&Time</label>
+              <input type="text" id="delivery-datetime" class="form-input" placeholder="Click to select delivery date & time" required style="cursor: pointer;">
 			        <p style="color: #b08d57;">Preorder at least 3 days in advance to ensure freshness!</p>
             </div>
           </div>
@@ -1051,6 +1210,56 @@
     </div>
   </div>
 </footer>
+
+  <!-- Date & Time Picker Modal -->
+  <div class="modal-overlay-datetime" id="dateTimeModal">
+    <div class="modal-content">
+      <div class="datepicker-header">
+        <div class="datepicker-month-year" id="currentMonthYear">October 2025</div>
+      </div>
+      
+      <div class="datepicker-days-header">
+        <div>SUN</div>
+        <div>MON</div>
+        <div>TUE</div>
+        <div>WED</div>
+        <div>THU</div>
+        <div>FRI</div>
+        <div>SAT</div>
+      </div>
+      
+      <div class="datepicker-days-grid" id="daysGrid"></div>
+      
+      <div class="datepicker-navigation">
+        <button type="button" class="nav-btn" id="prevMonth">‹ Previous</button>
+        <button type="button" class="nav-btn" id="todayBtn">Today</button>
+        <button type="button" class="nav-btn" id="nextMonth">Next ›</button>
+      </div>
+      
+      <div class="modal-footer">
+        <div class="selected-display" id="selectedDateDisplay">
+          No date selected
+        </div>
+        
+        <!-- Time Picker Section -->
+        <div class="time-picker-section" style="margin: 20px 0;">
+          <div class="section-title" style="font-size: 18px; margin-bottom: 15px;">Delivery Time</div>
+          <div class="time-group-title">Evening Delivery (6:00 PM - 9:00 PM)</div>
+          <div class="time-slots-grid">
+			<button type="button" class="time-slot" data-time="12:00 - 15:00">12:00 PM - 3:00 PM</button>
+			<button type="button" class="time-slot" data-time="15:00 - 18:00">3:00 PM - 6:00 PM</button>
+            <button type="button" class="time-slot" data-time="18:00 - 21:00">6:00 PM - 9:00 PM</button>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button type="button" class="btn btn-secondary" onclick="closeDateTimePicker()">Cancel</button>
+          <button type="button" class="btn btn-primary" id="confirmDateTimeBtn" onclick="confirmDateTime()" disabled>Select Date & Time</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Postcode Checker Modal -->
   <div class="modal-overlay" id="postcodeModal">
     <div class="postcode-modal">
@@ -1122,6 +1331,302 @@
       </div>
     </div>
   </div>
+  <script>
+// Postcode Checker Functionality
+const dateTimeModal = document.getElementById('dateTimeModal');
+
+// Date & Time Picker Functionality
+let selectedDate = null;
+let selectedTime = null;
+let currentDate = new Date();
+const minDate = new Date();
+minDate.setDate(minDate.getDate() + 3); // Minimum 3 days in advance
+
+// Initialize date/time picker
+function initializeDateTimePicker() {
+  renderCalendar();
+  setupDateTimeEventListeners();
+  updateTimeSlots(); // Initialize time slots based on current selection
+}
+
+function renderCalendar() {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthYearElement = document.getElementById('currentMonthYear');
+  const daysGrid = document.getElementById('daysGrid');
+
+  monthYearElement.textContent = formatMonthYear(year, month);
+  daysGrid.innerHTML = '';
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  const startingDay = firstDay.getDay();
+
+  // Previous month days
+  const prevMonthLastDay = new Date(year, month, 0).getDate();
+  for (let i = startingDay - 1; i >= 0; i--) {
+    createDayElement(prevMonthLastDay - i, 'other-month', true);
+  }
+
+  // Current month days
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month, day);
+    const isDisabled = date < minDate;
+    const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+    const isToday = isTodayDate(date);
+
+    let className = '';
+    if (isSelected) className = 'selected';
+    if (isDisabled) className = 'disabled';
+    if (isToday && !isSelected && !isDisabled) className = 'today';
+
+    createDayElement(day, className, isDisabled, date);
+  }
+
+  // Next month days
+  const totalCells = 42;
+  const remainingCells = totalCells - (startingDay + daysInMonth);
+  for (let day = 1; day <= remainingCells; day++) {
+    createDayElement(day, 'other-month', true);
+  }
+}
+
+function createDayElement(day, className, disabled, date) {
+  const dayElement = document.createElement('button');
+  dayElement.type = 'button';
+  dayElement.className = `datepicker-day ${className}`;
+  dayElement.textContent = day;
+  dayElement.disabled = disabled;
+
+  if (date && !disabled) {
+    dayElement.addEventListener('click', function() {
+      selectDate(date);
+    });
+  }
+
+  document.getElementById('daysGrid').appendChild(dayElement);
+}
+
+function selectDate(date) {
+  selectedDate = date;
+  selectedTime = null; // Reset time when date changes
+  
+  // Update time slots based on weekday/weekend
+  updateTimeSlots();
+  
+  document.getElementById('confirmDateTimeBtn').disabled = !selectedTime;
+  document.getElementById('selectedDateDisplay').textContent = 
+    `Selected: ${date.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    })}`;
+  renderCalendar();
+}
+
+function selectTime(element) {
+  if (element.disabled) return;
+  
+  // Remove selected class from all time slots
+  document.querySelectorAll('.time-slot').forEach(slot => {
+    slot.classList.remove('selected');
+  });
+
+  // Add selected class to clicked time slot
+  element.classList.add('selected');
+  
+  // Store selected time
+  selectedTime = element.getAttribute('data-time');
+  
+  // Enable confirm button if date is also selected
+  document.getElementById('confirmDateTimeBtn').disabled = !selectedDate;
+}
+
+// NEW FUNCTION: Update time slots based on selected date
+function updateTimeSlots() {
+  const timeSlots = document.querySelectorAll('.time-slot');
+  
+  if (!selectedDate) {
+    // No date selected - enable all time slots
+    timeSlots.forEach(slot => {
+      slot.disabled = false;
+      slot.style.opacity = '1';
+      slot.style.cursor = 'pointer';
+    });
+    return;
+  }
+  
+  const dayOfWeek = selectedDate.getDay(); // 0 = Sunday, 6 = Saturday
+  const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+  
+  timeSlots.forEach(slot => {
+    const timeRange = slot.getAttribute('data-time');
+    const startHour = parseInt(timeRange.split(':')[0]);
+    
+    if (isWeekend) {
+      // Weekend: enable all slots from 12:00 onwards
+      slot.disabled = false;
+      slot.style.opacity = '1';
+      slot.style.cursor = 'pointer';
+    } else {
+      // Weekday (1-5): only enable slots from 18:00 (6 PM) onwards
+      if (startHour >= 18) {
+        slot.disabled = false;
+        slot.style.opacity = '1';
+        slot.style.cursor = 'pointer';
+      } else {
+        slot.disabled = true;
+        slot.style.opacity = '0.5';
+        slot.style.cursor = 'not-allowed';
+      }
+    }
+    
+    // Remove selected state if switching from weekend to weekday and time becomes invalid
+    if (slot.classList.contains('selected') && slot.disabled) {
+      slot.classList.remove('selected');
+      selectedTime = null;
+      document.getElementById('confirmDateTimeBtn').disabled = true;
+    }
+  });
+  
+  // Update display to show current restrictions
+  updateDateTimeDisplay();
+}
+
+// NEW FUNCTION: Update the display text with restrictions info
+function updateDateTimeDisplay() {
+  const displayElement = document.getElementById('selectedDateDisplay');
+  
+  if (selectedDate) {
+    const dateStr = selectedDate.toLocaleDateString('en-US', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    
+    const dayType = (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) ? 'weekend' : 'weekday';
+    const timeRestriction = dayType === 'weekday' ? '6:00 PM - 9:00 PM' : '12:00 PM - 9:00 PM';
+    
+    if (selectedTime) {
+      const timeDisplay = document.querySelector('.time-slot.selected').textContent;
+      displayElement.textContent = `${dateStr} at ${timeDisplay}`;
+    } else {
+      displayElement.textContent = `${dateStr} - Available: ${timeRestriction}`;
+    }
+  } else {
+    displayElement.textContent = 'No date selected';
+  }
+}
+
+function formatMonthYear(year, month) {
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  return `${months[month]} ${year}`;
+}
+
+function isTodayDate(date) {
+  const today = new Date();
+  return date.toDateString() === today.toDateString();
+}
+
+function formatTime(timeString) {
+  const [hours, minutes] = timeString.split(':');
+  const hour = parseInt(hours);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  const displayHour = hour % 12 || 12;
+  return `${displayHour}:${minutes} ${period}`;
+}
+
+// Modal Functions
+function openDateTimePicker() {
+  console.log("open model");
+  dateTimeModal.classList.add('active');
+  document.getElementById('dateTimeModal').style.display = 'flex';
+  initializeDateTimePicker();
+}
+
+function closeDateTimePicker() {
+  console.log("close");
+  document.getElementById('dateTimeModal').style.display = 'none';
+}
+
+function confirmDateTime() {
+  if (selectedDate && selectedTime) {
+    // Format for database/storage (YYYY-MM-DD HH:MM - HH:MM)
+    const dbDate = selectedDate.toISOString().split('T')[0]; // YYYY-MM-DD
+    
+    // Get the time range from the button's data-time attribute
+    const timeRange = document.querySelector(`.time-slot[data-time="${selectedTime}"]`).getAttribute('data-time');
+    
+    // Combine date and time range
+    const dbDateTimeRange = `${dbDate} ${timeRange}`; // 2025-10-25 12:00 - 15:00
+    
+    // Update the delivery datetime input with the formatted range
+    document.getElementById('delivery-datetime').value = dbDateTimeRange;
+    
+    // Store the database format in a data attribute for form submission
+    document.getElementById('delivery-datetime').setAttribute('data-db-format', dbDateTimeRange);
+    
+    console.log('Database format:', dbDateTimeRange);
+    console.log('Is weekend?', (selectedDate.getDay() === 0 || selectedDate.getDay() === 6));
+    
+    // Close modal
+    closeDateTimePicker();
+  }
+}
+
+function setupDateTimeEventListeners() {
+  // Date picker navigation
+  document.getElementById('prevMonth').addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  });
+
+  document.getElementById('nextMonth').addEventListener('click', function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  });
+
+  document.getElementById('todayBtn').addEventListener('click', function() {
+    currentDate = new Date();
+    renderCalendar();
+  });
+
+  // Time slot selection
+  document.querySelectorAll('.time-slot').forEach(slot => {
+    slot.addEventListener('click', function() {
+      selectTime(this);
+    });
+  });
+
+  // Close modal when clicking overlay
+  document.getElementById('dateTimeModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeDateTimePicker();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('dateTimeModal').style.display === 'flex') {
+      closeDateTimePicker();
+    }
+  });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Make the delivery datetime input clickable to open picker
+  document.getElementById('delivery-datetime').addEventListener('click', openDateTimePicker);
+  document.getElementById('delivery-datetime').readOnly = true; // Make it read-only
+});
+  </script>
+
   <script type="module">
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1197,7 +1702,7 @@
         input.addEventListener("input", checkCustomerDetails);
       });
     });
-    // Postcode Checker Functionality
+        // Postcode Checker Functionality
     const deliveryCheckBtn = document.getElementById('deliveryCheckBtn');
     const deliveryCheckBtnNav = document.getElementById('deliveryCheckBtnNav'); // ✅ nav version
     const postcodeModal = document.getElementById('postcodeModal');
@@ -1373,7 +1878,7 @@
     postcodeInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') checkBtn.click();
     });
-
+    
     // Quantity controls
     document.querySelectorAll('.quantity-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -1665,85 +2170,6 @@ document.getElementById("continue-btn").addEventListener("click", async function
         return false;
       }
     }
-
-	function setupDateTimePicker(selector) {
-	  const container = document.createElement('div');
-	  container.innerHTML = `
-		<div class="mobile-datetime-picker" style="margin-top:10px;">
-		  <div class="date-time-row" style="display:flex; flex-wrap:wrap; gap:16px;">
-			<div class="date-input-group" style="flex:1;">
-			  <label for="delivery-date" class="form-label" style="font-weight:600;">Delivery Date</label>
-			  <input type="date" id="delivery-date" class="form-input" min="${getMinDate()}" required>
-			</div>
-			<div class="time-input-group" style="flex:1;">
-			  <label for="delivery-time" class="form-label" style="font-weight:600;">Delivery Time</label>
-			  <select id="delivery-time" class="form-input" required>
-				<option value="">Select Time</option>
-			  </select>
-			</div>
-		  </div>
-		</div>
-	  `;
-
-	  const originalInput = document.querySelector(selector);
-	  originalInput.style.display = 'none';
-	  originalInput.parentNode.insertBefore(container, originalInput.nextSibling);
-
-	  setupMobileDateTimePicker();
-	}
-
-	function getMinDate() {
-	  const minDate = new Date();
-	  minDate.setDate(minDate.getDate() + 3);
-	  return minDate.toISOString().split('T')[0];
-	}
-
-	function setupMobileDateTimePicker() {
-	  const dateInput = document.getElementById('delivery-date');
-	  const timeSelect = document.getElementById('delivery-time');
-	  const hiddenInput = document.getElementById('delivery-datetime');
-
-	  dateInput.addEventListener('change', function() {
-		updateTimeSlots(this.value);
-		updateHiddenInput();
-	  });
-
-	  timeSelect.addEventListener('change', updateHiddenInput);
-
-	  function updateTimeSlots(selectedDate) {
-		const date = new Date(selectedDate);
-		const day = date.getDay(); // 0 = Sunday, 6 = Saturday
-		const isWeekend = (day === 0 || day === 6);
-
-		timeSelect.innerHTML = '<option value="">Select Time</option>';
-		
-		if (isWeekend) {
-		  // Weekend: 12:00 - 21:00
-		  for (let hour = 12; hour <= 21; hour++) {
-			const timeString = `${hour.toString().padStart(2, '0')}:00`;
-			timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
-		  }
-		} else {
-		  // Weekday: 18:00 - 21:00
-		  for (let hour = 18; hour <= 21; hour++) {
-			const timeString = `${hour.toString().padStart(2, '0')}:00`;
-			timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
-		  }
-		}
-	  }
-
-	  function updateHiddenInput() {
-		if (dateInput.value && timeSelect.value) {
-		  hiddenInput.value = `${dateInput.value} ${timeSelect.value}`;
-		} else {
-		  hiddenInput.value = '';
-		}
-	  }
-	}
-
-	// ✅ Initialize
-	setupDateTimePicker("#delivery-datetime");
-
     const promoInput = document.getElementById('promo');
     if (promoInput) {
       promoInput.addEventListener('input', () => {
@@ -1769,7 +2195,6 @@ document.getElementById("continue-btn").addEventListener("click", async function
 		}
 	  });
 	
-
   </script>
   <script src="Modal/modalscript.js"></script>
 </body>
