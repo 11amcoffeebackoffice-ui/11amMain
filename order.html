@@ -498,28 +498,45 @@
       }
 
       .order-steps {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding: 0 10px;
       }
 
       .order-steps::before {
-        display: none;
+        display: block;
+        top: 20px;
       }
 
       .step {
-        flex-direction: row;
-        gap: 15px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
+
+      .step-label {
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.2;
       }
 
       .product-item {
         flex-direction: column;
         text-align: center;
       }
-
+	  
       .product-image {
         margin-right: 0;
         margin-bottom: 15px;
+		    width: 200px;
+		    height: 200px;
       }
 
       .delivery-options {
@@ -534,6 +551,24 @@
       .btn-group {
         flex-direction: column;
       }
+	  
+	  	  .flatpickr-calendar {
+		  font-size: 14px !important;
+		  border-radius: 10px !important;
+		  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		}
+
+		.flatpickr-time {
+		  display: flex;
+		  justify-content: center;
+		  gap: 8px;
+		  padding: 6px 0;
+		}
+
+		.flatpickr-time input {
+		  width: 70px !important;
+		  font-size: 14px;
+		}
     }
 
     /* Print Template (hidden on screen) */
@@ -805,9 +840,10 @@
             <div class="delivery-result" id="delivery-result">
             </div>
             <!-- Delivery DateTime -->
-            <div class="form-group">
+            <div class="form-group" style='padding-top:10px;'>
               <label for="delivery-datetime" class="form-label">Select Delivery Date & Time</label>
-              <input type="text" id="delivery-datetime" class="form-input" required>
+              <input type="text" id="delivery-datetime" class="form-input" placeholder="Select delivery date & time" required>
+			        <p style="color: #b08d57;">Preorder at least 3 days in advance to ensure freshness!</p>
             </div>
           </div>
           <div id="pickup-details" style="display: none;">
