@@ -552,52 +552,26 @@
         flex-direction: column;
       }
 	  
-		.flatpickr-calendar {
-        position: fixed !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 90vw !important;
-        max-width: 325px !important;
-        z-index: 99999 !important;
-      }
-      
-      .flatpickr-calendar:before,
-      .flatpickr-calendar:after {
-        display: none !important;
-      }
-      
-      .flatpickr-days {
-        width: 100% !important;
-      }
-      
-      .dayContainer {
-        width: 100% !important;
-        min-width: 100% !important;
-        max-width: 100% !important;
-      }
-      
-      .flatpickr-day {
-        height: 38px !important;
-        line-height: 38px !important;
-        margin: 2px !important;
-      }
-      
-      /* Ensure time picker is visible and properly styled */
-      .flatpickr-time {
-        height: 50px !important;
-        line-height: 50px !important;
-        border-top: 1px solid #eee !important;
+		.flatpickr-time {
+        height: 60px !important;
       }
       
       .flatpickr-time .numInputWrapper {
-        height: 40px !important;
-        width: 70px !important;
+        width: 100px !important;
+        height: 50px !important;
       }
       
-      .flatpickr-time input {
-        font-size: 16px !important;
-        height: 40px !important;
+      .flatpickr-time .numInputWrapper .numInput {
+        font-size: 20px !important;
+        height: 50px !important;
+        line-height: 50px !important;
+      }
+      
+      .flatpickr-time .flatpickr-am-pm {
+        font-size: 20px !important;
+        height: 50px !important;
+        line-height: 50px !important;
+        width: 100px !important;
       }
     }
 
@@ -1694,68 +1668,85 @@ document.getElementById("continue-btn").addEventListener("click", async function
     }
 
 	function setupDateTimePicker(selector) {
-	  flatpickr(selector, {
-		enableTime: true,
-		noCalendar: false,
-		dateFormat: "Y-m-d H:i",
-		minDate: new Date().fp_incr(3),
-		time_24hr: true,
-		minuteIncrement: 60,
-		defaultMinute: 0,
-		altInput: true,
-		altFormat: "F j, Y at H:i", // "October 25, 2025 at 18:00"
-		allowInput: true,
-		defaultHour: 18,
-		placeholder: "Select delivery date and time",
-		
-		// Force desktop style on mobile
-		disableMobile: true, // This disables the native mobile picker
-		static: true, // Keep calendar in place
-		monthSelectorType: "static", // Keep month/year selector as dropdown
-		clickOpens: true,
-		
-		// Custom styling to ensure consistency
-		theme: "airbnb", // Use the same theme consistently
-		
-		onChange: function(selectedDates, dateStr, instance) {
-		  handleDateChange(instance, selectedDates);
-		},
-		onReady: function(selectedDates, dateStr, instance) {
-		  handleDateChange(instance, selectedDates);
-		  // Ensure proper display format on load
-		  if (selectedDates.length > 0) {
-			instance.altInput.value = instance.formatDate(selectedDates[0], instance.config.altFormat);
-		  }
-		}
-	  });
+      const dateInput = document.createElement('div');
+      dateInput.innerHTML = `
+        <div class="mobile-datetime-picker">
+          <div class="date-time-row">
+            <div class="date-input-group">
+              <label for="delivery-date" class="form-label">Delivery Date</label>
+              <input type="date" id="delivery-date" class="form-input" min="${getMinDate()}" required>
+            </div>
+            <div class="time-input-group">
+              <label for="delivery-time" class="form-label">Delivery Time</label>
+              <select id="delivery-time" class="form-input" required>
+                <option value="">Select Time</option>
+                <!-- Options will be populated based on day -->
+              </select>
+            </div>
+          </div>
+        </div>
+      `;
 
-	  function handleDateChange(instance, selectedDates) {
-		if (!selectedDates.length) return;
+      const originalInput = document.getElementById('delivery-datetime');
+      originalInput.parentNode.insertBefore(dateInput, originalInput);
+      originalInput.style.display = 'none';
 
-		const selectedDate = selectedDates[0];
-		const day = selectedDate.getDay();
-		const previousDate = instance._lastValidDate;
+      setupMobileDateTimePicker();
+    }
 
-		const isWeekend = (day === 0 || day === 6);
-		const minTime = isWeekend ? "12:00" : "18:00";
-		const defaultHour = isWeekend ? 12 : 18;
-		const maxTime = "21:00";
+    function getMinDate() {
+      const minDate = new Date();
+      minDate.setDate(minDate.getDate() + 3);
+      return minDate.toISOString().split('T')[0];
+    }
 
-		instance.set("minTime", minTime);
-		instance.set("maxTime", maxTime);
+    function setupMobileDateTimePicker() {
+      const dateInput = document.getElementById('delivery-date');
+      const timeSelect = document.getElementById('delivery-time');
+      const hiddenInput = document.getElementById('delivery-datetime');
 
-		if (!previousDate || previousDate.toDateString() !== selectedDate.toDateString()) {
-		  const newDate = new Date(selectedDate);
-		  newDate.setHours(defaultHour, 0, 0, 0);
-		  instance.setDate(newDate, false);
-		}
+      dateInput.addEventListener('change', function() {
+        updateTimeSlots(this.value);
+        updateHiddenInput();
+      });
 
-		instance._lastValidDate = selectedDate;
+      timeSelect.addEventListener('change', function() {
+        updateHiddenInput();
+      });
+
+      function updateTimeSlots(selectedDate) {
+        const date = new Date(selectedDate);
+        const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+        const isWeekend = (day === 0 || day === 6);
+        
+        timeSelect.innerHTML = '<option value="">Select Time</option>';
+        
+        if (isWeekend) {
+          // Weekend: 12:00 - 21:00
+          for (let hour = 12; hour <= 21; hour++) {
+            const timeString = `${hour.toString().padStart(2, '0')}:00`;
+            timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
+          }
+        } else {
+          // Weekday: 18:00 - 21:00
+          for (let hour = 18; hour <= 21; hour++) {
+            const timeString = `${hour.toString().padStart(2, '0')}:00`;
+            timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
+          }
+        }
+      }
+
+      function updateHiddenInput() {
+        if (dateInput.value && timeSelect.value) {
+          const dateTimeString = `${dateInput.value} ${timeSelect.value}`;
+          hiddenInput.value = dateTimeString;
+        } else {
+          hiddenInput.value = '';
+        }
+      }
 	  }
-	}
-
-	setupDateTimePicker("#delivery-datetime");
-	setupDateTimePicker("#pickup-datetime");
+    // Initialize
+    setupDateTimePicker("#delivery-datetime");
 
     const promoInput = document.getElementById('promo');
     if (promoInput) {
