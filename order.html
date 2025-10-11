@@ -913,7 +913,6 @@
             </div>
             <!-- Delivery DateTime -->
             <div class="form-group" style='padding-top:10px;'>
-              <label for="delivery-datetime" class="form-label">Select Delivery Date & Time</label>
               <input type="text" id="delivery-datetime" class="form-input" placeholder="Select delivery date & time" required>
 			        <p style="color: #b08d57;">Preorder at least 3 days in advance to ensure freshness!</p>
             </div>
@@ -1668,85 +1667,82 @@ document.getElementById("continue-btn").addEventListener("click", async function
     }
 
 	function setupDateTimePicker(selector) {
-      const dateInput = document.createElement('div');
-      dateInput.innerHTML = `
-        <div class="mobile-datetime-picker">
-          <div class="date-time-row">
-            <div class="date-input-group">
-              <label for="delivery-date" class="form-label">Delivery Date</label>
-              <input type="date" id="delivery-date" class="form-input" min="${getMinDate()}" required>
-            </div>
-            <div class="time-input-group">
-              <label for="delivery-time" class="form-label">Delivery Time</label>
-              <select id="delivery-time" class="form-input" required>
-                <option value="">Select Time</option>
-                <!-- Options will be populated based on day -->
-              </select>
-            </div>
-          </div>
-        </div>
-      `;
+	  const container = document.createElement('div');
+	  container.innerHTML = `
+		<div class="mobile-datetime-picker" style="margin-top:10px;">
+		  <div class="date-time-row" style="display:flex; flex-wrap:wrap; gap:16px;">
+			<div class="date-input-group" style="flex:1;">
+			  <label for="delivery-date" class="form-label" style="font-weight:600;">Delivery Date</label>
+			  <input type="date" id="delivery-date" class="form-input" min="${getMinDate()}" required>
+			</div>
+			<div class="time-input-group" style="flex:1;">
+			  <label for="delivery-time" class="form-label" style="font-weight:600;">Delivery Time</label>
+			  <select id="delivery-time" class="form-input" required>
+				<option value="">Select Time</option>
+			  </select>
+			</div>
+		  </div>
+		</div>
+	  `;
 
-      const originalInput = document.getElementById('delivery-datetime');
-      originalInput.parentNode.insertBefore(dateInput, originalInput);
-      originalInput.style.display = 'none';
+	  const originalInput = document.querySelector(selector);
+	  originalInput.style.display = 'none';
+	  originalInput.parentNode.insertBefore(container, originalInput.nextSibling);
 
-      setupMobileDateTimePicker();
-    }
+	  setupMobileDateTimePicker();
+	}
 
-    function getMinDate() {
-      const minDate = new Date();
-      minDate.setDate(minDate.getDate() + 3);
-      return minDate.toISOString().split('T')[0];
-    }
+	function getMinDate() {
+	  const minDate = new Date();
+	  minDate.setDate(minDate.getDate() + 3);
+	  return minDate.toISOString().split('T')[0];
+	}
 
-    function setupMobileDateTimePicker() {
-      const dateInput = document.getElementById('delivery-date');
-      const timeSelect = document.getElementById('delivery-time');
-      const hiddenInput = document.getElementById('delivery-datetime');
+	function setupMobileDateTimePicker() {
+	  const dateInput = document.getElementById('delivery-date');
+	  const timeSelect = document.getElementById('delivery-time');
+	  const hiddenInput = document.getElementById('delivery-datetime');
 
-      dateInput.addEventListener('change', function() {
-        updateTimeSlots(this.value);
-        updateHiddenInput();
-      });
+	  dateInput.addEventListener('change', function() {
+		updateTimeSlots(this.value);
+		updateHiddenInput();
+	  });
 
-      timeSelect.addEventListener('change', function() {
-        updateHiddenInput();
-      });
+	  timeSelect.addEventListener('change', updateHiddenInput);
 
-      function updateTimeSlots(selectedDate) {
-        const date = new Date(selectedDate);
-        const day = date.getDay(); // 0 = Sunday, 6 = Saturday
-        const isWeekend = (day === 0 || day === 6);
-        
-        timeSelect.innerHTML = '<option value="">Select Time</option>';
-        
-        if (isWeekend) {
-          // Weekend: 12:00 - 21:00
-          for (let hour = 12; hour <= 21; hour++) {
-            const timeString = `${hour.toString().padStart(2, '0')}:00`;
-            timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
-          }
-        } else {
-          // Weekday: 18:00 - 21:00
-          for (let hour = 18; hour <= 21; hour++) {
-            const timeString = `${hour.toString().padStart(2, '0')}:00`;
-            timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
-          }
-        }
-      }
+	  function updateTimeSlots(selectedDate) {
+		const date = new Date(selectedDate);
+		const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+		const isWeekend = (day === 0 || day === 6);
 
-      function updateHiddenInput() {
-        if (dateInput.value && timeSelect.value) {
-          const dateTimeString = `${dateInput.value} ${timeSelect.value}`;
-          hiddenInput.value = dateTimeString;
-        } else {
-          hiddenInput.value = '';
-        }
-      }
+		timeSelect.innerHTML = '<option value="">Select Time</option>';
+		
+		if (isWeekend) {
+		  // Weekend: 12:00 - 21:00
+		  for (let hour = 12; hour <= 21; hour++) {
+			const timeString = `${hour.toString().padStart(2, '0')}:00`;
+			timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
+		  }
+		} else {
+		  // Weekday: 18:00 - 21:00
+		  for (let hour = 18; hour <= 21; hour++) {
+			const timeString = `${hour.toString().padStart(2, '0')}:00`;
+			timeSelect.innerHTML += `<option value="${timeString}">${timeString}</option>`;
+		  }
+		}
 	  }
-    // Initialize
-    setupDateTimePicker("#delivery-datetime");
+
+	  function updateHiddenInput() {
+		if (dateInput.value && timeSelect.value) {
+		  hiddenInput.value = `${dateInput.value} ${timeSelect.value}`;
+		} else {
+		  hiddenInput.value = '';
+		}
+	  }
+	}
+
+	// ✅ Initialize
+	setupDateTimePicker("#delivery-datetime");
 
     const promoInput = document.getElementById('promo');
     if (promoInput) {
