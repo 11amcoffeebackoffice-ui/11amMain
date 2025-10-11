@@ -11,7 +11,7 @@
   <!-- Include Flatpickr CSS & JS -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr">
   </script>
-  <!-- Confetti -->
+<!-- Confetti -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
   <link rel="stylesheet" href="common.css">
@@ -552,23 +552,53 @@
         flex-direction: column;
       }
 	  
-	  	  .flatpickr-calendar {
-		  font-size: 14px !important;
-		  border-radius: 10px !important;
-		  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-		}
-
-		.flatpickr-time {
-		  display: flex;
-		  justify-content: center;
-		  gap: 8px;
-		  padding: 6px 0;
-		}
-
-		.flatpickr-time input {
-		  width: 70px !important;
-		  font-size: 14px;
-		}
+		.flatpickr-calendar {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 90vw !important;
+        max-width: 325px !important;
+        z-index: 99999 !important;
+      }
+      
+      .flatpickr-calendar:before,
+      .flatpickr-calendar:after {
+        display: none !important;
+      }
+      
+      .flatpickr-days {
+        width: 100% !important;
+      }
+      
+      .dayContainer {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .flatpickr-day {
+        height: 38px !important;
+        line-height: 38px !important;
+        margin: 2px !important;
+      }
+      
+      /* Ensure time picker is visible and properly styled */
+      .flatpickr-time {
+        height: 50px !important;
+        line-height: 50px !important;
+        border-top: 1px solid #eee !important;
+      }
+      
+      .flatpickr-time .numInputWrapper {
+        height: 40px !important;
+        width: 70px !important;
+      }
+      
+      .flatpickr-time input {
+        font-size: 16px !important;
+        height: 40px !important;
+      }
     }
 
     /* Print Template (hidden on screen) */
@@ -662,23 +692,91 @@
         font-size: 16px;
       }
 	  
-	  .flatpickr-calendar {
-		  font-size: 14px !important;
-		  border-radius: 10px !important;
-		  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-		}
+		/* Force Flatpickr to use desktop style on mobile */
+    .flatpickr-calendar {
+      position: absolute !important;
+      width: 325px !important;
+      max-height: 385px !important;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      animation: none;
+      text-align: center;
+      padding: 0;
+      border-radius: 10px !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    }
 
-		.flatpickr-time {
-		  display: flex;
-		  justify-content: center;
-		  gap: 8px;
-		  padding: 6px 0;
-		}
+    .flatpickr-calendar.open {
+      visibility: visible;
+      opacity: 1;
+    }
 
-		.flatpickr-time input {
-		  width: 70px !important;
-		  font-size: 14px;
-		}
+    .flatpickr-calendar.inline {
+      position: relative;
+      top: 2px;
+    }
+
+    .flatpickr-calendar.static {
+      position: absolute;
+      top: calc(100% + 5px);
+    }
+
+    .flatpickr-calendar.static.open {
+      position: absolute;
+    }
+
+    /* Time picker styling */
+    .flatpickr-time {
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .flatpickr-time .numInputWrapper {
+          width: 70px !important;
+        }
+
+        .flatpickr-time .flatpickr-am-pm {
+          width: auto !important;
+          padding: 0 10px;
+        }
+
+        /* Input field styling */
+    .flatpickr-input {
+      font-family: 'Open Sans', sans-serif !important;
+      font-size: 16px !important;
+      color: #3b2a21 !important;
+      background: white !important;
+      cursor: pointer !important;
+    }
+
+    .flatpickr-alt-input {
+      font-family: 'Open Sans', sans-serif !important;
+      font-size: 16px !important;
+      color: #3b2a21 !important;
+      background: white !important;
+      cursor: pointer !important;
+    }
+
+    /* Backdrop for mobile */
+    .flatpickr-calendar.open {
+      z-index: 99999;
+    }
+
+    .flatpickr-calendar.open ~ .flatpickr-monthDropdown-months,
+    .flatpickr-calendar.open ~ .flatpickr-yearDropdown {
+      z-index: 100000;
+    }
+
+    /* Ensure the calendar appears above other content */
+    .flatpickr-wrapper {
+      position: relative;
+      z-index: 9999;
+    }
   </style>
 </head>
 
@@ -1600,18 +1698,34 @@ document.getElementById("continue-btn").addEventListener("click", async function
 		enableTime: true,
 		noCalendar: false,
 		dateFormat: "Y-m-d H:i",
-		minDate: new Date().fp_incr(3), // ✅ Preorder at least 3 days later
+		minDate: new Date().fp_incr(3),
 		time_24hr: true,
-		minuteIncrement: 60, // ✅ Only allow hour steps (00 minutes)
-		defaultMinute: 0, // ✅ Force 00 minutes
+		minuteIncrement: 60,
+		defaultMinute: 0,
 		altInput: true,
+		altFormat: "F j, Y at H:i", // "October 25, 2025 at 18:00"
 		allowInput: true,
 		defaultHour: 18,
+		placeholder: "Select delivery date and time",
+		
+		// Force desktop style on mobile
+		disableMobile: true, // This disables the native mobile picker
+		static: true, // Keep calendar in place
+		monthSelectorType: "static", // Keep month/year selector as dropdown
+		clickOpens: true,
+		
+		// Custom styling to ensure consistency
+		theme: "airbnb", // Use the same theme consistently
+		
 		onChange: function(selectedDates, dateStr, instance) {
 		  handleDateChange(instance, selectedDates);
 		},
 		onReady: function(selectedDates, dateStr, instance) {
 		  handleDateChange(instance, selectedDates);
+		  // Ensure proper display format on load
+		  if (selectedDates.length > 0) {
+			instance.altInput.value = instance.formatDate(selectedDates[0], instance.config.altFormat);
+		  }
 		}
 	  });
 
@@ -1619,10 +1733,9 @@ document.getElementById("continue-btn").addEventListener("click", async function
 		if (!selectedDates.length) return;
 
 		const selectedDate = selectedDates[0];
-		const day = selectedDate.getDay(); // 0 = Sun, 6 = Sat
+		const day = selectedDate.getDay();
 		const previousDate = instance._lastValidDate;
 
-		// ✅ Weekend vs weekday rules
 		const isWeekend = (day === 0 || day === 6);
 		const minTime = isWeekend ? "12:00" : "18:00";
 		const defaultHour = isWeekend ? 12 : 18;
@@ -1631,7 +1744,6 @@ document.getElementById("continue-btn").addEventListener("click", async function
 		instance.set("minTime", minTime);
 		instance.set("maxTime", maxTime);
 
-		// ✅ Reset time to default only when DATE changes
 		if (!previousDate || previousDate.toDateString() !== selectedDate.toDateString()) {
 		  const newDate = new Date(selectedDate);
 		  newDate.setHours(defaultHour, 0, 0, 0);
