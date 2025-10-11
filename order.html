@@ -14,222 +14,18 @@
   <!-- Confetti -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/airbnb.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
+  <link rel="stylesheet" href="common.css">
 	<!-- Favicon -->
-	<link rel="icon" href="images/11amV2.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="images/11amV2.ico" type="image/x-icon">
+	<link rel="icon" href="images/11amV2.png" type="image/x-icon">
+	<link rel="shortcut icon" href="images/11amV2.png" type="image/x-icon">
 
 	<!-- Optional for better support -->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.ico">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.ico">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.png">
   
   <style>
-    .announcement-bar {
-      background: #5c4435;
-      color: #fff;
-      padding: 8px 16px;
-      border-bottom: 1px solid #e0d9b9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-
-    .announcement-bar .announcement-full {
-      display: inline-block;
-      max-width: 900px;
-    }
-
-    @media (max-width: 768px) {
-      .announcement-bar i {
-        display: none;
-      }
-
-      .announcement-bar .announcement-short {
-        display: inline-block;
-        white-space: nowrap;
-        animation: marquee 10s linear infinite;
-        will-change: transform;
-      }
-
-      @keyframes marquee {
-        from {
-          transform: translateX(100%);
-        }
-
-        to {
-          transform: translateX(-100%);
-        }
-      }
-    }
-
-    .tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-style: italic;
-      color: #3a2c1e;
-    }
-
-    .tagline-hero {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      font-weight: 400;
-      color: #f5f0ea;
-      margin-top: 10px;
-      line-height: 1.6;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .mobile-actions {
-      display: none;
-      gap: 10px;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-actions {
-        display: flex;
-        align-items: center;
-      }
-
-      .nav-menu .icon-btn {
-        display: none;
-      }
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #f9f5f0;
-      color: #3a2c1e;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Premium Header */
-    header {
-      background: #fff;
-      padding: 15px 5%;
-      box-shadow: 0 2px 10px rgba(59, 42, 33, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 32px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #3b2a21, #b08d57);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-      flex: 1;
-      text-align: left;
-      cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #7a5c44, #d4a373);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .logo span {
-      color: #d4af37;
-      font-weight: 700;
-      font-style: italic;
-      opacity: 0.85;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      color: #3b2a21;
-      font-weight: 500;
-      font-size: 16px;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 5px 0;
-    }
-
-    .nav-link:hover {
-      color: #7a5c44;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #3b2a21, #7a5c44);
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .icon-btn,
-    .mobile-menu-btn {
-      background: none;
-      border: none;
-      color: #3b2a21;
-      font-size: 20px;
-      cursor: pointer;
-      padding: 8px;
-      transition: 0.3s;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon-btn:hover,
-    .mobile-menu-btn:hover {
-      background-color: #f3ebe4;
-      transform: scale(1.05);
-    }
-
-    .mobile-menu-btn {
-      display: none;
-    }
-
+	
     /* Order Page Specific Styles */
     .order-section {
       padding: 60px 0;
@@ -695,6 +491,7 @@
       }
 
       .logo {
+	    position: absolute;
         font-size: 24px;
         text-align: left;
         padding-left: 10px;
@@ -737,174 +534,6 @@
       .btn-group {
         flex-direction: column;
       }
-    }
-
-    /* Postcode Modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .postcode-modal {
-      background: #fff;
-      border-radius: 16px;
-      padding: 25px;
-      width: 90%;
-      max-width: 400px;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-    }
-
-    .modal-overlay.active .postcode-modal {
-      transform: translateY(0);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #666;
-    }
-
-    /* Postcode Checker Styles */
-    .order-card .muted {
-      color: #666;
-      font-size: 14px;
-      font-weight: 400;
-      margin: 0 0 12px 0;
-    }
-
-    .order-card label {
-      display: block;
-      margin: 10px 0 6px 0;
-      font-size: 14px;
-      font-weight: 700;
-      text-align: left;
-    }
-
-    .order-card input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #e3e3e8;
-      font-size: 14px;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-    }
-
-    .order-card small {
-      display: block;
-      margin-top: 8px;
-      color: #666;
-      font-weight: 400;
-      font-size: 12px;
-      text-align: left;
-    }
-
-    .order-card button.check-btn {
-      margin-top: 16px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-family: "Roboto", sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      background: linear-gradient(135deg, #3b2a21, #2a1d16);
-      color: #fff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-
-    .order-card button.check-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-
-    .order-card .result {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      text-align: left;
-    }
-
-    .order-card .ok {
-      background: #e8fff2;
-      color: #0b6b3a;
-    }
-
-    .order-card .no {
-      background: #fff0f0;
-      color: #8b1a1a;
-    }
-
-    .order-card {
-      width: 100%;
-      background: #fff;
-      border-radius: 16px;
-      padding: 25px;
-      font-family: "Open Sans", sans-serif;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      border: 1px solid #e3e3e8;
-    }
-
-    .order-card h2 {
-      margin: 0 0 20px 0;
-      font-family: Roboto, sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: #5d4037;
-    }
-
-    .order-card button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-family: "Roboto", sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      background: #5d4037;
-      color: #fff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-    }
-
-    .order-card button:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
     }
 
     /* Print Template (hidden on screen) */
@@ -997,57 +626,87 @@
         color: #7f8c8d;
         font-size: 16px;
       }
+	  
+	  .flatpickr-calendar {
+		  font-size: 14px !important;
+		  border-radius: 10px !important;
+		  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		}
+
+		.flatpickr-time {
+		  display: flex;
+		  justify-content: center;
+		  gap: 8px;
+		  padding: 6px 0;
+		}
+
+		.flatpickr-time input {
+		  width: 70px !important;
+		  font-size: 14px;
+		}
   </style>
 </head>
 
 <body>
   <!-- Announcement Bar -->
-  <div class="announcement-bar">
-    <i class="fas fa-bullhorn">
-    </i>
-    <span class="announcement-full">
-    </span>
-    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more. &nbsp; </span>
-  </div>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <!-- Mobile menu button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars">
-        </i>
-      </button>
-      <!-- Center: Logo -->
-      <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">11am Coffee</a></div>
-      <!-- Mobile Actions (only show on mobile) -->
-      <div class="mobile-actions">
-        <button class="icon-btn" id="orderCheckBtnOpen">
-          <i class="fas fa-clipboard-list">
-          </i>
-        </button>
-        <button class="icon-btn" id="deliveryCheckBtn">
-          <i class="fas fa-truck">
-          </i>
-        </button>
-      </div>
-      <!-- Navigation Menu -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="index.html#shop" class="nav-link">Shop</a>
-        <a href="order.html" class="nav-link">Order</a>
-		<a href="index.html#feedback-form" class="nav-link">Feedback</a>  
-        <a href="index.html#shop#about" class="nav-link">About Us</a>
-        <button class="icon-btn" id="orderCheckBtnOpenNav">
-          <i class="fas fa-clipboard-list">
-          </i>
-        </button>
-        <button class="icon-btn" id="deliveryCheckBtnNav">
-          <i class="fas fa-truck">
-          </i>
-        </button>
-      </nav>
-    </div>
-  </header>
+	<div class="announcement-bar">
+	  <i class="fas fa-bullhorn"> </i>
+	  <span class="announcement-full">
+	  </span>
+	  <span class="announcement-short">
+		&nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more.  &nbsp;
+	  </span>
+	</div>
+    <!-- Header -->
+	<header>
+	  <div class="header-container">
+		<!-- Mobile menu button -->
+		<button class="mobile-menu-btn" id="mobileMenuBtn">
+		  <i class="fas fa-bars"></i>
+		</button>
+
+	  <!-- Center: Logo -->
+	  <div class="logo" style="left: 50%; transform: translateX(-50%); display: flex;">
+		<a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+		  <img src="images/logo/ig profile.png" 
+			   alt="11am Coffee Logo" 
+			   style="height: 40px; width: auto; transform: scale(2); transform-origin: center;">
+		</a>
+	  </div>
+
+
+		<!-- Mobile Actions (only show on mobile) -->
+		<div class="mobile-actions">
+		  <button class="icon-btn" id="orderCheckBtnOpen">
+			<img src="images/track3.png" alt="Order Check" class="icon-img">
+		  </button>
+		  <button class="icon-btn" id="deliveryCheckBtn">
+			<img src="images/loca1.png" alt="Order Check" class="icon-img">
+		  </button>
+		</div>
+
+		<!-- Navigation Menu -->
+		<nav class="nav-menu" id="navMenu">
+		  <a href="index.html" class="nav-link">Home</a>
+		  <a href="index.html#shop" class="nav-link">Shop</a>
+		  <a href="order.html" class="nav-link">Order</a>
+		  <a href="index.html#feedback-form" class="nav-link">Feedback</a>  
+		  <a href="index.html#about" class="nav-link">About Us</a>
+		</nav>
+		<!-- Right: Icons -->
+		  <div class="nav-icons" style="display: flex; align-items: center; gap: 12px;">
+			<button class="icon-btn" id="orderCheckBtnOpenNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/track3.png" alt="Order Check" class="icon-img">
+			</button>
+			<button class="icon-btn" id="deliveryCheckBtnNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/loca1.png" alt="Delivery Check" class="icon-img">
+			</button>
+		  </div>
+		
+	  </div>
+	</header>
   <!-- Order Section -->
   <section class="order-section">
     <div class="container">
@@ -1077,48 +736,48 @@
           <h3>Select Your Coffee</h3>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Espresso">
+              <img src="https://previews.dropbox.com/p/thumb/ACw_yWAI7L21x9ZpQK8xy0DViJtPsTFb402okAFt_4ZwOSW0YSt0QDuzbucVX6j6POV4eRCIaWs8-4tTZp7MM_13_0j0xu3wrxVJxySx0NEYsAP_JThq_3nW2Z7s03gNSY8neSFDGuTBxGZQvXvlRD9YhI4uZ8Ks-GvhCv5VNw5aRLrw7O7WKYIla-HqDcbvkYZnsNK5gJlGhwokufdeRHj5uRf5m2nTFojY9HhEjADxFWmtIT3WbcwUJH2gTBZaRgL611TFkhIui8FKp-3eLo2TjUTsVHqQgqarJkQ1Ctt4gf9gyAkPHyvsm6jnO2Q0N0o/p.jpeg" alt="Espresso">
             </div>
             <div class="product-details">
-              <div class="product-name">Solo Pack</div>
+              <div class="product-name">Solo Brew</div>
               <div class="product-description"><p>6 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</p></div>
               <div class="product-price">RM 36</div>
             </div>
             <div class="quantity-controls">
-              <button class="quantity-btn minus" data-product="solopack">-</button>
-              <input type="number" class="quantity-input" id="solopack-qty" value="0" min="0" max="10">
-              <button class="quantity-btn plus" data-product="solopack">+</button>
+              <button class="quantity-btn minus" data-product="solobrew">-</button>
+              <input type="number" class="quantity-input" id="solobrew-qty" value="0" min="0" max="10">
+              <button class="quantity-btn plus" data-product="solobrew">+</button>
             </div>
           </div>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Cappuccino">
+              <img src="https://previews.dropbox.com/p/thumb/ACwZaXXcoMSuNthYcvcmLefvuf9SAtoHD4OB7Toi_w0T4HJS1lgrurH9bROdevboCnTTIGm2-q1OH1oWY_-wfTpv82Dw4nq9Fq_qxnvKFKoC4oKVC34I9PNhFlDhmHhXXu0iy-LFIVvPA1XdRl6o2JAfQ1pe8Vmx_MCF6uTHs7-gTNztABIOzgUK1i0gQj1HxUX9Xyikdu20kCy212A4TT_isF7rxLa4Xg168wHNZayNzJVynFH37fT6_1xevwvprbaLLeprRtdzB-qHbyE7VbYKTVZQcXQqjwRAYA3G307rKwISURjq1eaXMp6RWTyPbG0/p.jpeg" alt="Cappuccino">
             </div>
             <div class="product-details">
-              <div class="product-name">Duo Pack</div>
+              <div class="product-name">Duo Brew</div>
               <div class="product-description">12 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</div>
               <div class="product-price">RM 70</div>
             </div>
             <div class="quantity-controls">
-              <button class="quantity-btn minus" data-product="duopack">-</button>
-              <input type="number" class="quantity-input" id="duopack-qty" value="0" min="0" max="10">
-              <button class="quantity-btn plus" data-product="duopack">+</button>
+              <button class="quantity-btn minus" data-product="duobrew">-</button>
+              <input type="number" class="quantity-input" id="duobrew-qty" value="0" min="0" max="10">
+              <button class="quantity-btn plus" data-product="duobrew">+</button>
             </div>
           </div>
           <div class="product-item">
             <div class="product-image">
-              <img src="https://previews.dropbox.com/p/thumb/ACyLp1poWs_FB4_aDqG3YIR2fhU82pRucmRUkIiTsXQ1WOrSVd8E9C2le2IGIEprPyPhJ-frXxY5gXxDWLghPaMKt07h9SF1Y7ejG0mUBCgzPAyq-5w4Tc6qG69mU4bN1VXZRAgnsxm62hgpRxOhssL1Vr9A-Xno7HuhcyybvH4t8rRU8-59spuWiB9RmrZSlHb0YL4wDtsg5wyOYXCm1ioMynOygzh_s5n2iXLAxOmY_Me_nZJgZ5sJc1iTzA1yrZwBRsqi7NFihgZvhEw35Qbrg2gMBwPfVTe8QobcUavCOS6mEjHZjo9lTPU5P2l4WAJVuiDRJ1U2ThYTxBMPSAw8/p.jpeg?is_prewarmed=true" alt="Cold Brew">
+              <img src="https://previews.dropbox.com/p/thumb/ACzggF14qjBnVibepgTVllsCXh09jawYLB7FdIKPP6M-ikLmJTuX944GroVustDafDftFK1-rlF3oTDTL-FxP2X21chf6PrBsWMNnx2yLBiAUpeER-Z1JLX8GCeoOFh3OkyFCX0likI6GVL7q6vvS5cBmcGLSzCYTTNFwIjQu-SinxJt-9PvdIPQr7fwZ2XEtfolMx_C11cySun_bDsY3uNuHa5RDsk0Oo8OKK5lLyi3YoIlZhCPhUR43LnO2P9jhHHNdMq4OpRZRXNNea6i-nRAFmmJKqPP-2UWknXfaDu40w4iP7nBuTnsUs2k4SCpTm4/p.jpeg" alt="Cold Brew">
             </div>
             <div class="product-details">
-              <div class="product-name">Family Pack</div>
+              <div class="product-name">Family Brew</div>
               <div class="product-description">18 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</div>
 
               <div class="product-price">RM 105</div>
             </div>
             <div class="quantity-controls">
-              <button class="quantity-btn minus" data-product="familypack">-</button>
-              <input type="number" class="quantity-input" id="familypack-qty" value="0" min="0" max="10">
-              <button class="quantity-btn plus" data-product="familypack">+</button>
+              <button class="quantity-btn minus" data-product="familybrew">-</button>
+              <input type="number" class="quantity-input" id="familybrew-qty" value="0" min="0" max="10">
+              <button class="quantity-btn plus" data-product="familybrew">+</button>
             </div>
           </div>
         </div>
@@ -1196,11 +855,10 @@
               <input type="text" class="form-input" id="promo" placeholder="Enter your promo code">
               <small id="promoMsg" style="color:green;display:none;">✅ Promo code applied!</small>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="notes">Special Instructions (Optional)</label>
-              <textarea class="form-input" id="notes" rows="2" placeholder="Any special requests or notes for your order">
-</textarea>
-            </div>
+            <!-- <div class="form-group"> -->
+              <!-- <label class="form-label" for="notes">Special Instructions (Optional)</label> -->
+              <!-- <textarea class="form-input" id="notes" rows="2" placeholder="Any special requests or notes for your order"></textarea> -->
+            <!-- </div> -->
           </form>
         </div>
         <!-- Order Summary -->
@@ -1232,44 +890,60 @@
       </div>
     </div>
   </section>
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>11am Coffee</h3>
-          <p>Brewing joy in every cup — 11am Coffee, your daily ritual since 2025.</p>
-        </div>
-        <div class="footer-column">
-          <h3>Contact Us</h3>
-          <ul>
-            <li>
-              <i class="fas fa-phone">
-              </i>
-              <a href="tel:+60175115356">+60 17-511 5356</a>
-            </li>
-            <li>
-              <i class="fab fa-whatsapp">
-              </i>
-              <a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Follow Us</h3>
-          <div class="social-icons">
-            <a href="https://www.instagram.com/11amcoffee/">
-              <i class="fab fa-instagram">
-              </i>
-            </a>
-          </div>
-        </div>
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Column 1 -->
+      <div class="footer-column">
+        <h3>11am Coffee</h3>
+        <p>
+          Brewing joy in every cup — <br>
+          11am Coffee, your daily ritual since 2025.
+        </p>
       </div>
-      <div class="copyright">
-        <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
+
+      <!-- Column 2 -->
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+60175115356">+60 17-511 5356</a>
+          </li>
+          <li>
+            <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 3 (NEW Quick Links) -->
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="order.html">Place Order</a></li>
+		  <li><a href="index.html#feedback-form">Feedback</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4 -->
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/11amcoffee/" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
     </div>
-  </footer>
+
+    <div class="copyright">
+      <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
+    </div>
+  </div>
+</footer>
   <!-- Postcode Checker Modal -->
   <div class="modal-overlay" id="postcodeModal">
     <div class="postcode-modal">
@@ -1638,9 +1312,9 @@
     }
     // Update order summary
     function updateOrderSummary() {
-      const soloQty = parseInt(document.getElementById('solopack-qty').value) || 0;
-      const duoQty = parseInt(document.getElementById('duopack-qty').value) || 0;
-      const familyQty = parseInt(document.getElementById('familypack-qty').value) || 0;
+      const soloQty = parseInt(document.getElementById('solobrew-qty').value) || 0;
+      const duoQty = parseInt(document.getElementById('duobrew-qty').value) || 0;
+      const familyQty = parseInt(document.getElementById('familybrew-qty').value) || 0;
       const soloPrice = 36;
       const duoPrice = 70;
       const familyPrice = 105;
@@ -1700,7 +1374,7 @@ document.getElementById("continue-btn").addEventListener("click", async function
 
   // Collect selected products
   let selected = [];
-  const products = ["solopack", "duopack", "familypack"];
+  const products = ["solobrew", "duobrew", "familybrew"];
   products.forEach(p => {
     const qty = parseInt(document.getElementById(`${p}-qty`).value) || 0;
     if (qty > 0) {
@@ -1725,6 +1399,7 @@ document.getElementById("continue-btn").addEventListener("click", async function
   const custPhone = document.getElementById("phone").value.trim();
   const custEmail = document.getElementById("email").value.trim();
   const custAddress = document.getElementById("address").value.trim();
+  const promoCode = document.getElementById('promo').value.trim();
 
   if (!custName || !custPhone || !custEmail || !custAddress) {
     msgEl.textContent = "⚠️ Please fill in all customer details.";
@@ -1766,7 +1441,8 @@ document.getElementById("continue-btn").addEventListener("click", async function
     GrandTotal: grandTotal,
     DateTime: new Date().toLocaleString("en-GB", { timeZone: "Asia/Kuala_Lumpur" }),
     Status: "New",
-    DeliveryTime: custdeliverytime
+    DeliveryTime: custdeliverytime,
+	Promotion: promoCode
   };
 
   console.log("Final Payload 👉", payload);
@@ -1799,7 +1475,7 @@ document.getElementById("continue-btn").addEventListener("click", async function
 
       setTimeout(() => {
         window.location.replace(
-          `payment.html?orderId=${newOrderId}&name=${encodeURIComponent(custName)}&deliveryfee=${encodeURIComponent(deliveryFee)}&ordertotal=${encodeURIComponent(orderTotal)}&grandtotal=${encodeURIComponent(grandTotal)}&address=${encodeURIComponent(custAddress)}`
+          `payment.html?orderId=${newOrderId}&name=${encodeURIComponent(custName)}&deliveryfee=${encodeURIComponent(deliveryFee)}&ordertotal=${encodeURIComponent(orderTotal)}&grandtotal=${encodeURIComponent(grandTotal)}&promocode=${encodeURIComponent(promoCode)}&address=${encodeURIComponent(custAddress)}`
         );
       }, 2000);
     } else {
@@ -1883,25 +1559,56 @@ document.getElementById("continue-btn").addEventListener("click", async function
       }
     }
 
-    function setupDateTimePicker(selector) {
-      flatpickr(selector, {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        minDate: "today",
-        time_24hr: true,
-        minuteIncrement: 30, // ✅ Only 30-minute slots
-        minTime: "12:00", // ✅ Earliest time = 12:00 PM
-        maxTime: "21:00", // ✅ Latest time = 9:00 PM
-        disable: [
-          function(date) {
-            // Disable Monday–Thursday
-            return (date.getDay() >= 1 && date.getDay() <= 4);
-          }
-        ]
-      });
-    }
-    setupDateTimePicker("#delivery-datetime");
-    setupDateTimePicker("#pickup-datetime");
+	function setupDateTimePicker(selector) {
+	  flatpickr(selector, {
+		enableTime: true,
+		noCalendar: false,
+		dateFormat: "Y-m-d H:i",
+		minDate: new Date().fp_incr(3), // ✅ Preorder at least 3 days later
+		time_24hr: true,
+		minuteIncrement: 60, // ✅ Only allow hour steps (00 minutes)
+		defaultMinute: 0, // ✅ Force 00 minutes
+		altInput: true,
+		allowInput: true,
+		defaultHour: 18,
+		onChange: function(selectedDates, dateStr, instance) {
+		  handleDateChange(instance, selectedDates);
+		},
+		onReady: function(selectedDates, dateStr, instance) {
+		  handleDateChange(instance, selectedDates);
+		}
+	  });
+
+	  function handleDateChange(instance, selectedDates) {
+		if (!selectedDates.length) return;
+
+		const selectedDate = selectedDates[0];
+		const day = selectedDate.getDay(); // 0 = Sun, 6 = Sat
+		const previousDate = instance._lastValidDate;
+
+		// ✅ Weekend vs weekday rules
+		const isWeekend = (day === 0 || day === 6);
+		const minTime = isWeekend ? "12:00" : "18:00";
+		const defaultHour = isWeekend ? 12 : 18;
+		const maxTime = "21:00";
+
+		instance.set("minTime", minTime);
+		instance.set("maxTime", maxTime);
+
+		// ✅ Reset time to default only when DATE changes
+		if (!previousDate || previousDate.toDateString() !== selectedDate.toDateString()) {
+		  const newDate = new Date(selectedDate);
+		  newDate.setHours(defaultHour, 0, 0, 0);
+		  instance.setDate(newDate, false);
+		}
+
+		instance._lastValidDate = selectedDate;
+	  }
+	}
+
+	setupDateTimePicker("#delivery-datetime");
+	setupDateTimePicker("#pickup-datetime");
+
     const promoInput = document.getElementById('promo');
     if (promoInput) {
       promoInput.addEventListener('input', () => {

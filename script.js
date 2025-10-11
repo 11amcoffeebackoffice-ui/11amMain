@@ -380,7 +380,7 @@
 		try {
 		  const formData = this.getFormData();
 		  await this.saveToFirebase(formData);
-		  this.showSuccess('Thank you for your feedback! Your review has been submitted.');
+
 		  this.form.reset();
 		} catch (error) {
 		  console.error('Error submitting feedback:', error);
@@ -445,10 +445,11 @@
 
 			const result = await res.json();
 			console.log("Worker writeFeedback result 👉", result);
-
+			this.showSuccess('Thank you for your feedback! Your review has been submitted.');
 			return result; // return to caller if needed
 		  } catch (err) {
 			console.error("❌ Error saving feedback:", err);
+			this.showError('You already submmited feedback');
 			return { success: false, error: err.message + feedbackData };
 		  }
 		}

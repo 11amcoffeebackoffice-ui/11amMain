@@ -182,3 +182,17 @@
           justify-content: space-between;
         }
       }
+	  
+	  .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  vertical-align: middle;
+}

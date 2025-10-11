@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="modal\modelstyle.css">
+	<link rel="stylesheet" href="common.css">
 	<!-- Favicon -->
-	<link rel="icon" href="images/11amV2_32.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="images/11amV2_32.ico" type="image/x-icon">
+	<link rel="icon" href="images/11amV2.png" type="image/x-icon">
+	<link rel="shortcut icon" href="images/11amV2.png" type="image/x-icon">
 
 	<!-- Optional for better support -->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2_32.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.png">
 
   </head>
@@ -37,16 +39,23 @@
 		  <i class="fas fa-bars"></i>
 		</button>
 
-		<!-- Center: Logo -->
-		<div class="logo"><a href="#" style="text-decoration:none; color:inherit;">11am Coffee</div>
+	  <!-- Center: Logo -->
+	  <div class="logo" style="left: 50%; transform: translateX(-50%); display: flex;">
+		<a href="#" style="text-decoration: none; display: flex; align-items: center;">
+		  <img src="images/logo/ig profile.png" 
+			   alt="11am Coffee Logo" 
+			   style="height: 40px; width: auto; transform: scale(2); transform-origin: center;">
+		</a>
+	  </div>
+
 
 		<!-- Mobile Actions (only show on mobile) -->
 		<div class="mobile-actions">
 		  <button class="icon-btn" id="orderCheckBtnOpen">
-			<i class="fas fa-clipboard-list"></i>
+			<img src="images/track3.png" alt="Order Check" class="icon-img">
 		  </button>
 		  <button class="icon-btn" id="deliveryCheckBtn">
-			<i class="fas fa-truck"></i>
+			<img src="images/loca1.png" alt="Order Check" class="icon-img">
 		  </button>
 		</div>
 
@@ -57,20 +66,26 @@
 		  <a href="order.html" class="nav-link">Order</a>
 		  <a href="#feedback-form" class="nav-link">Feedback</a>  
 		  <a href="#about" class="nav-link">About Us</a>
-		  <button class="icon-btn" id="orderCheckBtnOpenNav">
-			<i class="fas fa-clipboard-list"></i>
-		  </button>
-		  <button class="icon-btn" id="deliveryCheckBtnNav">
-			<i class="fas fa-truck"></i>
-		  </button>
 		</nav>
+		<!-- Right: Icons -->
+		  <div class="nav-icons" style="display: flex; align-items: center; gap: 12px;">
+			<button class="icon-btn" id="orderCheckBtnOpenNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/track3.png" alt="Order Check" class="icon-img">
+			</button>
+			<button class="icon-btn" id="deliveryCheckBtnNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/loca1.png" alt="Delivery Check" class="icon-img">
+			</button>
+		  </div>
+		
 	  </div>
 	</header>
     <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-content">
-        <h1>Your Perfect 11AM Break</h1>
-        <p class="tagline-hero">Elevate your 11AM break with a rich, balanced brew from 11 AM Coffee — made to energize and inspire.</p>
+        <h1>11AM moment</h1>
+        <p class="tagline-hero">a perfect blend of comfort and inspiration.</p>
       </div>
     </section>
     	<!-- Coffee Menu Section (Shop) -->
@@ -83,7 +98,7 @@
 		
 		<div class="menu-items">
 		  <div class="menu-item">
-			<img src="https://previews.dropbox.com/p/thumb/ACz3GYQ_F8CKeH_5TFuAcIgRNsp2yZ38mGy7kFlrfqXFSbPz0dbVPYdBR3R-xUhjzG3Hko8e3awMyPH6KqG_Dg98327fvHrBkG9kcsDDHZ3DmeklWu0WByXfPtYWpw5Tx-ELf8mqZrqUxgSVIPmifW2whs5VMmuyVVP8-4Tw4rfcXZcuXxtWbxd6kooVFhjOoKOcGclJmh3NYxcRVPNnGO1xEEEE_Nq2ri5BfJebCfZmg_DT6vmINXjOgzZdz_D-XdN_Bg4LgWSVk7gk7wweXqIYa-ZmGRr5kKUww0ocHLuvT6qeegnGhT2yJOm6LqGfCFmOujSmQ466KGbgVCu6tQfh/p.jpeg?is_prewarmed=true" alt="Espresso">
+			<img src="https://previews.dropbox.com/p/thumb/ACyYc1uIFu6ZChkD4r2RSHu2ug0xvbUdVFB_LkD2DVi2x0X61Ibjbxp6c4BnUJhzSr7sGJPTKBn0vMbhSKdsZcYbydlfmzpsavSEz3u86Km32yX7f-am9UPvSmbsd_JrXpia8VQeCemwmvileqp7VkJdB_VkFOa1VHrvXM8u0p9OysmbeuehqSqHRb43uK4arg-Ks8FjzsvSHWHshnlvLDCZdQvOUCdB-sxX5HU7LSBsioNjn8ZKwTBlXr38iQiGNBfwf_k5PekOkcGlEsizgqQSKSyeskkjk4gaViJtRB1Ua4AJrsYXk7-d6EzWi6xEHro/p.jpeg" alt="Espresso">
 			<div class="menu-item-content">
 			  <h3><span class="brew-script">Solo</span> Brew</h3>
 			  <p class="tagline">6 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</p>
@@ -92,7 +107,7 @@
 		  </div>
 		  
 		  <div class="menu-item">
-			<img src="https://previews.dropbox.com/p/thumb/ACwq9SO6IVJb3_6VHp6Fo-Fw3oPZN8vyIeZ9ml-2uC33ik9qRKeLNhaWn-FNsM-Ehlr4u42YnJc0KrTvs4XuqaCmdh4-5rnQ1Vl7vLTWgKUtKfijNvrO19nYnqRlPhqBEhm_nk6cbYLF4R7R7u4pfs-mcJdfBrhvZJjdEdSCj6nNHRCkc22_c_MXgtV4HRPmsUjjNnIjJ5-5SjjX7XG47ORtVTGHa9Ti36vpY8V7wq5YigYpE8YgRlu6qp0m3yXkpH5Wncw70cQuMv-1ENQQbhPkIyzTE1iCbE1upjqqs8q0iA-6d14etDJWxB_o8CrS5LQ/p.jpeg" alt="Cappuccino">
+			<img src="https://previews.dropbox.com/p/thumb/ACzMZRI7TQo2w8Ek3QnsJe5c5Vun0yRT4FiKZcTUODZJW-M3zEYGMBPGjEbenCbC-cvOpNOMRDx8-hBkyn7z3eETQFZz0mEkSo2tLUKzQ0AfzwyaE2I0SiGAFfJ2NP5WUmebpP0uFrF1m9bt_ZO-arslWUeCF6F9JbghkbkfXq3UyCX1GnkEE7Y5EzRLVwsJkaTGrweYhVD4bX-cCSGMSfEarYCAqdKW8RuaMFagiF37YIull23mEoRHqmqFh0ZVqrz4pii31U-YBDtuM7eYgt_4ydFw1hasgX6uTYiLqykrmFnBMHVDtishktEoZ04KRJI/p.jpeg" alt="Cappuccino">
 			<div class="menu-item-content">
 			  <h3><span class="brew-script">Duo</span> Brew</h3>
 			  <p class="tagline">12 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</p>
@@ -101,7 +116,7 @@
 		  </div>
 		  
 		  <div class="menu-item">
-			<img src="https://previews.dropbox.com/p/thumb/ACwwbTKRbzIS17wFtjVl-zFsFfm6B4qOxImPTAPWXpPAcQomPQl0iGkCytkR6P9jxB0kvMs-IYb9tw45YDMjaDJRMKl-JCPLZR2CB2b7BKAEsy3V-J8rnB5ZfDrsSCzmY0gHVi-aJDYQr4_n30ZXPRYcyRxHOb-lti0wy_YoIYVXw1JHzaekqyyDYP8ZAly4fXSVQTJwriOkGfiXN8rEKLFhTK20sFsCxt6PRweUcU6g7M3yPOkfSxSXogtdyYhiVMGPgQXhE1BmJ8EPnWjo3mzkssVEk-zaaCM7SfrvIKWA8kJikysErCegJuvgS75h3J3GerNMI9I7fXLhdZWytoUx/p.jpeg?is_prewarmed=true" alt="Cold Brew">
+			<img src="https://previews.dropbox.com/p/thumb/ACyg52mJLp53qsYGvCS9yRlaNGWnKhaqUWSFwbuFTv76bdcvq7b_dJBjW7FwWKfU-G8vX7HMDz4-alLtEaWUGkS37PmfNBuA-sNfAWdGLSs8fjXzzJp1RUs33c6Yb-L1YyT3Ll1Yau-UULpG5x_WyN8hs-1wJu95T40keya9S05YRRzuQ_BncXoVdFWS9J-6FpNKmeNylZqGdx1vCo-SlfkQvOQP8k7wVTa-sRwJEqTRxchmCLpvYpfX2XN77av-YhYSNFIzFeKYnHVXIj6n1Jwf-nG-YxxhJQyc3YU7_qFVsu4AJp0PZi8et9J83jNs1Gk/p.jpeg" alt="Cold Brew">
 			<div class="menu-item-content">
 			  <h3><span class="brew-script">Family</span> Brew</h3>
 			  <p class="tagline">18 pouches | Arabica coffee beans <br>Taste notes: Dark chocolate, caramel, roasted walnuts</p>
@@ -118,7 +133,23 @@
                 <div class="about-text">
                     <h2 class="section-title" style="color: #fff;">Our Story</h2>
                     <p>At <strong>11am Coffee</strong>, we believe every day has its golden hour — a time to pause, recharge, and savor life's simple pleasures. Born from passion and precision, our coffee is crafted not just to awaken, but to inspire. From bean to cup, every detail is dedicated to delivering an experience that feels indulgent, timeless, and truly exceptional.</p>
-                </div>
+                <p>有些人喝咖啡是为了提神，
+我不是。
+
+对我来说，咖啡更像一个「安定按钮」。
+
+不是要我兴奋，
+而是提醒我——
+没关系，慢慢来，还赶得上。
+
+11am 之前的我，总是焦虑、烦躁、怀疑人生，
+所以我干脆做了一包 “情绪缓冲咖啡”。
+
+不甜，不吵，不夸张，
+只是静静地陪着你，
+然后让你在该清醒的时候，
+刚刚好地清醒。</p>
+				</div>
                 <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Coffee brewing">
                 </div>
@@ -313,7 +344,10 @@
         </button>
         <div class="order-card">
           <div class="content">
-            <h2>Check delivery by postcode</h2>
+			<div style="display: flex; align-items: center; gap: 10px;">
+			  <img src="images/loca1.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
+			  <h2 style="margin: 0;">Check delivery by postcode</h2>
+			</div>
             <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
             <label for="postcode">Postcode</label>
             <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
@@ -323,7 +357,7 @@
           <!-- Check result output -->
           <div id="output" class="result" aria-live="polite" style="display:none; margin-top:12px;"></div>
           <!-- ✅ Done button (hidden until result shown) -->
-          <button id="doneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
+          <button id="doneBtn" class="check-btn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
         </div>
       </div>
     </div>
@@ -334,7 +368,11 @@
 		  </button>
 		  <div class="order-card">
 			<div class="content">
+			<div style="display: flex; align-items: center; gap: 10px;">
+			  <img src="images/track3.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
 			  <h2>Check your order</h2>
+			</div>
+
 			  <p class="muted">Enter your Order ID to track your order status.</p>
 			  <label for="orderId">Order ID</label>
 			  <input id="orderId" type="text" placeholder="e.g. ORD12345" aria-describedby="orderHint" />
@@ -346,7 +384,7 @@
 			<div id="orderOutput" class="result" aria-live="polite" style="display:none; margin-top:12px;">
 			</div>
 			<!-- Done button -->
-			<button id="orderDoneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Done </button>
+			<button id="orderDoneBtn" class="check-btn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Done </button>
 		  </div>
 		</div>
 	  </div> 

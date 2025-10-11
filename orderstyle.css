@@ -66,6 +66,10 @@
           .nav-menu .icon-btn {
             display: none;
           }
+		  
+		  .nav-icons {
+			display: none !important;
+			}
         }
         
         *{
@@ -137,11 +141,12 @@
             opacity: 0.85;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
+		.nav-menu {
+		  flex: 1;
+		  display: flex;
+		  justify-content: center;
+		  gap: 28px;
+		}
 
         .nav-link {
             text-decoration: none;

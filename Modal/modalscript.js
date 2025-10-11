@@ -124,14 +124,80 @@
 
 			if (result.success) {
 			  const order = result.order;
+
+			  // 🎨 Status color mapping
+			  const statusColors = {
+				new: "#6c757d",          // gray
+				pending: "#ff9800",      // orange
+				paid: "#2196f3",         // blue
+				preparing: "#17a2b8",    // teal
+				delivery: "#9c27b0",     // purple
+				cancelled: "#dc3545",    // red
+				completed: "#28a745"     // green
+			  };
+
+			  const statusText = order.Status;
+			  const statusColor = statusColors[statusText] || "#333"; // fallback color
+			  
+			    // 🕒 Convert time to AM/PM format
+			  const dateObj = new Date(order.DateTime);
+			  const formattedDate = dateObj.toLocaleString("en-US", {
+				year: "numeric",
+				month: "short",
+				day: "numeric",
+				hour: "numeric",
+				minute: "2-digit",
+				hour12: true,
+			  });
+
 			  orderOutput.innerHTML = `
-				✅ <b>Order Found</b><br>
-				<b>Name:</b> ${order.CustName}<br>
-				<b>Order ID:</b> ${order.orderId}<br>
-				<b>Status:</b> ${order.Status}<br>
-				<b>Total:</b> ${order.GrandTotal}<br>
-				<b>Date:</b> ${order.DateTime}<br>
+				<div style="
+				  background: linear-gradient(145deg, #ffffff, #f7f4ef);
+				  border: 1px solid #e0dcd5;
+				  border-radius: 16px;
+				  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+				  padding: 24px 28px;
+				  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				  color: #333;
+				  max-width: 420px;
+				  margin: 10px auto;
+				  line-height: 1.7;
+				  transition: all 0.3s ease;
+				">
+				  <div style="text-align:center; margin-bottom:10px; font-size:18px; font-weight:600; color:#5d4037;">
+					  <img 
+						src="found.png" 
+						alt="Order Found" 
+						style="width:60px; height:auto; display:block; margin:0 auto 8px;" 
+					  />
+					  <div style="font-size:18px; font-weight:600; color:#5d4037;">
+						Order Found
+					  </div>
+				  </div>
+				  <div style="border-top:1px solid #eee; margin:10px 0 15px;"></div>
+				  <p style="margin:6px 0;"><b style="color:#555;">Name:</b> ${order.CustName}</p>
+				  <p style="margin:6px 0;"><b style="color:#555;">Order ID:</b> ${order.orderId}</p>
+				  <p style="margin:6px 0;">
+					<b style="color:#555;">Status:</b>
+					<span style="
+					  background:${statusColor};
+					  color:#fff;
+					  padding:3px 10px;
+					  border-radius:20px;
+					  font-weight:600;
+					  font-size:13px;
+					  display:inline-block;
+					">
+					  ${statusText.toUpperCase()}
+					</span>
+				  </p>
+				  <p style="margin:6px 0;"><b style="color:#555;">Total:</b> <span style="color:#b8860b; font-weight:600;">${order.GrandTotal}</span></p>
+				        <p style="margin:6px 0;">
+							<b style="color:#555;">Date:</b> ${formattedDate}
+						</p>
+				</div>
 			  `;
+
 			  orderDoneBtn.style.display = "inline-block";
 			  checkOrderBtn.style.display = "none";
 			} else {
@@ -139,7 +205,22 @@
 			}
 		  } catch (err) {
 			console.error("❌ Error:", err);
-			orderOutput.innerHTML = `❌ Error: ${err.message}`;
+			orderOutput.innerHTML = `
+				<div style="
+				  background:#fff8f8;
+				  border:1px solid #f5c2c7;
+				  border-radius:12px;
+				  padding:16px;
+				  color:#b71c1c;
+				  font-family:'Segoe UI', sans-serif;
+				  max-width:420px;
+				  margin:auto;
+				  text-align:center;
+				  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+				">
+				  ❌ ${result.error || "Order not found"}
+				</div>
+			  `;
 		  }
 		});
 

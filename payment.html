@@ -10,63 +10,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="paymentstyle.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
+  <link rel="stylesheet" href="common.css">
 	<!-- Favicon -->
-	<link rel="icon" href="images/11amV2.ico" type="image/x-icon">
-	<link rel="shortcut icon" href="images/11amV2.ico" type="image/x-icon">
+	<link rel="icon" href="images/11amV2.png" type="image/x-icon">
+	<link rel="shortcut icon" href="images/11amV2.png" type="image/x-icon">
 
 	<!-- Optional for better support -->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.ico">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.ico">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.png">
 </head>
 
 <body>
-  <!-- Announcement Bar -->
-  <div class="announcement-bar">
-    <i class="fas fa-bullhorn">
-    </i>
-    <span class="announcement-full">
-    </span>
-    <span class="announcement-short"> &nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more. &nbsp; </span>
-  </div>
-  <!-- Header -->
-  <header>
-    <div class="header-container">
-      <!-- Mobile menu button -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn">
-        <i class="fas fa-bars">
-        </i>
-      </button>
-      <!-- Center: Logo -->
-      <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">11am Coffee</div>
-      <!-- Mobile Actions (only show on mobile) -->
-      <div class="mobile-actions">
-        <button class="icon-btn" id="orderCheckBtnOpen">
-          <i class="fas fa-clipboard-list">
-          </i>
-        </button>
-        <button class="icon-btn" id="deliveryCheckBtn">
-          <i class="fas fa-truck">
-          </i>
-        </button>
-      </div>
-      <!-- Navigation Menu -->
-      <nav class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="index.html#shop" class="nav-link">Shop</a>
-        <a href="order.html" class="nav-link">Order</a>
-        <a href="index.html#shop#about" class="nav-link">About Us</a>
-        <button class="icon-btn" id="orderCheckBtnOpenNav">
-          <i class="fas fa-clipboard-list">
-          </i>
-        </button>
-        <button class="icon-btn" id="deliveryCheckBtnNav">
-          <i class="fas fa-truck">
-          </i>
-        </button>
-      </nav>
-    </div>
-  </header>
+	<!-- Announcement Bar -->
+	<div class="announcement-bar">
+	  <i class="fas fa-bullhorn"> </i>
+	  <span class="announcement-full">
+	  </span>
+	  <span class="announcement-short">
+		&nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more.  &nbsp;
+	  </span>
+	</div>
+    <!-- Header -->
+	<header>
+	  <div class="header-container">
+		<!-- Mobile menu button -->
+		<button class="mobile-menu-btn" id="mobileMenuBtn">
+		  <i class="fas fa-bars"></i>
+		</button>
+
+	  <!-- Center: Logo -->
+	  <div class="logo" style="left: 50%; transform: translateX(-50%); display: flex;">
+		<a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+		  <img src="images/logo/ig profile.png" 
+			   alt="11am Coffee Logo" 
+			   style="height: 40px; width: auto; transform: scale(2); transform-origin: center;">
+		</a>
+	  </div>
+
+
+		<!-- Mobile Actions (only show on mobile) -->
+		<div class="mobile-actions">
+		  <button class="icon-btn" id="orderCheckBtnOpen">
+			<img src="images/track3.png" alt="Order Check" class="icon-img">
+		  </button>
+		  <button class="icon-btn" id="deliveryCheckBtn">
+			<img src="images/loca1.png" alt="Order Check" class="icon-img">
+		  </button>
+		</div>
+
+		<!-- Navigation Menu -->
+		<nav class="nav-menu" id="navMenu">
+		  <a href="index.html" class="nav-link">Home</a>
+		  <a href="index.html#shop" class="nav-link">Shop</a>
+		  <a href="order.html" class="nav-link">Order</a>
+		  <a href="index.html#feedback-form" class="nav-link">Feedback</a>  
+		  <a href="index.html#about" class="nav-link">About Us</a>
+		</nav>
+		<!-- Right: Icons -->
+		  <div class="nav-icons" style="display: flex; align-items: center; gap: 12px;">
+			<button class="icon-btn" id="orderCheckBtnOpenNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/track3.png" alt="Order Check" class="icon-img">
+			</button>
+			<button class="icon-btn" id="deliveryCheckBtnNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/loca1.png" alt="Delivery Check" class="icon-img">
+			</button>
+		  </div>
+		
+	  </div>
+	</header>
   <!-- Order Success Section -->
   <section class="order-success-section">
     <div class="container">
@@ -99,6 +113,10 @@
             <span class="value" id="deliveryFeeDisplay">
             </span>
           </div>
+			<div class="order-info" id="promotionSection" style="display: none;">
+			  <span class="label">Promotion Discount:</span>
+			  <span class="value" id="promotionPriceDisplay"></span>
+			</div>	  
 		 <div class="order-info">
             <span class="label">Grand Total:</span>
             <span class="value" id="grandTotalDisplay">
@@ -126,43 +144,59 @@
     </div>
   </section>
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-column">
-          <h3>11am Coffee</h3>
-          <p>Brewing joy in every cup — 11am Coffee, your daily ritual since 2025.</p>
-        </div>
-        <div class="footer-column">
-          <h3>Contact Us</h3>
-          <ul>
-            <li>
-              <i class="fas fa-phone">
-              </i>
-              <a href="tel:+60175115356">+60 17-511 5356</a>
-            </li>
-            <li>
-              <i class="fab fa-whatsapp">
-              </i>
-              <a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
-            </li>
-          </ul>
-        </div>
-        <div class="footer-column">
-          <h3>Follow Us</h3>
-          <div class="social-icons">
-            <a href="https://www.instagram.com/11amcoffee/">
-              <i class="fab fa-instagram">
-              </i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+	<footer class="footer">
+	  <div class="container">
+		<div class="footer-content">
+		  <!-- Column 1 -->
+		  <div class="footer-column">
+			<h3>11am Coffee</h3>
+			<p>
+			  Brewing joy in every cup — <br>
+			  11am Coffee, your daily ritual since 2025.
+			</p>
+		  </div>
+
+		  <!-- Column 2 -->
+		  <div class="footer-column">
+			<h3>Contact Us</h3>
+			<ul>
+			  <li>
+				<i class="fas fa-phone"></i>
+				<a href="tel:+60175115356">+60 17-511 5356</a>
+			  </li>
+			  <li>
+				<i class="fab fa-whatsapp"></i>
+				<a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
+			  </li>
+			</ul>
+		  </div>
+
+		  <!-- Column 3 (NEW Quick Links) -->
+		  <div class="footer-column">
+			<h3>Quick Links</h3>
+			<ul>
+			  <li><a href="index.html">Home</a></li>
+			  <li><a href="order.html">Place Order</a></li>
+			  <li><a href="index.html#feedback-form">Feedback</a></li>
+			</ul>
+		  </div>
+
+		  <!-- Column 4 -->
+		  <div class="footer-column">
+			<h3>Follow Us</h3>
+			<div class="social-icons">
+			  <a href="https://www.instagram.com/11amcoffee/" target="_blank">
+				<i class="fab fa-instagram"></i>
+			  </a>
+			</div>
+		  </div>
+		</div>
+
+		<div class="copyright">
+		  <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
+		</div>
+	  </div>
+	</footer>
   <!-- Print Template (hidden on screen) -->
   <div id="printTemplate">
     <div class="print-container">
@@ -254,13 +288,16 @@
       const name = urlParams.get("name");
       const ordertotal = urlParams.get("ordertotal");
 	  const grandtotal = urlParams.get("grandtotal");
-	  const deliveryfee = urlParams.get("deliveryFee");
+	  const deliveryfee = urlParams.get("deliveryfee");
       const address = urlParams.get("address");
+	  const promo = urlParams.get("promocode");
       if (!orderId) {
         alert("⚠️ No order ID found. Please place an order first.");
         window.location.href = "order.html";
         return;
       }
+	  
+
 	  
       // ✅ Fill details
       document.getElementById("orderIdDisplay").textContent = orderId || "N/A";
@@ -268,6 +305,14 @@
       document.getElementById("deliveryAddressDisplay").textContent = address || "N/A";
 	  document.getElementById("orderTotalDisplay").textContent = ordertotal || "RM 0.00";
 	  document.getElementById("deliveryFeeDisplay").textContent = deliveryfee || "RM 0.00";
+	  
+	  	let promoDiscount = 0;
+		if (promo && promo === "11AMFIRSTUSER") {
+		  promotionSection.style.display = "flex"; // 👈 show it
+		  promoDiscount = 5; // RM5 off
+		  document.getElementById("promotionPriceDisplay").textContent = "RM " + promoDiscount || "RM 0.00";
+		}
+	  
 	  document.getElementById("grandTotalDisplay").textContent = grandtotal || "RM 0.00";
       // ✅ Print template update
       document.getElementById("printName").textContent = name || "N/A";
@@ -281,14 +326,15 @@
       const orderId = document.getElementById("orderIdDisplay").textContent;
       const customerName = document.getElementById("customerNameDisplay").textContent;
       const orderTotal = document.getElementById("orderTotalDisplay").textContent;
-	  const deliveryFee = document.getElementById("deliveryFeeDisplay").textContent;
+	  const promo = "&Discount : - " + document.getElementById("promotionPriceDisplay").textContent;
+	  const deliveryFee = "DeliveryFee : "+ document.getElementById("deliveryFeeDisplay").textContent;
 	  const grandTotal = document.getElementById("grandTotalDisplay").textContent;
       // Create item list for message
       //let itemsText = '';
       //orderData.items.forEach(item => {
       //  itemsText += `- ${item.quantity}x ${item.name} (RM ${(item.price * item.quantity).toFixed(2)})\n`;
       //});
-      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${orderTotal}\n\nPlease provide payment instructions.`;
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${orderTotal}(Included ${deliveryFee}${promo})\n\nPlease provide payment instructions.`;
       // Encode message for URL
       const encodedMessage = encodeURIComponent(message);
       // WhatsApp API URL
