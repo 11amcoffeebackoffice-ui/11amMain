@@ -1,7 +1,7 @@
 	
       /* Hero Section */
       .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://ucb9bdc162bd2b9678232066c3a3.previews.dropboxusercontent.com/p/thumb/ACxHCVlK1XuFp13klNuQkqWaoSMYy0W8iyDm_QOXuBbT8v08_pzryxZQtqAPrZVgAAEYOAEwT6ZF1ZBH8lj7An6WR9foJU0_ycXubgCYa7Wiy0yM1SjJXDkC6Ks_unNj1-Q9QDVvUc4xNN7x7Ptq7QIIeUuy6iLCArBXw58PsiJDF_Dam0hVdGbKknexyBBmSyV3NExdIZLDYierU3KYSGBD7OqNRgvQmzIWalDKsUCZGPtyGUUoGX6iBqzg5QrWUFZtPnqffm2kuylT7y7sX2UKM7P8a9q9ShSRASLTbFH4CeBsr74DCKkqxuqXy200czYi2-aEQVzYHx3drszhZn65cOiyA1nry5cqqPAb3H3kHDspdznG1PYCSKkjewgmXmo/p.jpeg?is_prewarmed=true');
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('productionImage/main/website-banner.jpg');
         background-size: cover;
         background-position: center;
         height: 92vh;

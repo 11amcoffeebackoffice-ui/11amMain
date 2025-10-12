@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date & Time Picker - 11am Coffee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #f9f5f0 0%, #fff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #5d4037 0%, #8d6e63 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .picker-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3b2a21;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Date Picker Styles */
+        .date-picker-trigger {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            color: #3b2a21;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .date-picker-trigger:hover {
+            border-color: #d9a66d;
+            transform: translateY(-2px);
+        }
+
+        .date-picker-trigger:focus {
+            border-color: #5d4037;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1);
+        }
+
+        /* Time Picker Styles */
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .time-slot {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b2a21;
+        }
+
+        .time-slot:hover {
+            border-color: #d9a66d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-slot.selected {
+            background: #5d4037;
+            color: white;
+            border-color: #5d4037;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(93, 64, 55, 0.3);
+        }
+
+        .time-group-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #7a5c44;
+            margin: 20px 0 10px 0;
+            padding-left: 5px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Date Picker Modal */
+        .datepicker-header {
+            background: linear-gradient(135deg, #5d4037 0%, #8d6e63 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .datepicker-month-year {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .datepicker-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #7a5c44;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            padding: 12px 0;
+            text-transform: uppercase;
+        }
+
+        .datepicker-days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #f0f0f0;
+            padding: 1px;
+            min-height: 300px;
+        }
+
+        .datepicker-day {
+            background: white;
+            border: none;
+            padding: 15px 0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #333;
+        }
+
+        .datepicker-day:hover {
+            background: #f8f8f8;
+            transform: scale(1.05);
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .datepicker-day.selected {
+            background: #5d4037;
+            color: white;
+            transform: scale(1.05);
+            z-index: 3;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.3);
+        }
+
+        .datepicker-day.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background: #fafafa;
+        }
+
+        .datepicker-day.other-month {
+            color: #ddd;
+            background: #fafafa;
+        }
+
+        .datepicker-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f9f5f0;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .nav-btn {
+            background: #5d4037;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #8d6e63;
+            transform: translateY(-1px);
+        }
+
+        .modal-footer {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .selected-display {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #5d4037;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #8d6e63;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: #f9f5f0;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #d9a66d;
+            color: #5d4037;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 18px;
+            background: #5d4037;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            background: #8d6e63;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(93, 64, 55, 0.3);
+        }
+
+        .continue-btn:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 12px;
+            }
+
+            .header {
+                padding: 25px 20px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .time-slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .datepicker-day {
+                padding: 18px 0;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 15px;
+            }
+
+            .modal-overlay {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .time-slots-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .datepicker-days-grid {
+                min-height: 280px;
+            }
+        }
+
+        /* Notices */
+        .notice {
+            font-size: 14px;
+            color: #7a5c44;
+            text-align: center;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">11am Coffee</div>
+            <div class="subtitle">Select your delivery date & time</div>
+        </div>
+
+        <div class="content">
+            <!-- Date Picker Section -->
+            <div class="picker-section">
+                <div class="section-title">Delivery Date</div>
+                <button type="button" class="date-picker-trigger" id="datePickerTrigger">
+                    <span id="selectedDateText">Select delivery date</span>
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+                <div class="notice">Preorder at least 3 days in advance to ensure freshness!</div>
+            </div>
+
+            <!-- Time Picker Section -->
+            <div class="picker-section">
+                <div class="section-title">Delivery Time</div>
+                <div class="time-group-title">Evening Delivery (6:00 PM - 9:00 PM)</div>
+                <div class="time-slots-grid">
+                    <button type="button" class="time-slot" data-time="18:00" onclick="selectTime(this)">6:00 PM</button>
+                    <button type="button" class="time-slot" data-time="19:00" onclick="selectTime(this)">7:00 PM</button>
+                    <button type="button" class="time-slot" data-time="20:00" onclick="selectTime(this)">8:00 PM</button>
+                    <button type="button" class="time-slot" data-time="21:00" onclick="selectTime(this)">9:00 PM</button>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="summary-section">
+                <div class="section-title">Order Summary</div>
+                <div class="summary-item">
+                    <span>Selected Date:</span>
+                    <span id="summaryDate">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Selected Time:</span>
+                    <span id="summaryTime">Not selected</span>
+                </div>
+                <div class="summary-total">
+                    <span>Delivery Schedule:</span>
+                    <span id="summaryDateTime">Please select date & time</span>
+                </div>
+            </div>
+
+            <!-- Continue Button -->
+            <button type="button" class="continue-btn" id="continueBtn" disabled onclick="continueToPayment()">
+                Continue to Payment
+            </button>
+        </div>
+    </div>
+
+    <!-- Date Picker Modal -->
+    <div class="modal-overlay" id="datePickerModal">
+        <div class="modal-content">
+            <div class="datepicker-header">
+                <div class="datepicker-month-year" id="currentMonthYear">October 2025</div>
+            </div>
+            
+            <div class="datepicker-days-header">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+            </div>
+            
+            <div class="datepicker-days-grid" id="daysGrid"></div>
+            
+            <div class="datepicker-navigation">
+                <button type="button" class="nav-btn" id="prevMonth">‹ Previous</button>
+                <button type="button" class="nav-btn" id="todayBtn">Today</button>
+                <button type="button" class="nav-btn" id="nextMonth">Next ›</button>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="selected-display" id="selectedDateDisplay">
+                    No date selected
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeDatePicker()">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmDateBtn" onclick="confirmDate()" disabled>Select Date</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let selectedDate = null;
+        let selectedTime = null;
+        let currentDate = new Date();
+        const minDate = new Date();
+        minDate.setDate(minDate.getDate() + 3);
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDatePicker();
+            setupEventListeners();
+        });
+
+        // Date Picker Functions
+        function initializeDatePicker() {
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const monthYearElement = document.getElementById('currentMonthYear');
+            const daysGrid = document.getElementById('daysGrid');
+
+            monthYearElement.textContent = formatMonthYear(year, month);
+            daysGrid.innerHTML = '';
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDay = firstDay.getDay();
+
+            // Previous month days
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            for (let i = startingDay - 1; i >= 0; i--) {
+                createDayElement(prevMonthLastDay - i, 'other-month', true);
+            }
+
+            // Current month days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const isDisabled = date < minDate;
+                const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+                const isToday = isTodayDate(date);
+
+                let className = '';
+                if (isSelected) className = 'selected';
+                if (isDisabled) className = 'disabled';
+                if (isToday && !isSelected && !isDisabled) className = 'today';
+
+                createDayElement(day, className, isDisabled, date);
+            }
+
+            // Next month days
+            const totalCells = 42;
+            const remainingCells = totalCells - (startingDay + daysInMonth);
+            for (let day = 1; day <= remainingCells; day++) {
+                createDayElement(day, 'other-month', true);
+            }
+        }
+
+        function createDayElement(day, className, disabled, date) {
+            const dayElement = document.createElement('button');
+            dayElement.type = 'button';
+            dayElement.className = `datepicker-day ${className}`;
+            dayElement.textContent = day;
+            dayElement.disabled = disabled;
+
+            if (date && !disabled) {
+                dayElement.addEventListener('click', function() {
+                    selectDate(date);
+                });
+            }
+
+            document.getElementById('daysGrid').appendChild(dayElement);
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            document.getElementById('confirmDateBtn').disabled = false;
+            document.getElementById('selectedDateDisplay').textContent = 
+                `Selected: ${date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })}`;
+            renderCalendar();
+        }
+
+        function formatMonthYear(year, month) {
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            return `${months[month]} ${year}`;
+        }
+
+        function isTodayDate(date) {
+            const today = new Date();
+            return date.toDateString() === today.toDateString();
+        }
+
+        // Time Picker Functions
+        function selectTime(element) {
+            // Remove selected class from all time slots
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+
+            // Add selected class to clicked time slot
+            element.classList.add('selected');
+            
+            // Store selected time
+            selectedTime = element.getAttribute('data-time');
+            
+            // Update summary
+            updateSummary();
+            checkContinueButton();
+        }
+
+        // Modal Functions
+        function openDatePicker() {
+            document.getElementById('datePickerModal').style.display = 'flex';
+        }
+
+        function closeDatePicker() {
+            document.getElementById('datePickerModal').style.display = 'none';
+        }
+
+        function confirmDate() {
+            if (selectedDate) {
+                // Update trigger button text
+                const displayDate = selectedDate.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                document.getElementById('selectedDateText').textContent = displayDate;
+                
+                // Update summary
+                updateSummary();
+                checkContinueButton();
+                
+                // Close modal
+                closeDatePicker();
+            }
+        }
+
+        // Summary and Continue Button
+        function updateSummary() {
+            const summaryDate = document.getElementById('summaryDate');
+            const summaryTime = document.getElementById('summaryTime');
+            const summaryDateTime = document.getElementById('summaryDateTime');
+
+            if (selectedDate) {
+                const dateString = selectedDate.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                summaryDate.textContent = dateString;
+            } else {
+                summaryDate.textContent = 'Not selected';
+            }
+
+            if (selectedTime) {
+                const timeString = formatTime(selectedTime);
+                summaryTime.textContent = timeString;
+            } else {
+                summaryTime.textContent = 'Not selected';
+            }
+
+            if (selectedDate && selectedTime) {
+                const dateTimeString = `${selectedDate.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                })} at ${formatTime(selectedTime)}`;
+                summaryDateTime.textContent = dateTimeString;
+            } else {
+                summaryDateTime.textContent = 'Please select date & time';
+            }
+        }
+
+        function formatTime(timeString) {
+            const [hours, minutes] = timeString.split(':');
+            const hour = parseInt(hours);
+            const period = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour % 12 || 12;
+            return `${displayHour}:${minutes} ${period}`;
+        }
+
+        function checkContinueButton() {
+            const continueBtn = document.getElementById('continueBtn');
+            if (selectedDate && selectedTime) {
+                continueBtn.disabled = false;
+            } else {
+                continueBtn.disabled = true;
+            }
+        }
+
+        function continueToPayment() {
+            if (selectedDate && selectedTime) {
+                const formattedDate = selectedDate.toISOString().split('T')[0];
+                const dateTime = `${formattedDate} ${selectedTime}`;
+                
+                alert(`Proceeding to payment with delivery scheduled for:\n${selectedDate.toLocaleDateString()} at ${formatTime(selectedTime)}`);
+                console.log('Selected date time:', dateTime);
+                
+                // Here you would typically:
+                // 1. Store the selection
+                // 2. Redirect to payment page
+                // 3. Submit the form
+            }
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Date picker trigger
+            document.getElementById('datePickerTrigger').addEventListener('click', openDatePicker);
+
+            // Date picker navigation
+            document.getElementById('prevMonth').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            document.getElementById('nextMonth').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+
+            document.getElementById('todayBtn').addEventListener('click', function() {
+                currentDate = new Date();
+                renderCalendar();
+            });
+
+            // Close modal when clicking overlay
+            document.getElementById('datePickerModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeDatePicker();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeDatePicker();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+</html>
