@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Order Success - 11am Coffee</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
@@ -11,14 +12,13 @@
   <link rel="stylesheet" href="paymentstyle.css">
   <link rel="stylesheet" href="modal\modelstyle.css">
   <link rel="stylesheet" href="common.css">
-	<!-- Favicon -->
-	<link rel="icon" href="images/11amV2.png" type="image/x-icon">
-	<link rel="shortcut icon" href="images/11amV2.png" type="image/x-icon">
-
-	<!-- Optional for better support -->
-	<link rel="apple-touch-icon" sizes="180x180" href="images/11amV2.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/11amV2.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/11amV2.png">
+    <!-- Favicon -->
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <!-- Optional for better support -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
 </head>
 
 <body>
@@ -223,50 +223,52 @@
     </div>
   </div>
   <!-- Postcode Checker Modal -->
-  <div class="modal-overlay" id="postcodeModal">
-    <div class="postcode-modal">
-      <button class="modal-close" id="modalClose">
-      </button>
-      <div class="order-card">
-        <div class="content">
-          <h2>Check delivery by postcode</h2>
-          <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
-          <label for="postcode">Postcode</label>
-          <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
-          <small id="hint">Malaysian format: 5 digits.</small>
+    <div class="modal-overlay" id="postcodeModal">
+      <div class="postcode-modal">
+        <button class="modal-close" id="modalClose"></button>
+        <div class="order-card">
+          <div class="content">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="images/loca1.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
+              <h2 style="margin: 0;">Check delivery by postcode</h2>
+            </div>
+            <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
+            <label for="postcode">Postcode</label>
+            <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
+            <small id="hint">Malaysian format: 5 digits.</small>
+          </div>
+          <button id="checkBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Check</button>
+          <!-- Check result output -->
+          <div id="output" class="result" aria-live="polite" style="display:none; margin-top:12px;"></div>
+          <!-- ✅ Done button (hidden until result shown) -->
+          <button id="doneBtn" class="check-btn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
         </div>
-        <button id="checkBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Check</button>
-        <!-- Check result output -->
-        <div id="output" class="result" aria-live="polite" style="display:none; margin-top:12px;">
-        </div>
-        <!-- ✅ Done button (hidden until result shown) -->
-        <button id="doneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
       </div>
     </div>
-  </div>
-  <!-- ✅ Order Checker Modal -->
-  <div class="modal-overlay" id="orderModal">
-    <div class="postcode-modal">
-      <button class="modal-close" id="orderModalClose">
-      </button>
-      <div class="order-card">
-        <div class="content">
-          <h2>Check your order</h2>
-          <p class="muted">Enter your Order ID to track your order status.</p>
-          <label for="orderId">Order ID</label>
-          <input id="orderId" type="text" placeholder="e.g. ORD12345" aria-describedby="orderHint" />
-          <small id="orderHint">Your Order ID is provided after checkout.</small>
+    <!-- ✅ Order Checker Modal -->
+    <div class="modal-overlay" id="orderModal">
+      <div class="postcode-modal">
+        <button class="modal-close" id="orderModalClose"></button>
+        <div class="order-card">
+          <div class="content">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="images/track3.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
+              <h2>Check your order</h2>
+            </div>
+            <p class="muted">Enter your Order ID to track your order status.</p>
+            <label for="orderId">Order ID</label>
+            <input id="orderId" type="text" placeholder="e.g. ORD12345" aria-describedby="orderHint" />
+            <small id="orderHint">Your Order ID is provided after checkout.</small>
+          </div>
+          <!-- ✅ Button inside modal to check -->
+          <button id="checkOrderBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Check Order </button>
+          <!-- Result -->
+          <div id="orderOutput" class="result" aria-live="polite" style="display:none; margin-top:12px;"></div>
+          <!-- Done button -->
+          <button id="orderDoneBtn" class="check-btn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Done </button>
         </div>
-        <!-- ✅ Button inside modal to check -->
-        <button id="checkOrderBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Check Order </button>
-        <!-- Result -->
-        <div id="orderOutput" class="result" aria-live="polite" style="display:none; margin-top:12px;">
-        </div>
-        <!-- Done button -->
-        <button id="orderDoneBtn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;"> Done </button>
       </div>
     </div>
-  </div>
   <script>
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -327,14 +329,14 @@
       const customerName = document.getElementById("customerNameDisplay").textContent;
       const orderTotal = document.getElementById("orderTotalDisplay").textContent;
 	  const promo = "&Discount : - " + document.getElementById("promotionPriceDisplay").textContent;
-	  const deliveryFee =document.getElementById("deliveryFeeDisplay").textContent;
+	  const deliveryFee = document.getElementById("deliveryFeeDisplay").textContent;
 	  const grandTotal = document.getElementById("grandTotalDisplay").textContent;
       // Create item list for message
       //let itemsText = '';
       //orderData.items.forEach(item => {
       //  itemsText += `- ${item.quantity}x ${item.name} (RM ${(item.price * item.quantity).toFixed(2)})\n`;
       //});
-      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${grandtotal}\n\nPlease provide payment instructions.`;
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${grandTotal}\n\nPlease provide payment instructions.`;
       // Encode message for URL
       const encodedMessage = encodeURIComponent(message);
       // WhatsApp API URL
