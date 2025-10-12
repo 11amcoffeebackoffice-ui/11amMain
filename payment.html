@@ -327,14 +327,14 @@
       const customerName = document.getElementById("customerNameDisplay").textContent;
       const orderTotal = document.getElementById("orderTotalDisplay").textContent;
 	  const promo = "&Discount : - " + document.getElementById("promotionPriceDisplay").textContent;
-	  const deliveryFee = "DeliveryFee : "+ document.getElementById("deliveryFeeDisplay").textContent;
+	  const deliveryFee =document.getElementById("deliveryFeeDisplay").textContent;
 	  const grandTotal = document.getElementById("grandTotalDisplay").textContent;
       // Create item list for message
       //let itemsText = '';
       //orderData.items.forEach(item => {
       //  itemsText += `- ${item.quantity}x ${item.name} (RM ${(item.price * item.quantity).toFixed(2)})\n`;
       //});
-      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${orderTotal}(Included ${deliveryFee}${promo})\n\nPlease provide payment instructions.`;
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nTotal To Pay: ${grandtotal}\n\nPlease provide payment instructions.`;
       // Encode message for URL
       const encodedMessage = encodeURIComponent(message);
       // WhatsApp API URL
