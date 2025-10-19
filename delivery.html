@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<title>Delivery Information - 11am Coffee</title>
 	<link rel="stylesheet" href="modal\modelstyle.css">
 	<link rel="stylesheet" href="common.css">
+	    <!-- Favicon -->
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+    <!-- Optional for better support -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
     <style>
         /* Base styles */
         :root {
@@ -269,38 +276,118 @@
         color: #aaa;
       }
         
-        /* Responsive styles */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-content {
+            .announcement-bar {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
                 flex-direction: column;
-                text-align: center;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                gap: 15px;
             }
-            
-            nav ul {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
+
+            .nav-menu.active {
+                display: flex;
             }
-            
-            nav ul li {
-                margin: 5px 10px;
+
+            .logo {
+                font-size: 22px;
+                text-align: left;
+                padding-left: 10px;
             }
-            
-            .hero h1 {
-                font-size: 2rem;
+
+            .mobile-actions {
+                display: flex;
+                align-items: center;
             }
-            
-            .hero p {
-                font-size: 1rem;
+
+            .nav-menu .icon-btn {
+                display: none;
             }
-            
-            .delivery-zones {
-                grid-template-columns: 1fr;
+
+            .order-success-section {
+                padding: 20px 0;
             }
-            
-            .fee-table {
-                display: block;
-                overflow-x: auto;
+
+            .success-container {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .success-icon {
+                font-size: 60px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .success-message {
+                font-size: 16px;
+            }
+
+            .order-details {
+                padding: 15px;
+            }
+
+            .order-details h3 {
+                font-size: 18px;
+            }
+
+            .order-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .order-info .value {
+                text-align: left;
+                max-width: 100%;
+            }
+
+            .order-id {
+                font-size: 18px;
+            }
+
+            .whatsapp-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+                max-width: 100%;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .footer {
+                padding: 30px 15px 15px;
+            }
+
+            .footer .footer-content {
+                gap: 20px;
+            }
+
+            .footer-column {
+                min-width: 100%;
             }
         }
     </style>
@@ -325,12 +412,7 @@
             <img src="images/logo/ig profile.png" alt="11am Coffee Logo" style="height: 40px; width: auto; transform: scale(2); transform-origin: center;">
           </a>
         </div>
-        <!-- Mobile Actions (only show on mobile) -->
-        <div class="mobile-actions">
-          <button class="icon-btn" id="orderCheckBtnOpen">
-            <img src="images/track3.png" alt="Order Check" class="icon-img">
-          </button>
-        </div>
+
         <!-- Navigation Menu -->
         <nav class="nav-menu" id="navMenu">
           <a href="index.html" class="nav-link">Home</a>
@@ -598,6 +680,21 @@
     </footer>
 
     <script>
+	// Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navMenu = document.getElementById('navMenu');
+      mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (navMenu.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+	
         // FAQ toggle functionality
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
