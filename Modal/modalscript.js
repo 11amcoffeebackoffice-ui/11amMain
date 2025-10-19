@@ -13,33 +13,43 @@
 		  postcodeModal.classList.add('active');
 		  document.body.style.overflow = 'hidden';
 		}
-
-		deliveryCheckBtn.addEventListener('click', openPostcodeModal);
-		if (deliveryCheckBtnNav) {
-		  deliveryCheckBtnNav.addEventListener('click', openPostcodeModal);
+		
+		if(deliveryCheckBtn)
+		{
+			deliveryCheckBtn.addEventListener('click', openPostcodeModal);
+			if (deliveryCheckBtnNav) {
+			  deliveryCheckBtnNav.addEventListener('click', openPostcodeModal);
+			}
 		}
 
-		// Reset when typing new postcode
-		postcodeInput.addEventListener("input", function () {
-		  checkBtn.style.display = "inline-block"; // show Check
-		  doneBtn.style.display = "none"; // hide Done
-		  output.style.display = "none"; // hide old result
-		});
+		if (postcodeInput) {
+		  postcodeInput.addEventListener("input", function () {
+			if (checkBtn) checkBtn.style.display = "inline-block"; // show Check
+			if (doneBtn) doneBtn.style.display = "none";           // hide Done
+			if (output) output.style.display = "none";             // hide old result
+		  });
+		}
 
 		// Close modal
 		function closePostcodeModal() {
 		  postcodeModal.classList.remove('active');
 		  document.body.style.overflow = '';
 		}
+		
+		if (modalClose)
+		{
+			modalClose.addEventListener('click', closePostcodeModal);
+		}
 
-		modalClose.addEventListener('click', closePostcodeModal);
-
-		// Close when clicking outside modal
-		postcodeModal.addEventListener('click', (e) => {
-		  if (e.target === postcodeModal) {
-			closePostcodeModal();
-		  }
-		});
+		if (postcodeModal)
+		{
+			// Close when clicking outside modal
+			postcodeModal.addEventListener('click', (e) => {
+			  if (e.target === postcodeModal) {
+				closePostcodeModal();
+			  }
+			});
+		}
 
 		// Close with ESC key
 		document.addEventListener('keydown', (e) => {
@@ -138,17 +148,31 @@
 
 			  const statusText = order.Status;
 			  const statusColor = statusColors[statusText] || "#333"; // fallback color
-			  
-			    // 🕒 Convert time to AM/PM format
-			  const dateObj = new Date(order.DateTime);
-			  const formattedDate = dateObj.toLocaleString("en-US", {
-				year: "numeric",
-				month: "short",
-				day: "numeric",
-				hour: "numeric",
-				minute: "2-digit",
-				hour12: true,
-			  });
+			  		  
+			  if (order?.DateTime) {
+				  try {
+					// Example: "18/10/2025, 17:42:26"
+					const [datePart, timePart] = order.DateTime.split(", ");
+					const [day, month, year] = datePart.split("/").map(Number);
+					const [hour, minute, second] = timePart.split(":").map(Number);
+
+					// Create proper Date object
+					const dateObj = new Date(year, month - 1, day, hour, minute, second);
+
+					// Format in US locale (e.g. "Oct 18, 2025, 5:42 PM")
+					formattedDate = dateObj.toLocaleString("en-US", {
+					  year: "numeric",
+					  month: "short",
+					  day: "numeric",
+					  hour: "numeric",
+					  minute: "2-digit",
+					  second: "2-digit",
+					  hour12: true,
+					});
+				  } catch (err) {
+					console.error("Date parsing error:", err);
+				  }
+			  }
 
 			  orderOutput.innerHTML = `
 				<div style="
@@ -295,61 +319,73 @@
           return Math.round(rawCost); // beyond 15 km, round to whole RM
         }
       }
-      checkBtn.addEventListener('click', async () => {
-        const raw = postcodeInput.value;
-        const pc = normalize(raw);
-        output.style.display = 'block';
-        if (!pc) {
-          output.className = 'result no';
-          output.textContent = 'Please enter a postcode.';
-          return;
-        }
-        if (!isValidMalaysianPostcode(pc)) {
-          output.className = 'result no';
-          output.innerHTML = 'Invalid postcode format. Postcode should be exactly 5 digits.';
-          return;
-        }
-        try {
-          output.className = 'result';
-          output.textContent = 'Checking postcode location and calculating delivery cost…';
-          const {
-            lat,
-            lng
-          } = await geocodePostcode(pc);
-          const km = haversineDistance(originLat, originLng, lat, lng);
-          const deliveryCost = calculateDeliveryCost(km);
-          if (km < maxKm) {
-            // ✅ Show Done button after result
-            doneBtn.style.display = "inline-block";
-            // ✅ Hide Check button
-            checkBtn.style.display = "none";
-            output.className = 'result ok';
-            output.innerHTML = `Good news — we deliver to 
-																		<strong>${pc}</strong> (≈${Math.round(km)} km away)!
-																		<br>
-                                    Estimated delivery fee: 
-																			<strong>RM${Math.round(deliveryCost)}</strong>`;
-          } else {
-            doneBtn.style.display = "inline-block";
-            // ✅ Hide Check button
-            checkBtn.style.display = "none";
-            output.className = 'result no';
-            output.innerHTML = `Sorry, 
-																			<strong>${pc}</strong> is about ${Math.round(km)} km away, which is outside our ${maxKm} km delivery zone.`;
-          }
-        } catch (err) {
-          output.className = 'result no';
-          output.textContent = 'Could not find this postcode. Please check and try again.';
-        }
-      });
-      postcodeInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') checkBtn.click();
-      });
-      // Close modal with Done button
-      document.getElementById("doneBtn").addEventListener("click", function() {
-        postcodeModal.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+	  
+	  if(checkBtn)
+	  {
+		  checkBtn.addEventListener('click', async () => {
+			const raw = postcodeInput.value;
+			const pc = normalize(raw);
+			output.style.display = 'block';
+			if (!pc) {
+			  output.className = 'result no';
+			  output.textContent = 'Please enter a postcode.';
+			  return;
+			}
+			if (!isValidMalaysianPostcode(pc)) {
+			  output.className = 'result no';
+			  output.innerHTML = 'Invalid postcode format. Postcode should be exactly 5 digits.';
+			  return;
+			}
+			try {
+			  output.className = 'result';
+			  output.textContent = 'Checking postcode location and calculating delivery cost…';
+			  const {
+				lat,
+				lng
+			  } = await geocodePostcode(pc);
+			  const km = haversineDistance(originLat, originLng, lat, lng);
+			  const deliveryCost = calculateDeliveryCost(km);
+			  if (km < maxKm) {
+				// ✅ Show Done button after result
+				doneBtn.style.display = "inline-block";
+				// ✅ Hide Check button
+				checkBtn.style.display = "none";
+				output.className = 'result ok';
+				output.innerHTML = `Good news — we deliver to 
+																			<strong>${pc}</strong> (≈${Math.round(km)} km away)!
+																			<br>
+										Estimated delivery fee: 
+																				<strong>RM${Math.round(deliveryCost)}</strong>`;
+			  } else {
+				doneBtn.style.display = "inline-block";
+				// ✅ Hide Check button
+				checkBtn.style.display = "none";
+				output.className = 'result no';
+				output.innerHTML = `Sorry, 
+																				<strong>${pc}</strong> is about ${Math.round(km)} km away, which is outside our ${maxKm} km delivery zone.`;
+			  }
+			} catch (err) {
+			  output.className = 'result no';
+			  output.textContent = 'Could not find this postcode. Please check and try again.';
+			}
+		  });
+	  }
+	  
+	  if(postcodeInput)
+	  {
+		  postcodeInput.addEventListener('keydown', (e) => {
+			if (e.key === 'Enter') checkBtn.click();
+		  });
+	  }
+	  
+		if (doneBtn) {
+		  doneBtn.addEventListener("click", function () {
+			postcodeModal.classList.remove("active");
+			document.body.style.overflow = "";
+		  });
+		}
+	  
+
       // Order Form Functionality
       function submitOrder(e) {
         e.preventDefault();

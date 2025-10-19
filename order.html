@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+	    <!-- Add Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     </script>
     <link rel="stylesheet" href="modal\modelstyle.css">
+	<link rel="stylesheet" href="CheckDelivery\checkDelivery.css">
     <link rel="stylesheet" href="common.css">
     <!-- Favicon -->
     <link rel="icon" href="/images/favicon.png" type="image/x-icon">
@@ -1092,7 +1095,10 @@
           <button class="icon-btn" id="orderCheckBtnOpen">
             <img src="images/track3.png" alt="Order Check" class="icon-img">
           </button>
-          <button class="icon-btn" id="deliveryCheckBtn">
+          <button class="icon-btn" id="grabExpressBtnMobile">
+            <img src="images/loca1.png" alt="Order Check" class="icon-img">
+          </button>
+          <button id="deliveryCheckBtn" hidden>
             <img src="images/loca1.png" alt="Order Check" class="icon-img">
           </button>
         </div>
@@ -1109,8 +1115,12 @@
           <button class="icon-btn" id="orderCheckBtnOpenNav" style="background: none; border: none; cursor: pointer;">
             <img src="images/track3.png" alt="Order Check" class="icon-img">
           </button>
-          <button class="icon-btn" id="deliveryCheckBtnNav" style="background: none; border: none; cursor: pointer;">
+          <button class="icon-btn" id="grabExpressBtn" style="background: none; border: none; cursor: pointer;">
             <img src="images/loca1.png" alt="Delivery Check" class="icon-img">
+          </button>
+          <button id="deliveryCheckBtnNav" hidden>
+            <i class="fas fa-shipping-fast"></i>
+            <span>Delivery Calculator</span>
           </button>
         </div>
       </div>
@@ -1144,7 +1154,7 @@
             <h3>Select Your Coffee</h3>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-01.jpg" alt="Single Brew">
+                <img src="productionImage\order\order-photo-01.png" alt="Single Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Single Brew</div>
@@ -1161,7 +1171,7 @@
             </div>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-02.jpg" alt="Couple Brew">
+                <img src="productionImage\order\order-photo-02.png" alt="Couple Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Couple Brew</div>
@@ -1176,7 +1186,7 @@
             </div>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-03.jpg" alt="Family Brew">
+                <img src="productionImage\order\order-photo-03.png" alt="Family Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Family Brew</div>
@@ -1204,12 +1214,13 @@
               </div>
             </div>
             <div id="delivery-details">
-              <label class="form-label" for="name">Check delivery availability:</label>
+              <label class="form-label" for="name">Check Delivery Availability</label>
               <div class="postcode-check">
-                <input type="text" class="postcode-input" id="postcodeorder" placeholder="Postcode" maxlength="5" readonly>
-                <button class="check-btn" id="checkPostcode">Check</button>
+                <input type="text" class="postcode-input" id="postcodeorder" placeholder="Delivery Area" maxlength="5" readonly>
+                <button class="check-btn" id="grabExpressCheckBtn">Check</button>
               </div>
-              <div class="delivery-result" id="delivery-result"></div>
+			  <input type="text" class="delivery-result" id="delivery-result" placeholder="Delivery Fee"/>
+              <!-- <div class="delivery-result" id="delivery-result"></div> -->
               <!-- Delivery DateTime -->
               <div class="form-group" style='padding-top:10px;'>
                 <label class="form-label" for="name">Delivery Date & Time</label>
@@ -1326,6 +1337,9 @@
               <li>
                 <a href="index.html#feedback-form">Feedback</a>
               </li>
+			  <li>
+                <a href="delivery.html">Delivery Fee</a>
+              </li>
             </ul>
           </div>
           <!-- Column 4 -->
@@ -1378,34 +1392,11 @@
           </div>
           <div class="action-buttons">
             <button type="button" class="btn btn-secondary" onclick="closeDateTimePicker()">Cancel</button>
-            <button type="button" class="btn btn-primary" id="confirmDateTimeBtn" onclick="confirmDateTime()" disabled>Select Date & Time</button>
+            <button type="button" class="btn btn-primary" id="confirmDateTimeBtn" onclick="confirmDateTime()" disabled>Select</button>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Postcode Checker Modal -->
-    <div class="modal-overlay" id="postcodeModal">
-      <div class="postcode-modal">
-        <button class="modal-close" id="modalClose"></button>
-        <div class="order-card">
-          <div class="content">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <img src="images/loca1.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
-              <h2 style="margin: 0;">Check delivery by postcode</h2>
-            </div>
-            <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
-            <label for="postcode">Postcode</label>
-            <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
-            <small id="hint">Malaysian format: 5 digits.</small>
-          </div>
-          <button id="checkBtn" class="check-btn" style="padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Check</button>
-          <!-- Check result output -->
-          <div id="output" class="result" aria-live="polite" style="display:none; margin-top:12px;"></div>
-          <!-- ✅ Done button (hidden until result shown) -->
-          <button id="doneBtn" class="check-btn" style="display:none; margin-top:15px; padding:10px 18px; font-size:14px; font-weight:600; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg, #3b2a21, #2a1d16); color:#fff; transition:0.3s;">Done</button>
-        </div>
-      </div>
-    </div>
+    </div> 
     <!-- ✅ Order Checker Modal -->
     <div class="modal-overlay" id="orderModal">
       <div class="postcode-modal">
@@ -1455,6 +1446,50 @@
         </div>
       </div>
     </div>
+
+	<!-- ===== Modal Popup ===== -->
+	  <div class="grab-modal-overlay" id="grabModal">
+		<div class="grab-popup">
+		  <button class="grab-close" id="grabModalClose">&times;</button>
+
+		  <div class="grab-popup-header">
+			  <div class="grab-header-top">
+				<i class="fas fa-motorcycle"></i>
+				<h2>Check Delivery Fee</h2>
+			  </div>
+			<p>Enter your pickup address to estimate your delivery cost.</p>
+		  </div>
+
+		  <div class="grab-popup-body">
+			<label for="grab-pickup-address">Delivery Area</label>
+			<div style="position: relative;">
+			  <input
+				type="text"
+				id="grab-pickup-address"
+				class="grab-input"
+				placeholder="e.g. Pavilion Kuala Lumpur"
+			  />
+			  <div id="grab-suggestions" class="grab-suggestions" style="display:none;"></div>
+			</div>
+			<span style="display: none;" id="calculate-result">No</span>
+			<button class="grab-popup-btn" id="grab-calculate-btn">
+			  <i class="fas fa-calculator"></i> Calculate Fee
+			</button>
+			<div class="grab-result" id="grab-result-container" style="display:none;">
+			  <p><strong>Distance:</strong> <span id="grab-distance-display">–</span></p>
+			  <p><strong>Estimated Fee:</strong> <span id="grab-delivery-fee">–</span></p>
+			</div>
+			
+			<!-- Done button -->
+            <button id="deliveryDoneBtn" class="grab-popup-btn" style="display:none;"> Done </button>
+
+			<div class="grab-not-available" id="grab-not-available" style="display:none; margin-top:15px;">
+			  🚫 Not available for this distance.
+			</div>
+			<a class="deliveryFeeInfo" href="delivery.html">Check Delivery Fee Info<a>
+		  </div>
+		</div>
+	  </div>
     <script>
       // Postcode Checker Functionality
       const dateTimeModal = document.getElementById('dateTimeModal');
@@ -1635,14 +1670,12 @@
       }
       // Modal Functions
       function openDateTimePicker() {
-        console.log("open model");
         dateTimeModal.classList.add('active');
         document.getElementById('dateTimeModal').style.display = 'flex';
         initializeDateTimePicker();
       }
 
       function closeDateTimePicker() {
-        console.log("close");
         document.getElementById('dateTimeModal').style.display = 'none';
       }
 
@@ -1658,8 +1691,6 @@
           document.getElementById('delivery-datetime').value = dbDateTimeRange;
           // Store the database format in a data attribute for form submission
           document.getElementById('delivery-datetime').setAttribute('data-db-format', dbDateTimeRange);
-          console.log('Database format:', dbDateTimeRange);
-          console.log('Is weekend?', (selectedDate.getDay() === 0 || selectedDate.getDay() === 6));
           // Close modal
           closeDateTimePicker();
         }
@@ -1730,6 +1761,92 @@
         const phoneInput = document.getElementById("phone");
         const emailInput = document.getElementById("email");
         const addressInput = document.getElementById("address");
+		const deliveryDoneBtn = document.getElementById('deliveryDoneBtn');
+		const grabCalculateBtn = document.getElementById("grab-calculate-btn");
+		const grabpickupaddress = document.getElementById("grab-pickup-address");
+		const grabresultcontainer = document.getElementById("grab-result-container");
+		const calculateResult = document.getElementById("calculate-result");
+		
+		// Handle order done
+		  deliveryDoneBtn.addEventListener("click", function() {
+			grabModal.style.display = "none"
+		  });
+		  
+		// Reset when typing new Order ID
+		grabpickupaddress.addEventListener("input", function () {
+		  grabCalculateBtn.style.display = "inline-block"; // show Check
+		  deliveryDoneBtn.style.display = "none"; // hide Done
+		  grabresultcontainer.style.display = "none"; // hide old result	  
+			if (grabpickupaddress.value.trim() === '' && calculateResult.textContent.trim().toLowerCase() === "yes") {
+				alert("Address Area Reset");
+				window.location.reload(); 
+			}		  
+		});
+    	
+		// ===== Route + Fee (no map) =====
+		document.getElementById("grab-calculate-btn").onclick = async function () {
+		  if (!grabPickupCoordinates)
+			return alert("Select a pickup location first.");
+			
+			if (grabpickupaddress.value.trim() === '') {
+				return alert("Select a pickup location first.");
+			}
+
+		  const grabDeliveryCoordinates = { lat: 3.118521, lng: 101.74457 }; // Pandan Perdana
+		  try {
+			const url = `https://router.project-osrm.org/route/v1/driving/${grabPickupCoordinates.lng},${grabPickupCoordinates.lat};${grabDeliveryCoordinates.lng},${grabDeliveryCoordinates.lat}?overview=false`;
+			const res = await fetch(url);
+			const data = await res.json();
+
+			if (!data.routes || data.routes.length === 0)
+			  throw new Error("No route found");
+
+			const route = data.routes[0];
+			const distance = route.distance / 1000;
+
+			// Show distance
+			document.getElementById("grab-result-container").style.display = "block";
+			document.getElementById("grab-distance-display").textContent =
+			  distance.toFixed(2) + " km";
+
+			// If distance too far
+			if (distance > 20) {
+			  document.getElementById("grab-delivery-fee").textContent = "–";
+			  notAvailableMsg.style.display = "block";
+			  return;
+			} else {
+			  notAvailableMsg.style.display = "none";
+			}
+
+			// Otherwise calculate fee
+			const deliveryResultEl = document.getElementById('delivery-result');
+			
+			const fee = calculateFee(distance);
+			document.getElementById("grab-delivery-fee").textContent = "RM " + fee;
+			if (deliveryResultEl) deliveryResultEl.value = "RM " + fee;
+			deliveryDoneBtn.style.display = "inline-block";
+			if (grabCalculateBtn) {
+			  grabCalculateBtn.style.display = "none";
+			}
+			updateOrderSummary();
+			calculateResult.textContent = "Yes";
+		  } catch (err) {
+			alert("Route calculation failed");
+		  }
+		};
+	
+		deliveryResult.addEventListener('input', (event) => {
+			const newValue = event.target.value;
+			// 👉 Do something with the new value
+			updateOrderSummary();
+		  });
+		  
+		deliveryResult.addEventListener("change", (event) => {
+			const newValue = event.target.value;
+			// 👉 Do something with the new value
+			updateOrderSummary();
+		  });
+		
         // ---- STEP PROGRESS HANDLER ----
         function setActiveSteps(stepIndex) {
           steps.forEach((step, index) => {
@@ -1780,186 +1897,6 @@
           input.addEventListener("input", checkCustomerDetails);
         });
       });
-      // Postcode Checker Functionality
-      const deliveryCheckBtn = document.getElementById('deliveryCheckBtn');
-      const deliveryCheckBtnNav = document.getElementById('deliveryCheckBtnNav'); // ✅ nav version
-      const postcodeModal = document.getElementById('postcodeModal');
-      const modalClose = document.getElementById('modalClose');
-      const checkBtn = document.getElementById('checkBtn');
-      const doneBtn = document.getElementById('doneBtn'); // ✅ added
-      const postcodeInput = document.getElementById('postcode');
-      const output = document.getElementById('output');
-      // Open modal
-      function openPostcodeModal() {
-        postcodeModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      deliveryCheckBtn.addEventListener('click', openPostcodeModal);
-      if (deliveryCheckBtnNav) {
-        deliveryCheckBtnNav.addEventListener('click', openPostcodeModal);
-      }
-      // Reset when typing new postcode
-      postcodeInput.addEventListener("input", function() {
-        checkBtn.style.display = "inline-block"; // show Check
-        doneBtn.style.display = "none"; // hide Done
-        output.style.display = "none"; // hide old result
-      });
-      // Close modal
-      function closePostcodeModal() {
-        postcodeModal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-      modalClose.addEventListener('click', closePostcodeModal);
-      // Close when clicking outside modal
-      postcodeModal.addEventListener('click', (e) => {
-        if (e.target === postcodeModal) {
-          closePostcodeModal();
-        }
-      });
-      // Close with ESC key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === "Escape" && postcodeModal.classList.contains('active')) {
-          closePostcodeModal();
-        }
-      });
-      // --- Postcode Checker Configuration ---
-      const originLat = 3.1345;
-      const originLng = 101.7432;
-      const maxKm = 11; // allow up to 20 km
-      function normalize(pc) {
-        if (!pc) return '';
-        return pc.replace(/\s+/g, '');
-      }
-
-      function isValidMalaysianPostcode(pc) {
-        return /^\d{5}$/.test(pc);
-      }
-
-      function haversineDistance(lat1, lon1, lat2, lon2) {
-        function toRad(x) {
-          return x * Math.PI / 180
-        }
-        const R = 6371;
-        const dLat = toRad(lat2 - lat1);
-        const dLon = toRad(lon2 - lon1);
-        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c;
-      }
-      async function geocodePostcode(postcode) {
-        const url = `https://nominatim.openstreetmap.org/search?postalcode=${encodeURIComponent(postcode)}&country=Malaysia&format=json`;
-        const res = await fetch(url, {
-          headers: {
-            'User-Agent': 'CoffeeDeliveryApp/1.0'
-          }
-        });
-        const json = await res.json();
-        if (json && json.length) {
-          return {
-            lat: parseFloat(json[0].lat),
-            lng: parseFloat(json[0].lon)
-          };
-        }
-        throw new Error('No results found');
-      }
-      // --- Delivery Rate Configuration ---
-      const baseRates = {
-        motorcycle: {
-          base: 4,
-          perKm: 1.5
-        },
-        car: {
-          base: 7,
-          perKm: 1.8
-        },
-        van: {
-          base: 25,
-          perKm: 3.5
-        }
-      };
-      // Grab-style capped pricing for motorcycles
-      function calculateDeliveryCost(distanceKm) {
-        let rate = baseRates.motorcycle;
-        let rawCost = rate.base + (rate.perKm * distanceKm);
-        if (distanceKm <= 5) {
-          return 7; // flat min RM7
-        } else if (distanceKm <= 15) {
-          return Math.min(rawCost, 19); // cap at RM19
-        } else {
-          return Math.round(rawCost); // beyond 15 km, round to whole RM
-        }
-      }
-      checkBtn.addEventListener('click', async () => {
-        const raw = postcodeInput.value;
-        const pc = normalize(raw);
-        output.style.display = 'block';
-        if (!pc) {
-          output.className = 'result no';
-          output.textContent = 'Please enter a postcode.';
-          return;
-        }
-        if (!isValidMalaysianPostcode(pc)) {
-          output.className = 'result no';
-          output.innerHTML = 'Invalid postcode format. Postcode should be exactly 5 digits.';
-          return;
-        }
-        try {
-          output.className = 'result';
-          output.textContent = 'Checking postcode location and calculating delivery cost…';
-          const {
-            lat,
-            lng
-          } = await geocodePostcode(pc);
-          const km = haversineDistance(originLat, originLng, lat, lng);
-          const deliveryCost = calculateDeliveryCost(km);
-          if (km < maxKm) {
-            // ✅ Show Done button after result
-            doneBtn.style.display = "inline-block";
-            // ✅ Hide Check button
-            checkBtn.style.display = "none";
-            const postcodeOrderEl = document.getElementById("postcodeorder");
-            if (postcodeOrderEl) {
-              if (postcodeOrderEl.tagName === "INPUT") {
-                postcodeOrderEl.value = pc; // store value for form submission
-              } else {
-                postcodeOrderEl.textContent = pc; // fallback if it's just a span/div
-              }
-            }
-            const resultDivE1 = document.getElementById('delivery-result');
-            resultDivE1.className = 'delivery-result available';
-            resultDivE1.textContent = `Estimated delivery fee: RM ${Math.round(deliveryCost)}`;
-            document.getElementById('delivery-fee').textContent = `RM ${Math.round(deliveryCost)}`;
-            updateOrderSummary();
-            output.className = 'result ok';
-            output.innerHTML = `Good news — we deliver to 
-         												
-         														
-																																				<strong>${pc}</strong> (≈${Math.round(km)} km away)!
-         												
-         														
-																																				<br>
-                                       Estimated delivery fee: 
-         													
-         															
-																																					<strong>RM${Math.round(deliveryCost)}</strong>`;
-          } else {
-            doneBtn.style.display = "inline-block";
-            // ✅ Hide Check button
-            checkBtn.style.display = "none";
-            output.className = 'result no';
-            output.innerHTML = `Sorry, 
-         													
-         															
-																																					<strong>${pc}</strong> is about ${Math.round(km)} km away, which is outside our ${maxKm} km delivery zone.`;
-          }
-        } catch (err) {
-          output.className = 'result no';
-          output.textContent = 'Could not find this postcode. Please check and try again.';
-        }
-      });
-      postcodeInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') checkBtn.click();
-      });
       // Quantity controls
       document.querySelectorAll('.quantity-btn').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -1999,10 +1936,6 @@
         document.getElementById('address').required = false;
         updateOrderSummary();
       });
-      document.getElementById('checkPostcode').addEventListener('click', openPostcodeModal);
-      if (deliveryCheckBtnNav) {
-        deliveryCheckBtnNav.addEventListener('click', openPostcodeModal);
-      }
       // Update order summary
       function updateOrderSummary() {
         const singleQty = parseInt(document.getElementById('singlebrew-qty').value) || 0;
@@ -2016,21 +1949,21 @@
         const resultDiv = document.getElementById('delivery-result');
         // ✅ Always extract original delivery fee from resultDiv
         let baseDeliveryFee = 0;
-        const feeMatch = resultDiv.innerHTML.match(/RM\s*(\d+\.?\d*)/);
+        const feeMatch = resultDiv.value.match(/RM\s*(\d+\.?\d*)/);
         if (feeMatch) {
           baseDeliveryFee = parseFloat(feeMatch[1]);
         }
         let deliveryFee = baseDeliveryFee;
         // ✅ Apply delivery discount if itemsTotal >= 103.90
         if (itemsTotal >= 103.90 && baseDeliveryFee > 0) {
-          const discount = Math.min(8, baseDeliveryFee); // max RM8 off
+          const discount = Math.min(10, baseDeliveryFee); // max RM10 off
           const discountedFee = baseDeliveryFee - discount;
           deliveryEl.textContent = `RM ${discountedFee.toFixed(2)} (discount applied, was RM ${baseDeliveryFee.toFixed(2)})`;
           deliveryFee = discountedFee;
         } else {
           // ❌ Restore original delivery fee from resultDiv
           deliveryEl.textContent = `RM ${baseDeliveryFee.toFixed(2)}`;
-          deliveryFee = baseDeliveryFee;
+          deliveryFee = baseDeliveryFee;		  
         }
         // ✅ Apply promo code discount
         const promoInput = document.getElementById('promo');
@@ -2150,7 +2083,6 @@
             body: JSON.stringify(payload),
           });
           const result = await response.json();
-          console.log("Worker Response 👉", result);
           if (result.success) {
             const newOrderId = result.orderId;
             document.getElementById("printOrderId").textContent = newOrderId;
@@ -2167,14 +2099,8 @@
         } catch (err) {
           btn.disabled = false;
           btn.textContent = "Continue to Payment";
-          console.error("❌ Error:", err);
           msgEl.textContent = "⚠️ Failed to save order, please try again.";
         }
-      });
-      // Close modal with Done button
-      document.getElementById("doneBtn").addEventListener("click", function() {
-        postcodeModal.classList.remove('active');
-        document.body.style.overflow = '';
       });
       //Phone Verification
       const phoneInput = document.getElementById("phone");
@@ -2222,6 +2148,7 @@
       // Validate on blur or input
       nameInput.addEventListener("input", () => {
         validateName();
+		updateOrderSummary();
       });
 
       function validateName() {
@@ -2278,5 +2205,8 @@
 	  }, false);
     </script>
     <script src="Modal/modalscript.js"></script>
+	<!-- Add Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="CheckDelivery/checkdelivery.js"></script>
   </body>
 </html>
