@@ -77,9 +77,10 @@
         }
         
         .menu-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+		  width: 100%;
+		  height: auto;
+		  border-radius: 12px; /* optional */
+		  display: block;
         }
         
         .menu-item-content {

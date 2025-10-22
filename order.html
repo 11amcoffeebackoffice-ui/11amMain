@@ -130,8 +130,7 @@
       }
 
       .product-image {
-        width: 100px;
-        height: 100px;
+        width: 150px;
         border-radius: 8px;
         overflow: hidden;
         margin-right: 20px;
@@ -139,8 +138,9 @@
 
       .product-image img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+		  height: auto;
+		  border-radius: 12px; /* optional */
+		  display: block;
       }
 
       .product-details {
@@ -961,7 +961,6 @@
           margin-right: 0;
           margin-bottom: 15px;
           width: 200px;
-          height: 200px;
         }
 
         .delivery-options {
@@ -1095,7 +1094,7 @@
           <button class="icon-btn" id="orderCheckBtnOpen">
             <img src="images/track3.png" alt="Order Check" class="icon-img">
           </button>
-          <button class="icon-btn" id="grabExpressBtnMobile">
+          <button class="icon-btn" id="deliverExpressBtnMobile">
             <img src="images/loca1.png" alt="Order Check" class="icon-img">
           </button>
           <button id="deliveryCheckBtn" hidden>
@@ -1115,7 +1114,7 @@
           <button class="icon-btn" id="orderCheckBtnOpenNav" style="background: none; border: none; cursor: pointer;">
             <img src="images/track3.png" alt="Order Check" class="icon-img">
           </button>
-          <button class="icon-btn" id="grabExpressBtn" style="background: none; border: none; cursor: pointer;">
+          <button class="icon-btn" id="deliverExpressBtn" style="background: none; border: none; cursor: pointer;">
             <img src="images/loca1.png" alt="Delivery Check" class="icon-img">
           </button>
           <button id="deliveryCheckBtnNav" hidden>
@@ -1154,7 +1153,7 @@
             <h3>Select Your Coffee</h3>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-01.png" alt="Single Brew">
+                <img src="productionImage\main\new1.png" alt="Single Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Single Brew</div>
@@ -1171,7 +1170,7 @@
             </div>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-02.png" alt="Couple Brew">
+                <img src="productionImage\main\new2.png" alt="Couple Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Couple Brew</div>
@@ -1186,7 +1185,7 @@
             </div>
             <div class="product-item">
               <div class="product-image">
-                <img src="productionImage\order\order-photo-03.png" alt="Family Brew">
+                <img src="productionImage\main\new3.png" alt="Family Brew">
               </div>
               <div class="product-details">
                 <div class="product-name">Family Brew</div>
@@ -1217,7 +1216,7 @@
               <label class="form-label" for="name">Check Delivery Availability</label>
               <div class="postcode-check">
                 <input type="text" class="postcode-input" id="postcodeorder" placeholder="Delivery Area" maxlength="5" readonly>
-                <button class="check-btn" id="grabExpressCheckBtn">Check</button>
+                <button class="check-btn" id="deliverExpressCheckBtn">Check</button>
               </div>
 			  <input type="text" class="delivery-result" id="delivery-result" placeholder="Delivery Fee"/>
               <!-- <div class="delivery-result" id="delivery-result"></div> -->
@@ -1448,42 +1447,42 @@
     </div>
 
 	<!-- ===== Modal Popup ===== -->
-	  <div class="grab-modal-overlay" id="grabModal">
-		<div class="grab-popup">
-		  <button class="grab-close" id="grabModalClose">&times;</button>
+	  <div class="deliver-modal-overlay" id="deliverModal">
+		<div class="deliver-popup">
+		  <button class="deliver-close" id="deliverModalClose">&times;</button>
 
-		  <div class="grab-popup-header">
-			  <div class="grab-header-top">
+		  <div class="deliver-popup-header">
+			  <div class="deliver-header-top">
 				<i class="fas fa-motorcycle"></i>
 				<h2>Check Delivery Fee</h2>
 			  </div>
 			<p>Enter your delivery address to Calculate your delivery cost.</p>
 		  </div>
 
-		  <div class="grab-popup-body">
-			<label for="grab-pickup-address">Delivery Area</label>
+		  <div class="deliver-popup-body">
+			<label for="deliver-pickup-address">Delivery Area</label>
 			<div style="position: relative;">
 			  <input
 				type="text"
-				id="grab-pickup-address"
-				class="grab-input"
+				id="deliver-pickup-address"
+				class="deliver-input"
 				placeholder="e.g. Pavilion Kuala Lumpur"
 			  />
-			  <div id="grab-suggestions" class="grab-suggestions" style="display:none;"></div>
+			  <div id="deliver-suggestions" class="deliver-suggestions" style="display:none;"></div>
 			</div>
 			<span style="display: none;" id="calculate-result">No</span>
-			<button class="grab-popup-btn" id="grab-calculate-btn">
+			<button class="deliver-popup-btn" id="deliver-calculate-btn">
 			  <i class="fas fa-calculator"></i> Calculate Fee
 			</button>
-			<div class="grab-result" id="grab-result-container" style="display:none;">
-			  <p><strong>Distance:</strong> <span id="grab-distance-display">–</span></p>
-			  <p><strong>Estimated Fee:</strong> <span id="grab-delivery-fee">–</span></p>
+			<div class="deliver-result" id="deliver-result-container" style="display:none;">
+			  <p><strong>Distance:</strong> <span id="deliver-distance-display">–</span></p>
+			  <p><strong>Estimated Fee:</strong> <span id="deliver-delivery-fee">–</span></p>
 			</div>
 			
 			<!-- Done button -->
-            <button id="deliveryDoneBtn" class="grab-popup-btn" style="display:none;"> Done </button>
+            <button id="deliveryDoneBtn" class="deliver-popup-btn" style="display:none;"> Done </button>
 
-			<div class="grab-not-available" id="grab-not-available" style="display:none; margin-top:15px;">
+			<div class="deliver-not-available" id="deliver-not-available" style="display:none; margin-top:15px;">
 			  🚫 Not available for this distance.
 			</div>
 			<a class="deliveryFeeInfo" href="delivery.html">Check Delivery Fee Info<a>
@@ -1762,39 +1761,39 @@
         const emailInput = document.getElementById("email");
         const addressInput = document.getElementById("address");
 		const deliveryDoneBtn = document.getElementById('deliveryDoneBtn');
-		const grabCalculateBtn = document.getElementById("grab-calculate-btn");
-		const grabpickupaddress = document.getElementById("grab-pickup-address");
-		const grabresultcontainer = document.getElementById("grab-result-container");
+		const deliverCalculateBtn = document.getElementById("deliver-calculate-btn");
+		const deliverpickupaddress = document.getElementById("deliver-pickup-address");
+		const deliverresultcontainer = document.getElementById("deliver-result-container");
 		const calculateResult = document.getElementById("calculate-result");
 		
 		// Handle order done
 		  deliveryDoneBtn.addEventListener("click", function() {
-			grabModal.style.display = "none"
+			deliverModal.style.display = "none"
 		  });
 		  
 		// Reset when typing new Order ID
-		grabpickupaddress.addEventListener("input", function () {
-		  grabCalculateBtn.style.display = "inline-block"; // show Check
+		deliverpickupaddress.addEventListener("input", function () {
+		  deliverCalculateBtn.style.display = "inline-block"; // show Check
 		  deliveryDoneBtn.style.display = "none"; // hide Done
-		  grabresultcontainer.style.display = "none"; // hide old result	  
-			if (grabpickupaddress.value.trim() === '' && calculateResult.textContent.trim().toLowerCase() === "yes") {
+		  deliverresultcontainer.style.display = "none"; // hide old result	  
+			if (deliverpickupaddress.value.trim() === '' && calculateResult.textContent.trim().toLowerCase() === "yes") {
 				alert("Address Area Reset");
 				window.location.reload(); 
 			}		  
 		});
     	
 		// ===== Route + Fee (no map) =====
-		document.getElementById("grab-calculate-btn").onclick = async function () {
-		  if (!grabPickupCoordinates)
+		document.getElementById("deliver-calculate-btn").onclick = async function () {
+		  if (!deliverPickupCoordinates)
 			return alert("Select a pickup location first.");
 			
-			if (grabpickupaddress.value.trim() === '') {
+			if (deliverpickupaddress.value.trim() === '') {
 				return alert("Select a pickup location first.");
 			}
 
-		  const grabDeliveryCoordinates = { lat: 3.118521, lng: 101.74457 }; // Pandan Perdana
+		  const deliverDeliveryCoordinates = { lat: 3.118521, lng: 101.74457 }; // Pandan Perdana
 		  try {
-			const url = `https://router.project-osrm.org/route/v1/driving/${grabPickupCoordinates.lng},${grabPickupCoordinates.lat};${grabDeliveryCoordinates.lng},${grabDeliveryCoordinates.lat}?overview=false`;
+			const url = `https://router.project-osrm.org/route/v1/driving/${deliverPickupCoordinates.lng},${deliverPickupCoordinates.lat};${deliverDeliveryCoordinates.lng},${deliverDeliveryCoordinates.lat}?overview=false`;
 			const res = await fetch(url);
 			const data = await res.json();
 
@@ -1805,13 +1804,13 @@
 			const distance = route.distance / 1000;
 
 			// Show distance
-			document.getElementById("grab-result-container").style.display = "block";
-			document.getElementById("grab-distance-display").textContent =
+			document.getElementById("deliver-result-container").style.display = "block";
+			document.getElementById("deliver-distance-display").textContent =
 			  distance.toFixed(2) + " km";
 
 			// If distance too far
 			if (distance > 20) {
-			  document.getElementById("grab-delivery-fee").textContent = "–";
+			  document.getElementById("deliver-delivery-fee").textContent = "–";
 			  notAvailableMsg.style.display = "block";
 			  return;
 			} else {
@@ -1822,11 +1821,11 @@
 			const deliveryResultEl = document.getElementById('delivery-result');
 			
 			const fee = calculateFee(distance);
-			document.getElementById("grab-delivery-fee").textContent = "RM " + fee;
+			document.getElementById("deliver-delivery-fee").textContent = "RM " + fee;
 			if (deliveryResultEl) deliveryResultEl.value = "RM " + fee;
 			deliveryDoneBtn.style.display = "inline-block";
-			if (grabCalculateBtn) {
-			  grabCalculateBtn.style.display = "none";
+			if (deliverCalculateBtn) {
+			  deliverCalculateBtn.style.display = "none";
 			}
 			updateOrderSummary();
 			calculateResult.textContent = "Yes";
