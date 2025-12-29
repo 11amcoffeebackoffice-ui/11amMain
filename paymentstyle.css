@@ -75,7 +75,7 @@
             background: #f9f5f0;
             border-radius: 10px;
             padding: 20px;
-            margin-bottom: 25px;
+            /* margin-bottom: 25px; */
             text-align: left;
         }
 
@@ -83,7 +83,6 @@
             font-size: 20px;
             margin-bottom: 15px;
             color: #3b2a21;
-            text-align: center;
         }
 
         .order-info {

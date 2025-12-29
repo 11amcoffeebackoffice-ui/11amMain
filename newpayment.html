@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Order Success - 11am Coffee</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="modal\modelstyle.css">
+  <link rel="stylesheet" href="common.css">
+  <link rel="stylesheet" href="paymentstyle.css">
+  <!-- Favicon -->
+  <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+  <!-- Optional for better support -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+  
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f9f5f0;
+      color: #3a2c1e;
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #3b2a21;
+      cursor: pointer;
+    }
+
+    
+    .mobile-actions {
+      display: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #3b2a21;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #c89b6d;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #c89b6d;
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Order Success Section - Redesigned */
+    .order-success-section {
+      padding: 20px 0;
+      background-color: #fff;
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+    }
+
+    .success-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .order-header {
+      background: #5c4435;
+      color: white;
+      padding: 20px;
+      border-radius: 16px 16px 0 0;
+      text-align: center;
+    }
+
+    .order-title {
+      font-size: 22px;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+
+    .order-currency {
+      font-size: 18px;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .order-date {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .order-details {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .order-id-section {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-id-label, .queue-number-label {
+      font-weight: 600;
+      color: #5d4037;
+      font-size: 14px;
+    }
+
+    .order-id-value, .queue-number-value {
+      font-weight: 700;
+      color: #3b2a21;
+      font-size: 16px;
+    }
+
+    .queue-number-value {
+      color: #888;
+    }
+
+    .order-items {
+      margin-bottom: 20px;
+    }
+
+    .order-items-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #3b2a21;
+      font-weight: 600;
+    }
+
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+      width: 100%;
+    }
+
+    .item-name {
+      flex: 1;
+      font-weight: 500;
+      text-align: left;
+      padding-right: 10px;
+    }
+
+    .item-quantity {
+      margin: 0 15px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .item-price {
+      font-weight: 600;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .show-all-items {
+      background: none;
+      border: none;
+      color: #3b2a21;
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 14px;
+      width: 100%;
+      padding: 10px;
+    }
+
+    .cost-breakdown {
+      margin-bottom: 20px;
+    }
+
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 0 5px;
+    }
+
+    .cost-label {
+      color: #5d4037;
+    }
+
+    .cost-value {
+      font-weight: 500;
+    }
+
+    .grand-total {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #eee;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .payment-section {
+      background: #f9f5f0;
+      padding: 20px;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .payment-message {
+      font-size: 16px;
+      color: #5d4037;
+      margin-bottom: 20px;
+      line-height: 1.6;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp-btn:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-btn i {
+      font-size: 20px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .btn-primary {
+      background: #5d4037;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #8d6e63;
+    }
+
+    .btn-secondary {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #d0d0d0;
+    }
+
+    /* Footer */
+    .footer {
+      background: #3b2a21;
+      color: #e1dfdc;
+      padding: 40px 20px 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .footer .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto 30px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      color: #f8f6f3;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .footer-column h3::after {
+      content: "";
+      width: 40px;
+      height: 2px;
+      background: #c89b6d;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
+
+    .footer-column p,
+    .footer-column ul {
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-column a {
+      color: #e1dfdc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: #c89b6d;
+    }
+
+    .social-icons a {
+      font-size: 18px;
+      margin-right: 10px;
+      color: #e1dfdc;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #c89b6d;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 15px;
+      color: #aaa;
+    }
+
+    /* Print Template (hidden on screen) */
+    #printTemplate {
+      display: none;
+    }
+
+    /* Postcode Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .postcode-modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      width: 90%;
+      max-width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .modal-overlay.active .postcode-modal {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .order-card {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content h2 {
+      color: #3b2a21;
+    }
+
+    .muted {
+      color: #666;
+      font-size: 14px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #3b2a21;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    small {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .check-btn {
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #3b2a21, #2a1d16);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .check-btn:hover {
+      background: linear-gradient(135deg, #4a372c, #3b2a21);
+    }
+
+    .result {
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    /* Mobile Responsive Improvements */
+    @media (max-width: 768px) {
+      .announcement-bar {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+      
+      .announcement-full {
+        display: none;
+      }
+      
+      .announcement-short {
+        display: inline;
+      }
+      
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        gap: 15px;
+      }
+
+      .nav-menu.active {
+        display: flex;
+      }
+
+      .mobile-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-icons .icon-btn {
+        display: none;
+      }
+
+      .order-success-section {
+        padding: 10px 0;
+        min-height: calc(100vh - 150px);
+      }
+
+      .success-container {
+        margin: 0 10px;
+        border-radius: 12px;
+      }
+
+      .order-header {
+        padding: 15px;
+        border-radius: 12px 12px 0 0;
+      }
+
+      .order-title {
+        font-size: 18px;
+      }
+
+      .order-currency {
+        font-size: 16px;
+      }
+
+      .order-date {
+        font-size: 12px;
+      }
+
+      .order-details {
+        padding: 15px;
+      }
+
+      .order-items-title {
+        font-size: 16px;
+      }
+
+      .order-item {
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 0;
+        margin-bottom: 8px;
+      }
+
+      .item-name {
+        font-size: 14px;
+        flex: 2;
+        padding-right: 5px;
+      }
+
+      .item-quantity {
+        font-size: 13px;
+        margin: 0 8px;
+        flex: 0 0 auto;
+      }
+
+      .item-price {
+        font-size: 14px;
+        flex: 0 0 auto;
+      }
+
+      .order-id-section {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .payment-section {
+        padding: 15px;
+      }
+
+      .payment-message {
+        font-size: 14px;
+        padding: 0 5px;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+      }
+
+      .whatsapp-btn {
+        padding: 14px;
+        font-size: 15px;
+      }
+
+      .footer {
+        padding: 30px 15px 15px;
+      }
+
+      .footer .footer-content {
+        gap: 20px;
+      }
+
+      .footer-column {
+        min-width: 100%;
+      }
+
+      /* Fix padding issues for cost breakdown */
+      .cost-breakdown {
+        padding: 0 5px;
+      }
+
+      .cost-row {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 10px;
+      }
+      
+      .success-container {
+        margin: 0 5px;
+      }
+      
+      .order-header {
+        padding: 12px 10px;
+      }
+      
+      .order-title {
+        font-size: 16px;
+      }
+      
+      .order-currency {
+        font-size: 15px;
+      }
+      
+      .order-details {
+        padding: 12px 10px;
+      }
+      
+      .order-item {
+        flex-wrap: nowrap;
+        padding: 6px 0;
+      }
+      
+      .item-name {
+        flex: 1;
+        font-size: 13px;
+        padding-right: 5px;
+      }
+      
+      .item-quantity {
+        margin: 0 5px;
+        font-size: 12px;
+      }
+      
+      .item-price {
+        font-size: 13px;
+      }
+      
+      .cost-row {
+        flex-direction: row;
+        padding: 0;
+      }
+      
+      .grand-total {
+        font-size: 16px;
+      }
+
+      .payment-section {
+        padding: 12px 10px;
+      }
+
+      .payment-message {
+        padding: 0;
+      }
+    }
+
+    /* Very small screens */
+    @media (max-width: 360px) {
+      .order-header {
+        padding: 10px 8px;
+      }
+      
+      .order-details {
+        padding: 10px 8px;
+      }
+      
+      .order-items-title {
+        font-size: 15px;
+      }
+      
+      .item-name {
+        font-size: 12px;
+      }
+      
+      .item-quantity, .item-price {
+        font-size: 11px;
+      }
+      
+      .payment-section {
+        padding: 10px 8px;
+      }
+
+      .cost-row {
+        font-size: 14px;
+      }
+    }
+
+    /* Ensure proper spacing for all elements */
+    .order-item > div,
+    .cost-row > span {
+      padding: 0 2px;
+    }
+  </style>
+</head>
+
+<body>
+	<!-- Announcement Bar -->
+	<div class="announcement-bar">
+	  <i class="fas fa-bullhorn"> </i>
+	  <span class="announcement-full">
+	  </span>
+	  <span class="announcement-short">
+		&nbsp; Pre-orders now open. Exclusive delivery within KL. Enjoy complimentary delivery with purchases of 3 bundles/18 pouches or more.  &nbsp;
+	  </span>
+	</div>
+    <!-- Header -->
+	<header>
+	  <div class="header-container">
+		<!-- Mobile menu button -->
+		<button class="mobile-menu-btn" id="mobileMenuBtn">
+		  <i class="fas fa-bars"></i>
+		</button>
+
+	  <!-- Center: Logo -->
+	  <div class="logo" style="left: 50%; transform: translateX(-50%); display: flex;">
+		<a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+		  <img src="images/logo/ig profile.png" 
+			   alt="11am Coffee Logo" 
+			   style="height: 40px; width: auto; transform: scale(2); transform-origin: center;">
+		</a>
+	  </div>
+
+		<!-- Mobile Actions (only show on mobile) -->
+		<div class="mobile-actions">
+		  <button class="icon-btn" id="orderCheckBtnOpen">
+			<img src="images/track3.png" alt="Order Check" class="icon-img">
+		  </button>
+		</div>
+
+		<!-- Navigation Menu -->
+		<nav class="nav-menu" id="navMenu">
+		  <a href="index.html" class="nav-link">Home</a>
+		  <a href="index.html#shop" class="nav-link">Shop</a>
+		  <a href="order.html" class="nav-link">Order</a>
+		  <a href="index.html#feedback-form" class="nav-link">Feedback</a>  
+		  <a href="index.html#about" class="nav-link">About Us</a>
+		</nav>
+		<!-- Right: Icons -->
+		  <div class="nav-icons" style="display: flex; align-items: center; gap: 12px;">
+			<button class="icon-btn" id="orderCheckBtnOpenNav" 
+					style="background: none; border: none; cursor: pointer;">
+			  <img src="images/track3.png" alt="Order Check" class="icon-img">
+			</button>
+		  </div>
+		
+	  </div>
+	</header>
+
+  <!-- Order Success Section - Redesigned -->
+  <section class="order-success-section">
+    <div class="container">
+      <div class="success-container">
+        <!-- Order Header -->
+        <div class="order-header">
+          <h2 class="order-title">11am Coffee</h2>
+          <div class="order-currency" id="grandTotalDisplay">MYR 0.00</div>
+          <div class="order-date" id="orderDateDisplay">Nov 08, 2025 11:27</div>
+        </div>
+
+        <!-- Order Details -->
+        <div class="order-details">
+          <!-- Order ID and Queue Number -->
+          <div class="order-id-section">
+            <div>
+              <div class="order-id-label">ORDER ID</div>
+              <div class="order-id-value" id="orderIdDisplay">823093260</div>
+            </div>
+          </div>
+
+          <!-- Order Items -->
+        <div class="order-items">
+            <h3 class="order-items-title">My Order</h3>
+            <!-- Order items will be dynamically inserted here -->
+            <button class="show-all-items">Show All Items</button>
+        </div>
+		  
+
+          <!-- Cost Breakdown -->
+          <div class="cost-breakdown">
+            <div class="cost-row">
+              <span class="cost-label">Subtotal</span>
+              <span class="cost-value" id="orderTotalDisplay"></span>
+            </div>
+            <div class="cost-row">
+              <span class="cost-label">Delivery Fee</span>
+              <span class="cost-value" id="deliveryFeeDisplay"></span>
+            </div>
+            <div class="cost-row" id="promotionSection" style="display: none;">
+              <span class="cost-label">Promotion Discount</span>
+              <span class="cost-value" id="promotionPriceDisplay"></span>
+            </div>
+            <div class="cost-row grand-total">
+              <span class="cost-label">Grand Total</span>
+              <span class="cost-value" id="grandTotalDisplay2"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section">
+          <p class="payment-message">To complete your order, please proceed with payment via WhatsApp.</p>
+          <a href="#" class="whatsapp-btn" id="whatsappPaymentBtn">
+            <i class="fab fa-whatsapp"></i> Pay via WhatsApp
+          </a>
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="printReceiptBtn">
+              <i class="fas fa-print"></i> Print Receipt
+            </button>
+            <a href="order.html" class="btn btn-secondary">
+              <i class="fas fa-coffee"></i> Place Another Order
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <!-- Column 1 -->
+        <div class="footer-column">
+          <h3>11am Coffee</h3>
+          <p>
+            Brewing joy in every cup — <br>
+            11am Coffee, your daily ritual since 2025.
+          </p>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>
+              <i class="fas fa-phone"></i>
+              <a href="tel:+60175115356">+60 17-511 5356</a>
+            </li>
+            <li>
+              <i class="fab fa-whatsapp"></i>
+              <a href="https://wa.me/60175115356" target="_blank">Message us on WhatsApp</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 3 (NEW Quick Links) -->
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="order.html">Place Order</a></li>
+            <li><a href="index.html#feedback-form">Feedback</a></li>
+            <li><a href="delivery.html">Delivery Fee</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/11amcoffee/" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy;2025 11 AM COFFEE 202503256298(CT0154839-U) • All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Print Template (hidden on screen) -->
+  <div id="printTemplate">
+    <div class="print-container">
+      <div class="print-header">
+        <h1 class="print-title">Order Confirmation</h1>
+        <p>Thank you for your purchase!</p>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Customer Name</div>
+        <div class="print-value" id="printName">John Doe</div>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Order ID</div>
+        <div class="print-value" id="printOrderId">EL0000000000</div>
+      </div>
+      <div class="print-detail">
+        <div class="print-label">Order Total</div>
+        <div class="print-value" id="printTotal">RM 0.00</div>
+      </div>
+      <div class="print-footer">
+        <p>Please keep this receipt for your records</p>
+        <p>Contact us if you have any questions</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Postcode Checker Modal -->
+  <div class="modal-overlay" id="postcodeModal">
+    <div class="postcode-modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="order-card">
+        <div class="content">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="images/loca1.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
+            <h2 style="margin: 0;">Check delivery by postcode</h2>
+          </div>
+          <p class="muted">Enter your postcode and we'll tell you whether we deliver to your area (within 10 km of Pandan Perdana, KL 55330).</p>
+          <label for="postcode">Postcode</label>
+          <input id="postcode" type="text" inputmode="numeric" placeholder="e.g. 55330" aria-describedby="hint" />
+          <small id="hint">Malaysian format: 5 digits.</small>
+        </div>
+        <button id="checkBtn" class="check-btn">Check</button>
+        <!-- Check result output -->
+        <div id="output" class="result" aria-live="polite" style="display:none;"></div>
+        <!-- ✅ Done button (hidden until result shown) -->
+        <button id="doneBtn" class="check-btn" style="display:none; margin-top:15px;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Order Checker Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="postcode-modal">
+      <button class="modal-close" id="orderModalClose">&times;</button>
+      <div class="order-card">
+        <div class="content">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="images/track3.png" alt="Order Check" class="icon-img" style="width: 40px; height: 40px;">
+            <h2>Check your order</h2>
+          </div>
+          <p class="muted">Enter your Order ID to track your order status.</p>
+          <label for="orderId">Order ID</label>
+          <input id="orderId" type="text" placeholder="e.g. ORD12345" aria-describedby="orderHint" />
+          <small id="orderHint">Your Order ID is provided after checkout.</small>
+        </div>
+        <!-- ✅ Button inside modal to check -->
+        <button id="checkOrderBtn" class="check-btn">Check Order</button>
+        <!-- Result -->
+        <div id="orderOutput" class="result" aria-live="polite" style="display:none;"></div>
+        <!-- Done button -->
+        <button id="orderDoneBtn" class="check-btn" style="display:none; margin-top:15px;">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Load order details from URL parameters
+    window.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get("orderId");
+      const name = urlParams.get("name");
+      const ordertotal = urlParams.get("ordertotal");
+      const grandtotal = urlParams.get("grandtotal");
+      const deliveryfee = urlParams.get("deliveryfee");
+      const address = urlParams.get("address");
+      const promo = urlParams.get("promocode");
+	  const order = urlParams.get("order");
+
+      if (!orderId) {
+        alert("⚠️ No order ID found. Please place an order first.");
+        window.location.href = "order.html";
+        return;
+      }
+
+      // Set current date and time
+      const now = new Date();
+      const options = { year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+      document.getElementById("orderDateDisplay").textContent = now.toLocaleDateString('en-US', options);
+
+      // Fill details
+      document.getElementById("orderIdDisplay").textContent = orderId || "N/A";
+      document.getElementById("orderTotalDisplay").textContent = (ordertotal || "0.00");
+      document.getElementById("deliveryFeeDisplay").textContent = (deliveryfee || "0.00");
+      
+      let promoDiscount = 0;
+      if (promo && promo === "11AMFIRSTUSER") {
+        document.getElementById("promotionSection").style.display = "flex";
+        promoDiscount = 5; // RM5 off
+        document.getElementById("promotionPriceDisplay").textContent = "-" + promoDiscount.toFixed(2);
+      }
+      
+      document.getElementById("grandTotalDisplay").textContent = (grandtotal || "0.00");
+      document.getElementById("grandTotalDisplay2").textContent = (grandtotal || "0.00");
+      
+      // Print template update
+      document.getElementById("printName").textContent = name || "N/A";
+      document.getElementById("printOrderId").textContent = orderId || "N/A";
+      document.getElementById("printTotal").textContent = (grandtotal || "0.00");
+	  // Process and display order items
+            if (order) {
+                try {
+                    const orders = JSON.parse(decodeURIComponent(order));
+                    displayOrderItems(orders);
+                } catch (e) {
+                    console.error("Error parsing orders:", e);
+                    document.querySelector('.order-items').innerHTML = '<p>Error loading order items</p>';
+                }
+            }
+
+            function displayOrderItems(orders) {
+    const orderItemsContainer = document.querySelector('.order-items');
+    
+    // Remove existing static order items but keep the title and button
+    const existingItems = orderItemsContainer.querySelectorAll('.order-item');
+    existingItems.forEach(item => {
+        if (item.querySelector('.item-name') && 
+            !item.querySelector('.item-name').textContent.includes('Show All Items')) {
+            item.remove();
+        }
+    });
+    
+    if (Array.isArray(orders) && orders.length > 0) {
+        orders.forEach((order, index) => {
+            const productName = formatProductName(order.product);
+            const itemPrice = calculateItemPrice(order.product, order.qty);
+            
+            const orderItemElement = document.createElement('div');
+            orderItemElement.className = 'order-item';
+            orderItemElement.innerHTML = `
+                <div class="item-name">${productName}</div>
+                <div class="item-quantity">x ${order.qty}</div>
+                <div class="item-price">MYR ${itemPrice.toFixed(2)}</div>
+            `;
+            
+            // Hide items beyond the first one initially
+            if (index >= 1) {
+                orderItemElement.style.display = 'none';
+            }
+            
+            // Insert before the "Show All Items" button
+            const showAllButton = orderItemsContainer.querySelector('.show-all-items');
+            orderItemsContainer.insertBefore(orderItemElement, showAllButton);
+        });
+        
+        // Update the "Show All Items" button text based on number of items
+        const showAllButton = orderItemsContainer.querySelector('.show-all-items');
+        if (orders.length > 1) {
+            showAllButton.innerHTML = `<span class="button-icon">▼</span> Show All Items (${orders.length - 1} more)`;
+            showAllButton.style.display = 'flex';
+        } else {
+            // Hide button if only 1 item
+            showAllButton.style.display = 'none';
+        }
+    } else {
+        // If no orders found, show a message
+        const noItemsMessage = document.createElement('div');
+        noItemsMessage.className = 'order-item';
+        noItemsMessage.innerHTML = '<div class="item-name">No items found</div>';
+        const showAllButton = orderItemsContainer.querySelector('.show-all-items');
+        orderItemsContainer.insertBefore(noItemsMessage, showAllButton);
+        showAllButton.style.display = 'none';
+    }
+}
+				
+				function formatProductName(productKey) {
+                // Map your product keys to display names
+                const productNames = {
+                    'singlebrew': 'Single Brew',
+                    'couplebrew': 'Couple Brew',
+                    'familybrew': 'Family Brew',
+  
+                    // Add more product mappings as needed
+                };
+                
+                return productNames[productKey] || 
+                    productKey.replace(/([A-Z])/g, ' $1')
+                             .replace(/^./, str => str.toUpperCase())
+                             .replace(/\b\w/g, l => l.toUpperCase());
+            }
+
+            function calculateItemPrice(product, quantity) {
+                // Map your products to their prices
+                const productPrices = {
+                    'singlebrew': 36.00,
+                    'couplebrew': 70.00,
+                    'familybrew': 105.00,
+                    // Add more product prices as needed
+                };
+                
+                const unitPrice = productPrices[product] || 0;
+                return unitPrice * quantity;
+            }
+
+			// Add event listener for "Show All Items" button
+			document.querySelector('.show-all-items').addEventListener('click', function() {
+				const orderItemsContainer = document.querySelector('.order-items');
+				const allOrderItems = orderItemsContainer.querySelectorAll('.order-item');
+				const showAllButton = this;
+				
+				// Check if we're currently showing all items
+				const isShowingAll = showAllButton.textContent === 'Show Less Items';
+				
+				if (!isShowingAll) {
+					// Show all items
+					allOrderItems.forEach(item => {
+						item.style.display = 'flex';
+					});
+					showAllButton.textContent = 'Show Less Items';
+					showAllButton.classList.add('showing-all');
+				} else {
+					// Show only first 2 items (or your preferred limit)
+					allOrderItems.forEach((item, index) => {
+						if (index < 1) {
+							item.style.display = 'flex';
+						} else {
+							item.style.display = 'none';
+						}
+					});
+					showAllButton.textContent = 'Show All Items';
+					showAllButton.classList.remove('showing-all');
+				}
+			});
+
+	  
+    });
+
+    // WhatsApp Payment Button
+    document.getElementById('whatsappPaymentBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Format WhatsApp message
+      const orderId = document.getElementById("orderIdDisplay").textContent;
+      const customerName = document.getElementById("customerNameDisplay")?.textContent || "Customer";
+      const orderTotal = document.getElementById("orderTotalDisplay").textContent;
+      const deliveryFee = document.getElementById("deliveryFeeDisplay").textContent;
+      const grandTotal = document.getElementById("grandTotalDisplay").textContent;
+      const promoDiscount = document.getElementById("promotionPriceDisplay")?.textContent || "MYR 0.00";
+      
+      const message = `Hello 11am Coffee! I would like to make payment for my order.\n\nOrder ID: ${orderId}\nCustomer Name: ${customerName}\nOrder Total: ${orderTotal}\nDelivery Fee: ${deliveryFee}\nPromotion Discount: ${promoDiscount}\nTotal To Pay: ${grandTotal}\n\nPlease provide payment instructions.`;
+      
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+      
+      // WhatsApp API URL
+      const whatsappUrl = `https://wa.me/60175115356?text=${encodedMessage}`;
+      
+      // Redirect to WhatsApp
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // Print Receipt Button
+    document.getElementById('printReceiptBtn').addEventListener('click', function() {
+      // Create a print window
+      const printContent = document.getElementById('printTemplate').innerHTML;
+      const printWindow = window.open('', '_blank');
+      
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Order Receipt - 11am Coffee</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 20px;
+              background: white;
+            }
+            .print-container {
+              max-width: 400px;
+              margin: 0 auto;
+              text-align: center;
+              border: 1px solid #ddd;
+              padding: 20px;
+              border-radius: 10px;
+            }
+            .print-header {
+              margin-bottom: 25px;
+              padding-bottom: 15px;
+              border-bottom: 2px solid #eee;
+            }
+            .print-title {
+              font-size: 24px;
+              color: #2c3e50;
+              margin-bottom: 10px;
+            }
+            .print-detail {
+              margin: 20px 0;
+              padding: 15px;
+              background: #f9f9f9;
+              border-radius: 8px;
+            }
+            .print-label {
+              font-weight: bold;
+              color: #7f8c8d;
+              margin-bottom: 5px;
+            }
+            .print-value {
+              font-size: 20px;
+              color: #2c3e50;
+            }
+            .print-orderid {
+              font-size: 26px;
+              font-weight: bold;
+              color: #e74c3c;
+              letter-spacing: 2px;
+            }
+            .print-footer {
+              margin-top: 30px;
+              padding-top: 15px;
+              border-top: 2px solid #eee;
+              color: #7f8c8d;
+              font-size: 16px;
+            }
+            @media print {
+              body {
+                margin: 0;
+                padding: 0;
+              }
+              .print-container {
+                border: none;
+                box-shadow: none;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          ${printContent}
+        </body>
+        </html>
+      `);
+      
+      printWindow.document.close();
+      printWindow.focus();
+      
+      // Wait for content to load before printing
+      setTimeout(() => {
+        printWindow.print();
+        // Don't close immediately - let user decide when to close
+      }, 250);
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+      });
+    });  
+
+    // Modal functionality
+    const postcodeModal = document.getElementById('postcodeModal');
+    const orderModal = document.getElementById('orderModal');
+    const modalClose = document.getElementById('modalClose');
+    const orderModalClose = document.getElementById('orderModalClose');
+    const orderCheckBtnOpen = document.getElementById('orderCheckBtnOpen');
+    const orderCheckBtnOpenNav = document.getElementById('orderCheckBtnOpenNav');
+    const doneBtn = document.getElementById('doneBtn');
+    const orderDoneBtn = document.getElementById('orderDoneBtn');
+
+    // Open modals
+    orderCheckBtnOpen.addEventListener('click', () => {
+      orderModal.classList.add('active');
+    });
+
+    orderCheckBtnOpenNav.addEventListener('click', () => {
+      orderModal.classList.add('active');
+    });
+
+    // Close modals
+    modalClose.addEventListener('click', () => {
+      postcodeModal.classList.remove('active');
+    });
+
+    orderModalClose.addEventListener('click', () => {
+      orderModal.classList.remove('active');
+    });
+
+    doneBtn.addEventListener('click', () => {
+      postcodeModal.classList.remove('active');
+    });
+
+    orderDoneBtn.addEventListener('click', () => {
+      orderModal.classList.remove('active');
+    });
+
+    // Close modals when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === postcodeModal) {
+        postcodeModal.classList.remove('active');
+      }
+      if (e.target === orderModal) {
+        orderModal.classList.remove('active');
+      }
+    });
+
+    // Prevent pinch zoom
+    document.addEventListener('touchstart', function (event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    // Prevent double-tap zoom
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+      const now = new Date().getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
+</body>
+</html>

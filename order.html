@@ -1066,7 +1066,7 @@
           border-top: 2px solid #eee;
           color: #7f8c8d;
           font-size: 16px;
-        }
+        }		
     </style>
   </head>
   <body>
@@ -1215,7 +1215,7 @@
             <div id="delivery-details">
               <label class="form-label" for="name">Check Delivery Availability</label>
               <div class="postcode-check">
-                <input type="text" class="postcode-input" id="postcodeorder" placeholder="Delivery Area" maxlength="5" readonly>
+                <input type="text" class="postcode-input" id="postcodeorder" placeholder="Click Check Button" maxlength="5" readonly>
                 <button class="check-btn" id="deliverExpressCheckBtn">Check</button>
               </div>
 			  <input type="text" class="delivery-result" id="delivery-result" placeholder="Delivery Fee"/>
@@ -1445,6 +1445,10 @@
         </div>
       </div>
     </div>
+	
+	<!-- Add this right before </body> -->
+	<div class="loading-overlay" id="loadingScreen">
+	</div>
 
 	<!-- ===== Modal Popup ===== -->
 	  <div class="deliver-modal-overlay" id="deliverModal">
@@ -1994,6 +1998,9 @@
       // ✅ Handle Continue Button
       document.getElementById("continue-btn").addEventListener("click", async function() {
         const msgEl = document.getElementById("formMsg");
+		
+		showLoading();
+		
         msgEl.style.color = "red"; // default red for errors
         // Collect selected products
         let selected = [];
@@ -2008,12 +2015,14 @@
           }
         });
         if (selected.length === 0) {
+		  hideLoading();
           msgEl.textContent = "⚠️ Please select at least one product.";
           return;
         }
         // Delivery postcode check
         const postcode = document.getElementById("postcodeorder").value.trim();
         if (!postcode) {
+		  hideLoading();
           msgEl.textContent = "⚠️ Please check your delivery postcode before continuing.";
           return;
         }
@@ -2025,22 +2034,26 @@
         const custAddress = document.getElementById("address").value.trim();
         const promoCode = document.getElementById('promo').value.trim();
         if (!custName || !custPhone || !custEmail || !custAddress) {
+		  hideLoading();ideLoading();
           msgEl.textContent = "⚠️ Please fill in all customer details.";
           return;
         }
         if (!custdeliverytime) {
-          msgEl.textContent = "⚠️ Please Select Delivery DateTime";
+          hideLoading();
+		  msgEl.textContent = "⚠️ Please Select Delivery DateTime";
           return;
         }
         // Phone validation
         const phoneRegex = /^(?:\+60\d{9,10}|0\d{8,9})$/;
         if (!phoneRegex.test(custPhone)) {
-          msgEl.textContent = "⚠️ Please enter a valid phone number (e.g., +60123456789 or 0143810530).";
+          hideLoading();
+		  msgEl.textContent = "⚠️ Please enter a valid phone number (e.g., +60123456789 or 0143810530).";
           return;
         }
         // Email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(custEmail)) {
+		  hideLoading();
           msgEl.textContent = "⚠️ Please enter a valid email (e.g., example@email.com).";
           return;
         }
@@ -2082,20 +2095,25 @@
             body: JSON.stringify(payload),
           });
           const result = await response.json();
+		  console.log("Response JSON:", result);
           if (result.success) {
             const newOrderId = result.orderId;
             document.getElementById("printOrderId").textContent = newOrderId;
             document.getElementById("printName").textContent = custName;
+			const encodedOrders = encodeURIComponent(JSON.stringify(selected));
             sessionStorage.setItem("selectedOrders", JSON.stringify(payload));
             setTimeout(() => {
-              window.location.replace(`payment.html?orderId=${newOrderId}&name=${encodeURIComponent(custName)}&deliveryfee=${encodeURIComponent(deliveryFee)}&ordertotal=${encodeURIComponent(orderTotal)}&grandtotal=${encodeURIComponent(grandTotal)}&promocode=${encodeURIComponent(promoCode)}&address=${encodeURIComponent(custAddress)}`);
+			  hideLoading();
+              window.location.replace(`newpayment.html?orderId=${newOrderId}&order=${encodedOrders}&name=${encodeURIComponent(custName)}&deliveryfee=${encodeURIComponent(deliveryFee)}&ordertotal=${encodeURIComponent(orderTotal)}&grandtotal=${encodeURIComponent(grandTotal)}&promocode=${encodeURIComponent(promoCode)}&address=${encodeURIComponent(custAddress)}`);
             }, 2000);
           } else {
+		    hideLoading();
             btn.disabled = false;
             btn.textContent = "Continue to Payment";
             msgEl.textContent = "⚠️ Failed to save order: " + (result.error || "Unknown error");
           }
         } catch (err) {
+		  hideLoading();
           btn.disabled = false;
           btn.textContent = "Continue to Payment";
           msgEl.textContent = "⚠️ Failed to save order, please try again.";
@@ -2202,6 +2220,26 @@
 		}
 		lastTouchEnd = now;
 	  }, false);
+	  
+	  // Add this function at the beginning of your script
+		function showLoading() {
+		  const loadingScreen = document.getElementById('loadingScreen');
+		  if (loadingScreen) {
+			loadingScreen.classList.add('active');
+			// Disable body scrolling
+			document.body.style.overflow = 'hidden';
+		  }
+		}
+
+		function hideLoading() {
+		  const loadingScreen = document.getElementById('loadingScreen');
+		  if (loadingScreen) {
+			loadingScreen.classList.remove('active');
+			// Re-enable body scrolling
+			document.body.style.overflow = 'auto';
+		  }
+		}
+			  
     </script>
     <script src="Modal/modalscript.js"></script>
 	<!-- Add Leaflet JS -->

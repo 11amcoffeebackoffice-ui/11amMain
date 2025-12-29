@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coffee Info Tag</title>
+<style>
+  .coffee-tag {
+    width: 50mm;
+    height: 30mm;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 4mm;
+    font-family: Arial, sans-serif;
+    font-size: 3mm;
+    line-height: 1.4;
+    box-sizing: border-box;
+  }
+
+  .coffee-tag h3 {
+    text-align: center;
+    font-size: 4mm;
+    margin: 0 0 2mm 0;
+    text-transform: uppercase;
+  }
+
+  .coffee-tag .info {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+  }
+
+  .coffee-tag .info span {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="coffee-tag">
+  <h3>11am Coffee</h3>
+  <div class="info">
+    <span><strong>Ingredient:</strong> 100% Arabica Coffee</span>
+    <span><strong>Net Weight:</strong> 18 g (yields ~36 ml espresso)</span>
+    <span><strong>Produced On:</strong> __________</span>
+    <span><strong>Best Before:</strong> __________</span>
+    <span><strong>Roast Level:</strong> Dark</span>
+  </div>
+</div>
+
+</body>
+</html>
